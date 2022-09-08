@@ -1,0 +1,41 @@
+type Query {
+  login(_id: String!): User
+}
+
+type Mutation {
+  registerUser(
+    fullName: String!
+    email: String!
+    mobileNo: String!
+    gender: String!
+    dob: String!
+    country: String!
+    password: String!
+  ): UserResponse
+
+  loginUser(email: String!, password: String!): UserResponse
+}
+
+type UserResponse {
+  message: String!
+  statusCode: Int!
+  data: User
+}
+
+type User {
+  _id: String
+  fullName: String!
+  email: String!
+  mobileNo: String!
+  password: String!
+  gender: String!
+  dob: String!
+  country: String!
+  tokens: [Token]
+  token: String
+}
+
+type Token {
+  token: String
+  _id: String
+}
