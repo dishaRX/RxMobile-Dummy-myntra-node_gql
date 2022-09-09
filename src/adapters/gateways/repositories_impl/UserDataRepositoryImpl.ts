@@ -117,4 +117,36 @@ export class UserDataRepositoryImpl implements UserDataRepository {
 
     // return response;
   }
+
+  async changePassword(
+    userId: string,
+    oldPassword: any,
+    newPassword: any
+  ): Promise<any> {
+    try {
+      const user = await Users.findById(userId);
+      if (!user) {
+        return {
+          message: "User not found",
+          statusCode: 404,
+        };
+      }
+      const isMatch = await bcrypt.compare(oldPassword, user.password);
+      if (!isMatch) {
+        return {
+          message: "Old Password is incorrect",
+          statusCode: 400,
+        };
+      }
+      user.password = await bcrypt.hash(newPassword, 8);
+      let updatedUser = await user.save();
+
+      return {
+        message: "Password changed",
+        statusCode: 200,
+      };
+    } catch (error) {
+      return error;
+    }
+  }
 }

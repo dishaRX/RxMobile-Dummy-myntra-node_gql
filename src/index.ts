@@ -47,7 +47,7 @@ const launchServer = async () => {
 
     await apoloServer.start();
 
-    apoloServer.applyMiddleware({ app: server.app, path: "/graphql" });
+    apoloServer.applyMiddleware({ app: server.app, path: "/react-myntra" });
 
     server.app.listen(config.URL_PORT, () =>
       console.log(`UP & Running on port ${config.URL_PORT}`)

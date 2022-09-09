@@ -78,7 +78,7 @@ class UserDataRepositoryImpl {
             const token = jwt.sign({ userId: user._id, email: user.email }, process.env.JWT_SECRET);
             user.tokens = user.tokens.concat({ token });
             user.fcmTokens = user.fcmTokens.concat({ token });
-            user.deviceId = user.deviceId;
+            user.deviceId = deviceId;
             let userRes = yield user.save();
             // const response = { ...userRes, token: token };
             const response = {
@@ -100,6 +100,35 @@ class UserDataRepositoryImpl {
                 data: response,
             };
             // return response;
+        });
+    }
+    changePassword(userId, oldPassword, newPassword) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const user = yield Users_1.default.findById(userId);
+                if (!user) {
+                    return {
+                        message: "User not found",
+                        statusCode: 404,
+                    };
+                }
+                const isMatch = yield bcrypt.compare(oldPassword, user.password);
+                if (!isMatch) {
+                    return {
+                        message: "Old Password is incorrect",
+                        statusCode: 400,
+                    };
+                }
+                user.password = yield bcrypt.hash(newPassword, 8);
+                let updatedUser = yield user.save();
+                return {
+                    message: "Password changed",
+                    statusCode: 200,
+                };
+            }
+            catch (error) {
+                return error;
+            }
         });
     }
 }
