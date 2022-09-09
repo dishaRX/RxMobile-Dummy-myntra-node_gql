@@ -17,5 +17,16 @@ const userSchema = new Schema({
             token: String,
         },
     ],
+    fcmTokens: [
+        {
+            fcmToken: String,
+        },
+    ],
+    role: String,
+    isVerified: Boolean,
+    deviceId: String,
+    platform: String,
+}, {
+    timestamps: true,
 });
 module.exports = MongoDatabase_1.default.model("User", userSchema);

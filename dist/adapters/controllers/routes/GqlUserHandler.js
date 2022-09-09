@@ -22,18 +22,18 @@ class UserMutationHandler {
 exports.UserMutationHandler = UserMutationHandler;
 _a = UserMutationHandler;
 //Users
-UserMutationHandler.registerUser = (fullName, email, mobileNo, gender, dob, country, password) => __awaiter(void 0, void 0, void 0, function* () {
+UserMutationHandler.registerUser = (args) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const res = yield new RegisterUser_1.RegisterUserCase(new UserDataRepositoryImpl_1.UserDataRepositoryImpl()).registerUser(fullName, email, mobileNo, gender, dob, country, password);
+        const res = yield new RegisterUser_1.RegisterUserCase(new UserDataRepositoryImpl_1.UserDataRepositoryImpl()).registerUser(args);
         return res;
     }
     catch (error) {
         return error;
     }
 });
-UserMutationHandler.loginUser = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
+UserMutationHandler.loginUser = (args) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const res = yield new LoginUser_1.LoginUserCase(new UserDataRepositoryImpl_1.UserDataRepositoryImpl()).loginUser(email, password);
+        const res = yield new LoginUser_1.LoginUserCase(new UserDataRepositoryImpl_1.UserDataRepositoryImpl()).loginUser(args);
         return res;
     }
     catch (error) {

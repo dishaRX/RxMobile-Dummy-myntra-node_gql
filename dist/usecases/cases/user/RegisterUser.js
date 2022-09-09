@@ -12,9 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegisterUserCase = void 0;
 class RegisterUserCase {
     constructor(productDataRepository) {
-        this.registerUser = (fullName, email, mobileNo, gender, dob, country, password) => __awaiter(this, void 0, void 0, function* () {
-            return yield this.userDataRepository.registerUser(fullName, email, mobileNo, gender, dob, country, password);
-        });
+        this.registerUser = (args) => __awaiter(this, void 0, void 0, function* () { return yield this.userDataRepository.registerUser(args); });
         this.userDataRepository = productDataRepository;
     }
 }

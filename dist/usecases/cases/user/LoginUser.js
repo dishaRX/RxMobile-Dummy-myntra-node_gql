@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoginUserCase = void 0;
 class LoginUserCase {
     constructor(productDataRepository) {
-        this.loginUser = (email, password) => __awaiter(this, void 0, void 0, function* () { return yield this.userDataRepository.loginUser(email, password); });
+        this.loginUser = (args) => __awaiter(this, void 0, void 0, function* () { return yield this.userDataRepository.loginUser(args); });
         this.userDataRepository = productDataRepository;
     }
 }

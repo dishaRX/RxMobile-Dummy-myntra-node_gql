@@ -5,27 +5,21 @@ var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 
 export class UserDataRepositoryImpl implements UserDataRepository {
-  // async getAllProducts() {
-  //   var products = await Product.find({});
-  //   return products;
-  // }
+  async registerUser(args: any): Promise<any> {
+    const {
+      fullName,
+      email,
+      mobileNo,
+      gender,
+      dob,
+      country,
+      password,
+      role,
+      fcmToken,
+      deviceId,
+      platform,
+    } = args;
 
-  // async getProductById(id: any): Promise<typeof Product> {
-  //   var products = await this.getAllProducts();
-  //   return products.find((product: any) => {
-  //     return product.id === id;
-  //   });
-  // }
-
-  async registerUser(
-    fullName: string,
-    email: string,
-    mobileNo: string,
-    gender: string,
-    dob: string,
-    country: string,
-    password: any
-  ): Promise<any> {
     const isUser = await Users.findOne({ email: email });
     if (isUser) {
       // return new Error("User is already registered");
@@ -42,6 +36,10 @@ export class UserDataRepositoryImpl implements UserDataRepository {
       gender: gender,
       dob: dob,
       country: country,
+      role: role,
+      isVerified: false,
+      deviceId: deviceId,
+      platform: platform,
     });
 
     user.password = await bcrypt.hash(user.password, 8);
@@ -51,6 +49,7 @@ export class UserDataRepositoryImpl implements UserDataRepository {
       process.env.JWT_SECRET
     );
     user.tokens = [{ token }];
+    user.fcmTokens = [{ fcmToken }];
 
     let userRes = await user.save();
     console.log("userRes ::" + userRes);
@@ -63,8 +62,9 @@ export class UserDataRepositoryImpl implements UserDataRepository {
     };
   }
 
-  async loginUser(email: string, password: any): Promise<any> {
-    const user = await Users.findOne({ email: email });
+  async loginUser(args: any): Promise<any> {
+    const { email, password, role, fcmToken, deviceId } = args;
+    const user = await Users.findOne({ email: email, role: role });
     console.log("user : ", user);
     if (!user) {
       // return new Error("User not registered");
@@ -89,6 +89,8 @@ export class UserDataRepositoryImpl implements UserDataRepository {
       process.env.JWT_SECRET
     );
     user.tokens = user.tokens.concat({ token });
+    user.fcmTokens = user.fcmTokens.concat({ token });
+    user.deviceId = deviceId;
 
     let userRes = await user.save();
 
@@ -114,36 +116,5 @@ export class UserDataRepositoryImpl implements UserDataRepository {
     };
 
     // return response;
-  }
-  async changePassword(
-    userId: string,
-    oldPassword: any,
-    newPassword: any
-  ): Promise<any> {
-    try {
-      const user = await Users.findById(userId);
-      if (!user) {
-        return {
-          message: "User not found",
-          statusCode: 404,
-        };
-      }
-      const isMatch = await bcrypt.compare(oldPassword, user.password);
-      if (!isMatch) {
-        return {
-          message: "Old Password is incorrect",
-          statusCode: 400,
-        };
-      }
-      user.password = await bcrypt.hash(newPassword, 8);
-      let updatedUser = await user.save();
-
-      return {
-        message: "Password changed",
-        statusCode: 200,
-      };
-    } catch (error) {
-      return error;
-    }
   }
 }

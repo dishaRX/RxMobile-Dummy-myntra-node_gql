@@ -14,25 +14,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Users_1 = __importDefault(require("../../domains/models/Users"));
 var jwt = require("jsonwebtoken");
-const Auth = (data) => __awaiter(void 0, void 0, void 0, function* () {
+const auth = (tokenData) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const token = data.req.header("Authorization").replace("Bearer ", "");
+        const token = tokenData.replace("Bearer ", "");
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        // console.log("decoded token: " + decoded);
         const user = yield Users_1.default.findOne({
-            _id: decoded._id,
+            _id: decoded.userId,
             "tokens.token": token,
         });
         if (!user) {
             throw new Error();
         }
-        // console.log(token);
-        // req.token = token;
-        // req.user = user;
         return user;
     }
     catch (error) {
-        return { error: "Unauthorized user" };
+        return undefined;
     }
 });
-module.exports = Auth;
+exports.default = auth;

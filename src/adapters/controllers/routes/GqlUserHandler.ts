@@ -1,7 +1,6 @@
 import { RegisterUserCase } from "../../../usecases/cases/user/RegisterUser";
 import { LoginUserCase } from "../../../usecases/cases/user/LoginUser";
 import { UserDataRepositoryImpl } from "../../gateways/repositories_impl/UserDataRepositoryImpl";
-import { ChangeUserPasswordCase } from "../../../usecases/cases/user/ChangeUserPasswordCase";
 
 class UserQueryHandler {
   //Products
@@ -17,45 +16,22 @@ class UserQueryHandler {
 
 class UserMutationHandler {
   //Users
-  static registerUser = async (
-    fullName: string,
-    email: string,
-    mobileNo: string,
-    gender: string,
-    dob: string,
-    country: string,
-    password: any
-  ) => {
+  static registerUser = async (args: any) => {
     try {
       const res = await new RegisterUserCase(
         new UserDataRepositoryImpl()
-      ).registerUser(fullName, email, mobileNo, gender, dob, country, password);
+      ).registerUser(args);
       return res;
     } catch (error: any) {
       return error;
     }
   };
 
-  static loginUser = async (email: string, password: any) => {
+  static loginUser = async (args: any) => {
     try {
       const res = await new LoginUserCase(
         new UserDataRepositoryImpl()
-      ).loginUser(email, password);
-      return res;
-    } catch (error: any) {
-      return error;
-    }
-  };
-
-  static changePassword = async (
-    userId: string,
-    oldPassword: string,
-    newPassword: string
-  ) => {
-    try {
-      const res = await new ChangeUserPasswordCase(
-        new UserDataRepositoryImpl()
-      ).changePassword(userId, oldPassword, newPassword);
+      ).loginUser(args);
       return res;
     } catch (error: any) {
       return error;

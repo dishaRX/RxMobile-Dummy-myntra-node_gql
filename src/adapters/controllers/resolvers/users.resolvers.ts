@@ -11,15 +11,7 @@ export default {
   Mutation: {
     registerUser: (_: any, args: any) => {
       try {
-        return UserMutationHandler.registerUser(
-          args.fullName,
-          args.email,
-          args.mobileNo,
-          args.gender,
-          args.dob,
-          args.country,
-          args.password
-        );
+        return UserMutationHandler.registerUser(args);
       } catch (error) {
         console.log(`Error -------> ${error}`);
         return error;
@@ -28,27 +20,7 @@ export default {
 
     loginUser: (_: any, args: any) => {
       try {
-        return UserMutationHandler.loginUser(args.email, args.password);
-      } catch (error) {
-        console.log(`Error -------> ${error}`);
-        return error;
-      }
-    },
-
-    changePassword: async (_: any, args: any, context: any, info: any) => {
-      // console.log(`Change Password args: ${JSON.stringify(context)}`);
-      if (!context) {
-        return {
-          message: "Unauthorized",
-          statusCode: 401,
-        };
-      }
-      try {
-        return UserMutationHandler.changePassword(
-          args.userId,
-          args.oldPassword,
-          args.newPassword
-        );
+        return UserMutationHandler.loginUser(args);
       } catch (error) {
         console.log(`Error -------> ${error}`);
         return error;

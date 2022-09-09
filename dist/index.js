@@ -17,7 +17,7 @@ const expressServer_1 = __importDefault(require("../src/adapters/controllers/gen
 const config_1 = __importDefault(require("./adapters/controllers/generated/src/config"));
 const logger_1 = __importDefault(require("../src/adapters/controllers/generated/src/logger"));
 const GraphQlSchema_1 = __importDefault(require("./infrastructure/config/GraphQlSchema"));
-const Auth = require("./infrastructure/config/auth");
+const auth_1 = __importDefault(require("./infrastructure/config/auth"));
 const { ApolloServer } = require("apollo-server-express");
 const gracefulShutdown = (server) => () => __awaiter(void 0, void 0, void 0, function* () {
     yield server.close().then(() => __awaiter(void 0, void 0, void 0, function* () {
@@ -43,18 +43,17 @@ const launchServer = () => __awaiter(void 0, void 0, void 0, function* () {
         // );
         const apoloServer = new ApolloServer({
             schema: GraphQlSchema_1.default,
-            // context: (data: any) => {
-            //   // console.log(`request keys ${Object.keys(data.req)}`);
-            //   // console.log(`request keys ${data.req.headers.authorization}`);
-            //   return { fullName: "arjun", id: "190239123" };
-            // },
-            context: Auth,
+            context: (data) => __awaiter(void 0, void 0, void 0, function* () {
+                const user = yield (0, auth_1.default)(data.req.headers.authorization);
+                return user;
+            }),
         });
         yield apoloServer.start();
         apoloServer.applyMiddleware({ app: server.app, path: "/graphql" });
         server.app.listen(config_1.default.URL_PORT, () => console.log(`UP & Running on port ${config_1.default.URL_PORT}`));
     }
     catch (err) {
+        ``;
         logger_1.default.error(`Express Server failure`, err);
         gracefulShutdown(server);
     }

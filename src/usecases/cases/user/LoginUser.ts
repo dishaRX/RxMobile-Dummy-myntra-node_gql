@@ -7,6 +7,6 @@ export class LoginUserCase {
     this.userDataRepository = productDataRepository;
   }
 
-  public loginUser = async (email: string, password: any) =>
-    await this.userDataRepository.loginUser(email, password);
+  public loginUser = async (args: any) =>
+    await this.userDataRepository.loginUser(args);
 }

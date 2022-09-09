@@ -7,22 +7,6 @@ export class RegisterUserCase {
     this.userDataRepository = productDataRepository;
   }
 
-  public registerUser = async (
-    fullName: string,
-    email: string,
-    mobileNo: string,
-    gender: string,
-    dob: string,
-    country: string,
-    password: any
-  ) =>
-    await this.userDataRepository.registerUser(
-      fullName,
-      email,
-      mobileNo,
-      gender,
-      dob,
-      country,
-      password
-    );
+  public registerUser = async (args: any) =>
+    await this.userDataRepository.registerUser(args);
 }

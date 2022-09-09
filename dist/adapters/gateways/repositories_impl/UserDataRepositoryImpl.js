@@ -14,25 +14,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserDataRepositoryImpl = void 0;
 const Users_1 = __importDefault(require("../../../domains/models/Users"));
-const Constants_1 = require("../errors/Constants");
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 class UserDataRepositoryImpl {
-    // async getAllProducts() {
-    //   var products = await Product.find({});
-    //   return products;
-    // }
-    // async getProductById(id: any): Promise<typeof Product> {
-    //   var products = await this.getAllProducts();
-    //   return products.find((product: any) => {
-    //     return product.id === id;
-    //   });
-    // }
-    registerUser(fullName, email, mobileNo, gender, dob, country, password) {
+    registerUser(args) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { fullName, email, mobileNo, gender, dob, country, password, role, fcmToken, deviceId, platform, } = args;
             const isUser = yield Users_1.default.findOne({ email: email });
             if (isUser) {
-                return new Error("User is already registered");
+                // return new Error("User is already registered");
+                return {
+                    message: "User already registered",
+                    statusCode: 400,
+                };
             }
             let user = new Users_1.default({
                 fullName: fullName,
@@ -42,29 +36,49 @@ class UserDataRepositoryImpl {
                 gender: gender,
                 dob: dob,
                 country: country,
+                role: role,
+                isVerified: false,
+                deviceId: deviceId,
+                platform: platform,
             });
             user.password = yield bcrypt.hash(user.password, 8);
             const token = jwt.sign({ userId: user._id, email: user.email }, process.env.JWT_SECRET);
             user.tokens = [{ token }];
+            user.fcmTokens = [{ fcmToken }];
             let userRes = yield user.save();
             console.log("userRes ::" + userRes);
-            return userRes;
+            // return userRes;
+            return {
+                message: "Registered successfully",
+                statusCode: 200,
+                data: userRes,
+            };
         });
     }
-    loginUser(email, password) {
+    loginUser(args) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield Users_1.default.findOne({ email: email });
+            const { email, password, role, fcmToken, deviceId } = args;
+            const user = yield Users_1.default.findOne({ email: email, role: role });
             console.log("user : ", user);
             if (!user) {
-                return new Error("User not registered");
+                // return new Error("User not registered");
+                return {
+                    message: "User not registered",
+                    statusCode: 404,
+                };
             }
             const isMatch = yield bcrypt.compare(password, user.password);
             if (!isMatch) {
                 // return new Error("Incorrect password");
-                return new Error(Constants_1.errorName.UNAUTHORIZED);
+                return {
+                    message: "Incorrect password",
+                    statusCode: 400,
+                };
             }
             const token = jwt.sign({ userId: user._id, email: user.email }, process.env.JWT_SECRET);
             user.tokens = user.tokens.concat({ token });
+            user.fcmTokens = user.fcmTokens.concat({ token });
+            user.deviceId = user.deviceId;
             let userRes = yield user.save();
             // const response = { ...userRes, token: token };
             const response = {
@@ -80,7 +94,12 @@ class UserDataRepositoryImpl {
                 token: token,
             };
             console.log("userRes ::" + response);
-            return response;
+            return {
+                message: "Login successfully",
+                statusCode: 200,
+                data: response,
+            };
+            // return response;
         });
     }
 }

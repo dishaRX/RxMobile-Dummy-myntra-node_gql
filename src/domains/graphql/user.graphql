@@ -11,14 +11,19 @@ type Mutation {
     dob: String!
     country: String!
     password: String!
+    role: String! #admin/user
+    isVerified: Boolean! #by default false
+    fcmToken: String!
+    deviceId: String!
+    platform: String! #web/android/ios
   ): UserResponse
 
-  loginUser(email: String!, password: String!): UserResponse
-
-  changePassword(
-    userId: String!
-    oldPassword: String!
-    newPassword: String!
+  loginUser(
+    email: String!
+    password: String!
+    fcmToken: String!
+    deviceId: String!
+    role: String!
   ): UserResponse
 }
 
@@ -37,8 +42,16 @@ type User {
   gender: String!
   dob: String!
   country: String!
-  tokens: [Token]
-  token: String
+  token: String!
+  isVerified: Boolean! #by default false
+  fcmTokens: [FcmToken]
+  deviceId: String
+  platform: String #web/android/ios
+}
+
+type FcmToken {
+  fcmToken: String
+  _id: String
 }
 
 type Token {
