@@ -40,8 +40,6 @@ const launchServer = async () => {
     const apoloServer = new ApolloServer({
       schema: gqlSchema,
       context: async (data: any) => {
-        // console.log(`request keys ${Object.keys(data.req)}`);
-        // console.log(`request keys ${data.req.headers.authorization}`);
         const user = await Auth(data.req.headers.authorization);
         return user;
       },

@@ -16,4 +16,10 @@ export interface UserDataRepository {
   ): Promise<any>;
 
   loginUser(email: string, password: any): Promise<any>;
+
+  changePassword(
+    userId: string,
+    oldPassword: any,
+    newPassword: any
+  ): Promise<any>;
 }
