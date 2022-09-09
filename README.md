@@ -8,7 +8,7 @@
 ![high-level-diagram]
 
 <p align="center">
-    <img width="300" height="300" src="docs/images/high-level-diagram.jpg">
+    <img height="300" src="docs/images/high-level-diagram.jpg">
   </p>
 
 ## Running the apps
