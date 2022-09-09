@@ -26,5 +26,25 @@ export default {
         return error;
       }
     },
+
+    changePassword: async (_: any, args: any, context: any, info: any) => {
+      // console.log(`Change Password args: ${JSON.stringify(context)}`);
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        return UserMutationHandler.changePassword(
+          args.userId,
+          args.oldPassword,
+          args.newPassword
+        );
+      } catch (error) {
+        console.log(`Error -------> ${error}`);
+        return error;
+      }
+    },
   },
 };

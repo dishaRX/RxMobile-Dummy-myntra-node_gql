@@ -25,6 +25,12 @@ type Mutation {
     deviceId: String!
     role: String!
   ): UserResponse
+
+  changePassword(
+    userId: String!
+    oldPassword: String!
+    newPassword: String!
+  ): UserResponse
 }
 
 type UserResponse {

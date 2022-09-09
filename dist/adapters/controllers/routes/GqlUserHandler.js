@@ -14,6 +14,7 @@ exports.UserMutationHandler = exports.UserQueryHandler = void 0;
 const RegisterUser_1 = require("../../../usecases/cases/user/RegisterUser");
 const LoginUser_1 = require("../../../usecases/cases/user/LoginUser");
 const UserDataRepositoryImpl_1 = require("../../gateways/repositories_impl/UserDataRepositoryImpl");
+const ChangeUserPasswordCase_1 = require("../../../usecases/cases/user/ChangeUserPasswordCase");
 class UserQueryHandler {
 }
 exports.UserQueryHandler = UserQueryHandler;
@@ -34,6 +35,15 @@ UserMutationHandler.registerUser = (args) => __awaiter(void 0, void 0, void 0, f
 UserMutationHandler.loginUser = (args) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const res = yield new LoginUser_1.LoginUserCase(new UserDataRepositoryImpl_1.UserDataRepositoryImpl()).loginUser(args);
+        return res;
+    }
+    catch (error) {
+        return error;
+    }
+});
+UserMutationHandler.changePassword = (userId, oldPassword, newPassword) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const res = yield new ChangeUserPasswordCase_1.ChangeUserPasswordCase(new UserDataRepositoryImpl_1.UserDataRepositoryImpl()).changePassword(userId, oldPassword, newPassword);
         return res;
     }
     catch (error) {

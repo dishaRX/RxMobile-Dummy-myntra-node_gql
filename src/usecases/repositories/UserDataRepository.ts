@@ -8,4 +8,10 @@ export interface UserDataRepository {
   registerUser(args: any): Promise<any>;
 
   loginUser(args: any): Promise<any>;
+
+  changePassword(
+    userId: string,
+    oldPassword: any,
+    newPassword: any
+  ): Promise<any>;
 }
