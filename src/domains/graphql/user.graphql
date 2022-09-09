@@ -1,0 +1,60 @@
+type Query {
+  login(_id: String!): User
+}
+
+type Mutation {
+  registerUser(
+    fullName: String!
+    email: String!
+    mobileNo: String!
+    gender: String!
+    dob: String!
+    country: String!
+    password: String!
+    role: String! #admin/user
+    isVerified: Boolean! #by default false
+    fcmToken: String!
+    deviceId: String!
+    platform: String! #web/android/ios
+  ): UserResponse
+
+  loginUser(
+    email: String!
+    password: String!
+    fcmToken: String!
+    deviceId: String!
+    role: String!
+  ): UserResponse
+}
+
+type UserResponse {
+  message: String!
+  statusCode: Int!
+  data: User
+}
+
+type User {
+  _id: String
+  fullName: String!
+  email: String!
+  mobileNo: String!
+  password: String!
+  gender: String!
+  dob: String!
+  country: String!
+  token: String!
+  isVerified: Boolean! #by default false
+  fcmTokens: [FcmToken]
+  deviceId: String
+  platform: String #web/android/ios
+}
+
+type FcmToken {
+  fcmToken: String
+  _id: String
+}
+
+type Token {
+  token: String
+  _id: String
+}
