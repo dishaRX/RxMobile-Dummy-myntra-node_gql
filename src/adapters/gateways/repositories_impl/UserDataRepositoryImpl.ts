@@ -19,7 +19,7 @@ export class UserDataRepositoryImpl implements UserDataRepository {
       deviceId,
       platform,
     } = args;
-
+console.log("register")
     const isUser = await Users.findOne({ email: email });
     if (isUser) {
       // return new Error("User is already registered");

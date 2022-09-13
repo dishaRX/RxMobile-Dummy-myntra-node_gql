@@ -35,7 +35,7 @@ exports.default = {
         },
         changePassword: (_, args, context, info) => __awaiter(void 0, void 0, void 0, function* () {
             // console.log(`Change Password args: ${JSON.stringify(context)}`);
-            if (!context) {
+            if (!context._id) {
                 return {
                     message: "Unauthorized",
                     statusCode: 401,

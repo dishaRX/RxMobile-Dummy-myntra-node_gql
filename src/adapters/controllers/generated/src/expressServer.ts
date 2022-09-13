@@ -10,6 +10,7 @@ import logger from "./logger";
 import config from "./config";
 import express, { Application, Request, Response, NextFunction } from 'express';
 import bearerToken from 'express-bearer-token';
+import dotenv from "dotenv"
 
 class ExpressServer {
     schema: any;

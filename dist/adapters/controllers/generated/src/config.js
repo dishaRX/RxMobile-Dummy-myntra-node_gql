@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const config = {
     ROOT_DIR: __dirname,
-    URL_PORT: 4001,
+    URL_PORT: 4002,
     URL_PATH: "http://localhost",
     BASE_VERSION: "",
     PROJECT_DIR: __dirname,

@@ -49,7 +49,7 @@ const launchServer = () => __awaiter(void 0, void 0, void 0, function* () {
             }),
         });
         yield apoloServer.start();
-        apoloServer.applyMiddleware({ app: server.app, path: "/graphql" });
+        apoloServer.applyMiddleware({ app: server.app, path: "/react-myntra" });
         server.app.listen(config_1.default.URL_PORT, () => console.log(`UP & Running on port ${config_1.default.URL_PORT}`));
     }
     catch (err) {
