@@ -20,7 +20,7 @@ const auth = (tokenData) => __awaiter(void 0, void 0, void 0, function* () {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         let user;
         if (decoded.role === "user") {
-            const user = yield Users_1.default.findOne({
+            user = yield Users_1.default.findOne({
                 _id: decoded.userId,
                 "tokens.token": token,
             });

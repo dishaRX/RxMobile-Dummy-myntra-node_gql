@@ -5,22 +5,24 @@ var jwt = require("jsonwebtoken");
 
 const auth = async (tokenData: any) => {
   try {
-    const token = tokenData.replace("Bearer ", "");
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    let user;
-    if (decoded.role === "user") {
-      console.log("User token");
-      user = await Users.findOne({
-        _id: decoded.userId,
-        "tokens.token": token,
-      });
+    if (tokenData) {
+      const token = tokenData.replace("Bearer ", "");
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      let user;
+      if (decoded.role === "user") {
+        user = await Users.findOne({
+          _id: decoded.userId,
+          "tokens.token": token,
+        });
+      } else {
+      }
+      if (!user) {
+        throw new Error();
+      }
+      return user;
     } else {
-      console.log("Admin token");
+      return undefined;
     }
-    if (!user) {
-      throw new Error();
-    }
-    return user;
   } catch (error) {
     return undefined;
   }
