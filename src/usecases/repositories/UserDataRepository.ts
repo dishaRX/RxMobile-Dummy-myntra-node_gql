@@ -14,4 +14,8 @@ export interface UserDataRepository {
     oldPassword: any,
     newPassword: any
   ): Promise<any>;
+
+  forgotPassword(args: any): Promise<any>;
+
+  resetPassword(args: any): Promise<any>;
 }

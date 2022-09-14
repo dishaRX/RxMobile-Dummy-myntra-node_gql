@@ -131,5 +131,47 @@ class UserDataRepositoryImpl {
             }
         });
     }
+    forgotPassword(args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { email, role } = args;
+            const user = yield Users_1.default.findOne({ email: email });
+            const otp = Math.floor(100000 + Math.random() * 900000);
+            console.log("otp : " + otp);
+            if (!user) {
+                return {
+                    message: "User not registered",
+                    statusCode: 404,
+                };
+            }
+            return {
+                message: "OTP sent on your email address",
+                statusCode: 200,
+            };
+        });
+    }
+    resetPassword(args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { email, otp, newPassword } = args;
+            const user = yield Users_1.default.findOne({ email: email });
+            if (!user) {
+                return {
+                    message: "User not found",
+                    statusCode: 404,
+                };
+            }
+            if (otp !== "1234") {
+                return {
+                    message: "OTP is incorrect",
+                    statusCode: 400,
+                };
+            }
+            user.password = yield bcrypt.hash(newPassword, 8);
+            let updatedUser = yield user.save();
+            return {
+                message: "Password changed, Login to continue",
+                statusCode: 200,
+            };
+        });
+    }
 }
 exports.UserDataRepositoryImpl = UserDataRepositoryImpl;

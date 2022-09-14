@@ -2,18 +2,10 @@ import { RegisterUserCase } from "../../../usecases/cases/user/RegisterUser";
 import { LoginUserCase } from "../../../usecases/cases/user/LoginUser";
 import { UserDataRepositoryImpl } from "../../gateways/repositories_impl/UserDataRepositoryImpl";
 import { ChangeUserPasswordCase } from "../../../usecases/cases/user/ChangeUserPasswordCase";
+import { ResetUserPasswordCase } from "../../../usecases/cases/user/ResetUserPasswordCase";
+import { ForgotUserPasswordCase } from "../../../usecases/cases/user/ForgotUserPasswordCase";
 
-class UserQueryHandler {
-  //Products
-  // static getProductById = async (id: any) => {
-  //     try {
-  //         const res = await new GetProductByIdCase(new ProductDataRepositoryImpl()).getProductById(id);
-  //         return res;
-  //     } catch (error: any) {
-  //         return error;
-  //     }
-  // }
-}
+class UserQueryHandler {}
 
 class UserMutationHandler {
   //Users
@@ -48,6 +40,26 @@ class UserMutationHandler {
       const res = await new ChangeUserPasswordCase(
         new UserDataRepositoryImpl()
       ).changePassword(userId, oldPassword, newPassword);
+      return res;
+    } catch (error: any) {
+      return error;
+    }
+  };
+  static forgotPassword = async (args: any) => {
+    try {
+      const res = await new ForgotUserPasswordCase(
+        new UserDataRepositoryImpl()
+      ).forgotPassword(args);
+      return res;
+    } catch (error: any) {
+      return error;
+    }
+  };
+  static resetPassword = async (args: any) => {
+    try {
+      const res = await new ResetUserPasswordCase(
+        new UserDataRepositoryImpl()
+      ).resetPassword(args);
       return res;
     } catch (error: any) {
       return error;

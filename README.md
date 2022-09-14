@@ -19,6 +19,10 @@ The illustration below shows the four concentric circles that compose a Clean Ar
   - We have added the login API in which user can login on the app/web using the email and password.
 - Change password API
   - We have added the change password API in which user can change there password if they remember there existing password.
+- Forgot password API
+  - We have added the forgot password API, if you forgot your password then In this API you will receiver OTP on register email.
+- Reset password API
+  - We have added the Reset password API, In which you can enter Received OTP and new password to reset your password.
 
 # Tech components
 

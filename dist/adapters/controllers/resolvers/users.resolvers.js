@@ -35,7 +35,7 @@ exports.default = {
         },
         changePassword: (_, args, context, info) => __awaiter(void 0, void 0, void 0, function* () {
             // console.log(`Change Password args: ${JSON.stringify(context)}`);
-            if (!context) {
+            if (!context._id) {
                 return {
                     message: "Unauthorized",
                     statusCode: 401,
@@ -43,6 +43,24 @@ exports.default = {
             }
             try {
                 return GqlUserHandler_1.UserMutationHandler.changePassword(args.userId, args.oldPassword, args.newPassword);
+            }
+            catch (error) {
+                console.log(`Error -------> ${error}`);
+                return error;
+            }
+        }),
+        forgotPassword: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                return GqlUserHandler_1.UserMutationHandler.forgotPassword(args.email);
+            }
+            catch (error) {
+                console.log(`Error -------> ${error}`);
+                return error;
+            }
+        }),
+        resetPassword: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                return GqlUserHandler_1.UserMutationHandler.resetPassword(args);
             }
             catch (error) {
                 console.log(`Error -------> ${error}`);
