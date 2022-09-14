@@ -47,7 +47,7 @@ export class UserDataRepositoryImpl implements UserDataRepository {
     user.password = await bcrypt.hash(user.password, 8);
 
     const token = jwt.sign(
-      { userId: user._id, email: user.email },
+      { userId: user._id, email: user.email, role: user.role },
       process.env.JWT_SECRET
     );
     user.tokens = [{ token }];
@@ -87,7 +87,7 @@ export class UserDataRepositoryImpl implements UserDataRepository {
     }
 
     const token = jwt.sign(
-      { userId: user._id, email: user.email },
+      { userId: user._id, email: user.email, role: user.role },
       process.env.JWT_SECRET
     );
     user.tokens = user.tokens.concat({ token });

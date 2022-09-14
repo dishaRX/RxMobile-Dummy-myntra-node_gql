@@ -19,7 +19,6 @@ const logger_1 = __importDefault(require("../src/adapters/controllers/generated/
 const GraphQlSchema_1 = __importDefault(require("./infrastructure/config/GraphQlSchema"));
 const auth_1 = __importDefault(require("./infrastructure/config/auth"));
 const { ApolloServer } = require("apollo-server-express");
-const Email_1 = __importDefault(require("./infrastructure/config/Email"));
 const gracefulShutdown = (server) => () => __awaiter(void 0, void 0, void 0, function* () {
     yield server.close().then(() => __awaiter(void 0, void 0, void 0, function* () {
         console.log("Force shutdown");
@@ -29,12 +28,6 @@ const gracefulShutdown = (server) => () => __awaiter(void 0, void 0, void 0, fun
 //     return errorType[errorName]
 //   }
 const launchServer = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        (0, Email_1.default)("2324", "42234");
-    }
-    catch (error) {
-        console.error("send mail error", error);
-    }
     const server = new expressServer_1.default(config_1.default.URL_PORT, config_1.default.OPENAPI_YAML);
     try {
         // server.app.use(

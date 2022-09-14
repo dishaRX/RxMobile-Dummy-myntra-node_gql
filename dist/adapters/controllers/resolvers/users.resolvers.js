@@ -51,7 +51,7 @@ exports.default = {
         }),
         forgotPassword: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
             try {
-                return GqlUserHandler_1.UserMutationHandler.forgotPassword(args.email);
+                return GqlUserHandler_1.UserMutationHandler.forgotPassword(args);
             }
             catch (error) {
                 console.log(`Error -------> ${error}`);
