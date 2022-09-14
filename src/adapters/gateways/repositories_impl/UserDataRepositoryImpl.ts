@@ -1,6 +1,8 @@
 import { UserDataRepository } from "../../../usecases/repositories/UserDataRepository";
 import Users from "../../../domains/models/Users";
 import { errorName } from "../errors/Constants";
+import sendEmail from "../../../infrastructure/config/Email";
+import OTP from "../../../domains/models/Otp";
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 
@@ -45,7 +47,7 @@ export class UserDataRepositoryImpl implements UserDataRepository {
     user.password = await bcrypt.hash(user.password, 8);
 
     const token = jwt.sign(
-      { userId: user._id, email: user.email },
+      { userId: user._id, email: user.email, role: user.role },
       process.env.JWT_SECRET
     );
     user.tokens = [{ token }];
@@ -85,7 +87,7 @@ export class UserDataRepositoryImpl implements UserDataRepository {
     }
 
     const token = jwt.sign(
-      { userId: user._id, email: user.email },
+      { userId: user._id, email: user.email, role: user.role },
       process.env.JWT_SECRET
     );
     user.tokens = user.tokens.concat({ token });
@@ -148,5 +150,64 @@ export class UserDataRepositoryImpl implements UserDataRepository {
     } catch (error) {
       return error;
     }
+  }
+
+  async forgotPassword(args: any): Promise<any> {
+    // console.log("args :", args);
+    const { email, role } = args;
+    const user = await Users.findOne({ email: email, role: role });
+
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    // console.log("otp : " + otp);
+    if (!user) {
+      return {
+        message: "User not registered",
+        statusCode: 404,
+      };
+    }
+    const otpSchema = new OTP({
+      otp: otp,
+      email: email,
+      role: role,
+    });
+
+    let otpRes = await otpSchema.save();
+    // console.log("otpres : " + otpRes);
+    try {
+      sendEmail(otp, email);
+    } catch (error) {
+      console.error("send mail error", error);
+    }
+    return {
+      message: "OTP sent on your email address",
+      statusCode: 200,
+    };
+  }
+
+  async resetPassword(args: any): Promise<any> {
+    const { email, otp, newPassword, role } = args;
+    const user = await Users.findOne({ email: email, role: role });
+    if (!user) {
+      return {
+        message: "User not found",
+        statusCode: 404,
+      };
+    }
+    const otpSchema = await OTP.findOne({ email: email, otp: otp, role: role });
+    // console.log("otpSchema  ::::", otpSchema);
+    if (!otpSchema) {
+      return {
+        message: "OTP is incorrect",
+        statusCode: 400,
+      };
+    }
+    otpSchema.remove();
+    user.password = await bcrypt.hash(newPassword, 8);
+    let updatedUser = await user.save();
+
+    return {
+      message: "Password changed, Login to continue",
+      statusCode: 200,
+    };
   }
 }

@@ -14,6 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserDataRepositoryImpl = void 0;
 const Users_1 = __importDefault(require("../../../domains/models/Users"));
+const Email_1 = __importDefault(require("../../../infrastructure/config/Email"));
+const Otp_1 = __importDefault(require("../../../domains/models/Otp"));
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 class UserDataRepositoryImpl {
@@ -42,7 +44,7 @@ class UserDataRepositoryImpl {
                 platform: platform,
             });
             user.password = yield bcrypt.hash(user.password, 8);
-            const token = jwt.sign({ userId: user._id, email: user.email }, process.env.JWT_SECRET);
+            const token = jwt.sign({ userId: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET);
             user.tokens = [{ token }];
             user.fcmTokens = [{ fcmToken }];
             let userRes = yield user.save();
@@ -75,7 +77,7 @@ class UserDataRepositoryImpl {
                     statusCode: 400,
                 };
             }
-            const token = jwt.sign({ userId: user._id, email: user.email }, process.env.JWT_SECRET);
+            const token = jwt.sign({ userId: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET);
             user.tokens = user.tokens.concat({ token });
             user.fcmTokens = user.fcmTokens.concat({ token });
             user.deviceId = deviceId;
@@ -129,6 +131,65 @@ class UserDataRepositoryImpl {
             catch (error) {
                 return error;
             }
+        });
+    }
+    forgotPassword(args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // console.log("args :", args);
+            const { email, role } = args;
+            const user = yield Users_1.default.findOne({ email: email, role: role });
+            const otp = Math.floor(100000 + Math.random() * 900000);
+            // console.log("otp : " + otp);
+            if (!user) {
+                return {
+                    message: "User not registered",
+                    statusCode: 404,
+                };
+            }
+            const otpSchema = new Otp_1.default({
+                otp: otp,
+                email: email,
+                role: role,
+            });
+            let otpRes = yield otpSchema.save();
+            // console.log("otpres : " + otpRes);
+            try {
+                (0, Email_1.default)(otp, email);
+            }
+            catch (error) {
+                console.error("send mail error", error);
+            }
+            return {
+                message: "OTP sent on your email address",
+                statusCode: 200,
+            };
+        });
+    }
+    resetPassword(args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { email, otp, newPassword, role } = args;
+            const user = yield Users_1.default.findOne({ email: email, role: role });
+            if (!user) {
+                return {
+                    message: "User not found",
+                    statusCode: 404,
+                };
+            }
+            const otpSchema = yield Otp_1.default.findOne({ email: email, otp: otp, role: role });
+            // console.log("otpSchema  ::::", otpSchema);
+            if (!otpSchema) {
+                return {
+                    message: "OTP is incorrect",
+                    statusCode: 400,
+                };
+            }
+            otpSchema.remove();
+            user.password = yield bcrypt.hash(newPassword, 8);
+            let updatedUser = yield user.save();
+            return {
+                message: "Password changed, Login to continue",
+                statusCode: 200,
+            };
         });
     }
 }

@@ -15,6 +15,8 @@ const RegisterUser_1 = require("../../../usecases/cases/user/RegisterUser");
 const LoginUser_1 = require("../../../usecases/cases/user/LoginUser");
 const UserDataRepositoryImpl_1 = require("../../gateways/repositories_impl/UserDataRepositoryImpl");
 const ChangeUserPasswordCase_1 = require("../../../usecases/cases/user/ChangeUserPasswordCase");
+const ResetUserPasswordCase_1 = require("../../../usecases/cases/user/ResetUserPasswordCase");
+const ForgotUserPasswordCase_1 = require("../../../usecases/cases/user/ForgotUserPasswordCase");
 class UserQueryHandler {
 }
 exports.UserQueryHandler = UserQueryHandler;
@@ -44,6 +46,24 @@ UserMutationHandler.loginUser = (args) => __awaiter(void 0, void 0, void 0, func
 UserMutationHandler.changePassword = (userId, oldPassword, newPassword) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const res = yield new ChangeUserPasswordCase_1.ChangeUserPasswordCase(new UserDataRepositoryImpl_1.UserDataRepositoryImpl()).changePassword(userId, oldPassword, newPassword);
+        return res;
+    }
+    catch (error) {
+        return error;
+    }
+});
+UserMutationHandler.forgotPassword = (args) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const res = yield new ForgotUserPasswordCase_1.ForgotUserPasswordCase(new UserDataRepositoryImpl_1.UserDataRepositoryImpl()).forgotPassword(args);
+        return res;
+    }
+    catch (error) {
+        return error;
+    }
+});
+UserMutationHandler.resetPassword = (args) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const res = yield new ResetUserPasswordCase_1.ResetUserPasswordCase(new UserDataRepositoryImpl_1.UserDataRepositoryImpl()).resetPassword(args);
         return res;
     }
     catch (error) {

@@ -46,5 +46,23 @@ export default {
         return error;
       }
     },
+
+    forgotPassword: async (_: any, args: any) => {
+      try {
+        return UserMutationHandler.forgotPassword(args);
+      } catch (error) {
+        console.log(`Error -------> ${error}`);
+        return error;
+      }
+    },
+
+    resetPassword: async (_: any, args: any) => {
+      try {
+        return UserMutationHandler.resetPassword(args);
+      } catch (error) {
+        console.log(`Error -------> ${error}`);
+        return error;
+      }
+    },
   },
 };

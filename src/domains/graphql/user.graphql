@@ -31,6 +31,15 @@ type Mutation {
     oldPassword: String!
     newPassword: String!
   ): UserResponse
+
+  forgotPassword(email: String!, role: String!): UserResponse
+
+  resetPassword(
+    email: String!
+    otp: String!
+    newPassword: String!
+    role: String!
+  ): UserResponse
 }
 
 type UserResponse {
