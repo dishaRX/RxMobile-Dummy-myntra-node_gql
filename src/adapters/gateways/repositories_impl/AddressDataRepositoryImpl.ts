@@ -114,7 +114,29 @@ export class AddressDataRepositoryImpl implements AddressDataRepository {
     }
 
     return {
-      message: "Address added",
+      message: "Address updated",
+      statusCode: 200,
+    };
+  }
+
+  async deleteAddress(args: any): Promise<any> {
+    const address = await Address.findOne({
+      _id: args.addressId,
+      userId: args.userId,
+    });
+    console.log("address : ", address);
+
+    if (!address) {
+      return {
+        message: "Address not found",
+        statusCode: 404,
+      };
+    }
+
+    await address.remove();
+
+    return {
+      message: "Address removed",
       statusCode: 200,
     };
   }

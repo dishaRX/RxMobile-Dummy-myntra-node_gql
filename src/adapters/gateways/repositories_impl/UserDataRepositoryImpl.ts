@@ -201,7 +201,7 @@ export class UserDataRepositoryImpl implements UserDataRepository {
         statusCode: 400,
       };
     }
-    otpSchema.remove();
+    await otpSchema.remove();
     user.password = await bcrypt.hash(newPassword, 8);
     let updatedUser = await user.save();
 
