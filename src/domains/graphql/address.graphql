@@ -1,5 +1,5 @@
 type Query {
-  getAddress(_id: String!): User
+  getAddressList(userId: String!): AddressListResponse
 }
 
 type Mutation {
@@ -23,6 +23,12 @@ type AddressResponse {
   message: String!
   statusCode: Int!
   data: Address
+}
+
+type AddressListResponse {
+  message: String!
+  statusCode: Int!
+  data: [Address]
 }
 
 type Address {

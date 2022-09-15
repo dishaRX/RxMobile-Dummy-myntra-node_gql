@@ -8,18 +8,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var _a;
+var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AddressMutationHandler = exports.AddressQueryHandler = void 0;
 const AddUserAddress_1 = require("../../../usecases/cases/address/AddUserAddress");
+const GetAddressList_1 = require("../../../usecases/cases/address/GetAddressList");
 const AddressDataRepositoryImpl_1 = require("../../gateways/repositories_impl/AddressDataRepositoryImpl");
 class AddressQueryHandler {
 }
 exports.AddressQueryHandler = AddressQueryHandler;
+_a = AddressQueryHandler;
+AddressQueryHandler.getAddressList = (args) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const res = yield new GetAddressList_1.GetAddressListCase(new AddressDataRepositoryImpl_1.AddressDataRepositoryImpl()).getAddressList(args);
+        return res;
+    }
+    catch (error) {
+        return error;
+    }
+});
 class AddressMutationHandler {
 }
 exports.AddressMutationHandler = AddressMutationHandler;
-_a = AddressMutationHandler;
+_b = AddressMutationHandler;
 //Addresses
 AddressMutationHandler.addAddress = (args) => __awaiter(void 0, void 0, void 0, function* () {
     try {

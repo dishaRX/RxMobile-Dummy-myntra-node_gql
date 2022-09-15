@@ -16,21 +16,27 @@ const Users_1 = __importDefault(require("../../domains/models/Users"));
 var jwt = require("jsonwebtoken");
 const auth = (tokenData) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const token = tokenData.replace("Bearer ", "");
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        let user;
-        if (decoded.role === "user") {
-            user = yield Users_1.default.findOne({
-                _id: decoded.userId,
-                "tokens.token": token,
-            });
+        if (tokenData) {
+            const token = tokenData.replace("Bearer ", "");
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            let user;
+            if (decoded.role === "user") {
+                user = yield Users_1.default.findOne({
+                    _id: decoded.userId,
+                    "tokens.token": token,
+                });
+            }
+            else {
+            }
+            if (!user) {
+                throw new Error();
+            }
+            user._id = decoded.userId;
+            return user;
         }
         else {
+            return undefined;
         }
-        if (!user) {
-            throw new Error();
-        }
-        return user;
     }
     catch (error) {
         return undefined;
