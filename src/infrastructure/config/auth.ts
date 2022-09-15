@@ -19,6 +19,7 @@ const auth = async (tokenData: any) => {
       if (!user) {
         throw new Error();
       }
+      user._id = decoded.userId;
       return user;
     } else {
       return undefined;

@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AddressDataRepositoryImpl = void 0;
 const Address_1 = __importDefault(require("../../../domains/models/Address"));
+const mongoose = require("mongoose");
 class AddressDataRepositoryImpl {
     addAddress(args) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -33,11 +34,24 @@ class AddressDataRepositoryImpl {
                 type,
             });
             let addresssRes = yield address.save();
-            console.log("addresssRes ::" + addresssRes);
             return {
                 message: "Address added",
                 statusCode: 200,
                 data: addresssRes,
+            };
+        });
+    }
+    getAddressList(args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // let addressList = await Address.findById(args.userId);
+            let addressList = yield Address_1.default.find({
+                userId: args.userId,
+            });
+            console.log("addressList : ", addressList);
+            return {
+                message: "Success",
+                statusCode: 200,
+                data: addressList,
             };
         });
     }
