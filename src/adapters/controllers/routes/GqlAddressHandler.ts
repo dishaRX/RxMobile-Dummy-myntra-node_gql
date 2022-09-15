@@ -1,4 +1,5 @@
 import { AddUserAddressCase } from "../../../usecases/cases/address/AddUserAddress";
+import { EditUserAddressCase } from "../../../usecases/cases/address/EditUserAddress";
 import { GetAddressListCase } from "../../../usecases/cases/address/GetAddressList";
 import { AddressDataRepositoryImpl } from "../../gateways/repositories_impl/AddressDataRepositoryImpl";
 
@@ -22,6 +23,17 @@ class AddressMutationHandler {
       const res = await new AddUserAddressCase(
         new AddressDataRepositoryImpl()
       ).addAddress(args);
+      return res;
+    } catch (error: any) {
+      return error;
+    }
+  };
+
+  static editAddress = async (args: any) => {
+    try {
+      const res = await new EditUserAddressCase(
+        new AddressDataRepositoryImpl()
+      ).editAddress(args);
       return res;
     } catch (error: any) {
       return error;
