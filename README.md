@@ -25,6 +25,10 @@ The illustration below shows the four concentric circles that compose a Clean Ar
   - We have added the Reset password API, In which you can enter Received OTP and new password to reset your password.
 - Add Address API
   - We have added the Add Address API, In which user will add there product delivery address.
+- Get Address List API
+  - We have added the Address List APi, In which user will get there added address in a list.
+- Edit Address
+  - We have added the Edit address APi, In which user can edit there added address information.
 
 # Tech components
 
