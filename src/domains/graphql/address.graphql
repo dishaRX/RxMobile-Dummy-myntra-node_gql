@@ -1,5 +1,6 @@
 type Query {
   getAddressList(userId: String!): AddressListResponse
+  deleteAddress(userId: String!, addressId: String!): AddressListResponse
 }
 
 type Mutation {
