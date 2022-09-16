@@ -5,8 +5,10 @@ async function sendEmail(otp: any, email: string) {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "appatidar09@gmail.com",
-      pass: "pyntmaaxrgvbfuky",
+      // user: "appatidar09@gmail.com",
+      // pass: "pyntmaaxrgvbfuky",
+      user: "radixdt.2530@gmail.com",
+      pass: "slonasgjwugkkbkc",
     },
   });
 

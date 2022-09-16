@@ -1,23 +1,15 @@
-import crypto from "crypto";
-const algorithm = "aes-256-cbc"; //Using AES encryption
-const key = crypto.randomBytes(32);
-const iv = crypto.randomBytes(16);
+var CryptoJS = require("crypto-js");
 
+const key = "keytoencryptthedata";
 function encrypt(text: any) {
-  let cipher = crypto.createCipheriv(algorithm, Buffer.from(key), iv);
-  let encrypted = cipher.update(text);
-  encrypted = Buffer.concat([encrypted, cipher.final()]);
-  return { iv: iv.toString("hex"), encryptedData: encrypted.toString("hex") };
+  var ciphertext = CryptoJS.AES.encrypt(text, key).toString();
+  return ciphertext;
 }
 
-// Decrypting text
 function decrypt(text: any) {
-  let iv = Buffer.from(text.iv, "hex");
-  let encryptedText = Buffer.from(text.encryptedData, "hex");
-  let decipher = crypto.createDecipheriv(algorithm, Buffer.from(key), iv);
-  let decrypted = decipher.update(encryptedText);
-  decrypted = Buffer.concat([decrypted, decipher.final()]);
-  return decrypted.toString();
+  var bytes = CryptoJS.AES.decrypt(text, key);
+  var originalText = bytes.toString(CryptoJS.enc.Utf8);
+  return originalText;
 }
 
 export { encrypt, decrypt };

@@ -20,11 +20,11 @@ export class PaymentInfoDataRepositoryImpl
       upiId,
     } = args;
 
-    const encCardNumber = encrypt(cardNumber);
+    const encCardNumber = cardNumber ? encrypt(cardNumber) : undefined;
 
     let paymentInfo = new PaymentInfo({
       userId,
-      cardNumber: JSON.stringify(encCardNumber),
+      cardNumber: cardNumber ? encCardNumber : cardNumber,
       cardName,
       expiryMonth,
       expiryYear,
@@ -34,12 +34,42 @@ export class PaymentInfoDataRepositoryImpl
 
     let paymentInfoRes = await paymentInfo.save();
 
-    paymentInfoRes.cardNumber = decrypt(JSON.parse(paymentInfoRes.cardNumber));
+    paymentInfoRes.cardNumber = paymentInfoRes.cardNumber
+      ? decrypt(paymentInfoRes.cardNumber)
+      : undefined;
 
     return {
-      message: "Card added",
+      message: "Payment info added",
       statusCode: 200,
       data: paymentInfoRes,
+    };
+  }
+
+  async getPaymentInfoList(args: any): Promise<any> {
+    const { userId, paymentMethod } = args;
+    let paymentInfoList: any;
+    if (paymentMethod) {
+      paymentInfoList = await PaymentInfo.find({
+        userId: args.userId,
+        paymentMethod: paymentMethod,
+      });
+    } else {
+      paymentInfoList = await PaymentInfo.find({
+        userId: args.userId,
+      });
+    }
+
+    paymentInfoList = paymentInfoList.map((data: any, index: any) => {
+      if (data.cardNumber) {
+        paymentInfoList[index].cardNumber = decrypt(data.cardNumber);
+      }
+      return data;
+    });
+
+    return {
+      message: "Success",
+      statusCode: 200,
+      data: paymentInfoList,
     };
   }
 }
