@@ -22,6 +22,7 @@ class UserDataRepositoryImpl {
     registerUser(args) {
         return __awaiter(this, void 0, void 0, function* () {
             const { fullName, email, mobileNo, gender, dob, country, password, role, fcmToken, deviceId, platform, } = args;
+            console.log("register");
             const isUser = yield Users_1.default.findOne({ email: email });
             if (isUser) {
                 // return new Error("User is already registered");

@@ -36,6 +36,11 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 - Get Payment Info list (card/upi)
   - We have added the get Payment Info List API, In which user can get there saved payment details card/upi.
 
+- **Admin API**
+- Register API
+- We have added the register API to register the admin on the react-myntra-dummy web and app.
+
+
 # Tech components
 
 - **Node**

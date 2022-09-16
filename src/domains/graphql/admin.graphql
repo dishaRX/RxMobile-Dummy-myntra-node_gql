@@ -1,0 +1,39 @@
+type Admin {
+  _id: String
+  fullName: String!
+  email: String!
+  mobileNo: String!
+  password: String!
+  gender: String!
+  dob: String!
+  country: String!
+  token: String!
+  isVerified: Boolean! #by default false
+  fcmTokens: [FcmToken]
+  deviceId: String
+  platform: String #web/android/ios
+}
+type Mutation {
+  registerAdmin(
+    fullName: String!
+    email: String!
+    mobileNo: String!
+    gender: String!
+    dob: String!
+    country: String!
+    password: String!
+    isVerified: Boolean! #by default false
+    fcmToken: String!
+    deviceId: String!
+    platform: String! #web/android/ios
+  ): AdminResponse
+}
+type AdminResponse {
+  message: String!
+  statusCode: Int!
+  data: User!
+}
+type Token {
+  token: String
+  _id: String
+}
