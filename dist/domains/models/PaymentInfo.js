@@ -10,7 +10,7 @@ const paymentInfoSchema = new Schema({
         required: true,
         ref: "User",
     },
-    carNumber: String,
+    cardNumber: String,
     cardName: String,
     expiryMonth: String,
     expiryYear: String,

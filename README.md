@@ -13,6 +13,8 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 
 ## Features
 
+- **User Api**
+
 - Register API
   - We have added the register API to register the user on the react-myntra-dummy web and app.
 - Login API
@@ -33,6 +35,10 @@ The illustration below shows the four concentric circles that compose a Clean Ar
   - We have added the Delete address APi, In which user can delete there added address.
 - Add Payment Info (card/upi)
   - We have added the Add Payment Info API, In which user can save there payment method card/upi.
+- Get Payment Info list (card/upi)
+  - We have added the get Payment Info List API, In which user can get there saved payment details card/upi.
+- Edit Payment Info (card/upi)
+  - We have added the edit Payment Info API, In which user can edit there payment details card/upi.
 
 # Tech components
 

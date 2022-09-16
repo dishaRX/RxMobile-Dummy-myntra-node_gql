@@ -15,8 +15,10 @@ function sendEmail(otp, email) {
         let transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
-                user: "appatidar09@gmail.com",
-                pass: "pyntmaaxrgvbfuky",
+                // user: "appatidar09@gmail.com",
+                // pass: "pyntmaaxrgvbfuky",
+                user: "radixdt.2530@gmail.com",
+                pass: "slonasgjwugkkbkc",
             },
         });
         let info = yield transporter.sendMail({
