@@ -29,6 +29,8 @@ The illustration below shows the four concentric circles that compose a Clean Ar
   - We have added the Address List APi, In which user will get there added address in a list.
 - Edit Address
   - We have added the Edit address APi, In which user can edit there added address information.
+- Delete Address
+  - We have added the Delete address APi, In which user can delete there added address.
 
 # Tech components
 

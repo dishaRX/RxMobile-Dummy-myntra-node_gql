@@ -1,0 +1,48 @@
+type Query {
+  getPaymentInfoList(userId: String!): PaymentInfoListResponse
+}
+
+type Mutation {
+  addPaymentInfo(
+    userId: String!
+    cardNumber: String
+    cardName: String
+    expiryMonth: String
+    expiryYear: String
+    paymentMethod: String!
+    upiId: String
+  ): PaymentInfoResponse
+
+  editPaymentInfo(
+    userId: String!
+    cardNumber: String
+    cardName: String
+    expiryMonth: String
+    expiryYear: String
+    paymentMethod: String!
+    upiId: String
+  ): PaymentInfoResponse
+}
+
+type PaymentInfoResponse {
+  message: String!
+  statusCode: Int!
+  data: PaymentInfo
+}
+
+type PaymentInfoListResponse {
+  message: String!
+  statusCode: Int!
+  data: [PaymentInfo]
+}
+
+type PaymentInfo {
+  _id: String
+  userId: String!
+  cardNumber: String
+  cardName: String
+  expiryMonth: String
+  expiryYear: String
+  paymentMethod: String!
+  upiId: String
+}

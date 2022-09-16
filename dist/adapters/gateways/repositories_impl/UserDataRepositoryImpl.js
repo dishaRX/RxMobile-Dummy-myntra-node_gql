@@ -183,7 +183,7 @@ class UserDataRepositoryImpl {
                     statusCode: 400,
                 };
             }
-            otpSchema.remove();
+            yield otpSchema.remove();
             user.password = yield bcrypt.hash(newPassword, 8);
             let updatedUser = yield user.save();
             return {
