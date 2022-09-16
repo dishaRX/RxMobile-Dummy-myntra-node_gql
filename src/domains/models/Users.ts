@@ -29,4 +29,10 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+userSchema.virtual("addresses", {
+  ref: "Address",
+  localField: "_id",
+  foreignField: "userId",
+});
 export = mongoose.model("User", userSchema);

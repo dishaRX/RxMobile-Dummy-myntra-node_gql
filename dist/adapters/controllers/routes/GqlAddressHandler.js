@@ -12,6 +12,8 @@ var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AddressMutationHandler = exports.AddressQueryHandler = void 0;
 const AddUserAddress_1 = require("../../../usecases/cases/address/AddUserAddress");
+const DeleteAddress_1 = require("../../../usecases/cases/address/DeleteAddress");
+const EditUserAddress_1 = require("../../../usecases/cases/address/EditUserAddress");
 const GetAddressList_1 = require("../../../usecases/cases/address/GetAddressList");
 const AddressDataRepositoryImpl_1 = require("../../gateways/repositories_impl/AddressDataRepositoryImpl");
 class AddressQueryHandler {
@@ -27,6 +29,15 @@ AddressQueryHandler.getAddressList = (args) => __awaiter(void 0, void 0, void 0,
         return error;
     }
 });
+AddressQueryHandler.deleteAddress = (args) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const res = yield new DeleteAddress_1.DeleteAddressCase(new AddressDataRepositoryImpl_1.AddressDataRepositoryImpl()).deleteAddress(args);
+        return res;
+    }
+    catch (error) {
+        return error;
+    }
+});
 class AddressMutationHandler {
 }
 exports.AddressMutationHandler = AddressMutationHandler;
@@ -35,6 +46,15 @@ _b = AddressMutationHandler;
 AddressMutationHandler.addAddress = (args) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const res = yield new AddUserAddress_1.AddUserAddressCase(new AddressDataRepositoryImpl_1.AddressDataRepositoryImpl()).addAddress(args);
+        return res;
+    }
+    catch (error) {
+        return error;
+    }
+});
+AddressMutationHandler.editAddress = (args) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const res = yield new EditUserAddress_1.EditUserAddressCase(new AddressDataRepositoryImpl_1.AddressDataRepositoryImpl()).editAddress(args);
         return res;
     }
     catch (error) {

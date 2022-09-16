@@ -4,24 +4,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const MongoDatabase_1 = __importDefault(require("../../infrastructure/config/MongoDatabase"));
 const Schema = MongoDatabase_1.default.Schema;
-const addressSchema = new Schema({
+const paymentInfoSchema = new Schema({
     userId: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: "User",
     },
-    name: String,
-    mobileNo: String,
-    pinCode: String,
-    country: String,
-    state: String,
-    city: String,
-    billingAddress: String,
-    shippingAddress: String,
-    locality: String,
-    isDefault: Boolean,
-    type: String,
+    carNumber: String,
+    cardName: String,
+    expiryMonth: String,
+    expiryYear: String,
+    paymentMethod: Number,
+    upiId: String,
 }, {
     timestamps: true,
 });
-module.exports = MongoDatabase_1.default.model("Address", addressSchema);
+module.exports = MongoDatabase_1.default.model("PaymentInfo", paymentInfoSchema);

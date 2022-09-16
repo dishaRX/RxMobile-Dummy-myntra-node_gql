@@ -5,9 +5,7 @@ const GqlAddressHandler_1 = require("../routes/GqlAddressHandler");
 exports.default = {
     Query: {
         getAddressList: (_, args, context, info) => {
-            console.log("getAddressList con : ", context._id);
-            console.log("getAddressList args : ", args.userId);
-            if (!context._id || args.userId !== context._id) {
+            if (!context._id || args.userId !== context._id.toString()) {
                 //For authrization
                 return {
                     message: "Unauthorized",
@@ -22,10 +20,26 @@ exports.default = {
                 return error;
             }
         },
+        deleteAddress: (_, args, context, info) => {
+            if (!context._id || args.userId !== context._id.toString()) {
+                //For authrization
+                return {
+                    message: "Unauthorized",
+                    statusCode: 401,
+                };
+            }
+            try {
+                return GqlAddressHandler_1.AddressQueryHandler.deleteAddress(args);
+            }
+            catch (error) {
+                console.log(`Error -------> ${error}`);
+                return error;
+            }
+        },
     },
     Mutation: {
         addAddress: (_, args, context, info) => {
-            if (!context._id || args.userId !== context._id) {
+            if (!context._id || args.userId !== context._id.toString()) {
                 //For authrization
                 return {
                     message: "Unauthorized",
@@ -34,6 +48,22 @@ exports.default = {
             }
             try {
                 return GqlAddressHandler_1.AddressMutationHandler.addAddress(args);
+            }
+            catch (error) {
+                console.log(`Error -------> ${error}`);
+                return error;
+            }
+        },
+        editAddress: (_, args, context, info) => {
+            if (!context._id || args.userId !== context._id.toString()) {
+                //For authrization
+                return {
+                    message: "Unauthorized",
+                    statusCode: 401,
+                };
+            }
+            try {
+                return GqlAddressHandler_1.AddressMutationHandler.editAddress(args);
             }
             catch (error) {
                 console.log(`Error -------> ${error}`);

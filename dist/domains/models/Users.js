@@ -29,4 +29,9 @@ const userSchema = new Schema({
 }, {
     timestamps: true,
 });
+userSchema.virtual("addresses", {
+    ref: "Address",
+    localField: "_id",
+    foreignField: "userId",
+});
 module.exports = MongoDatabase_1.default.model("User", userSchema);
