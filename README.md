@@ -20,6 +20,11 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 - Change password API
   - We have added the change password API in which user can change there password if they remember there existing password.
 
+- **Admin API**
+- Register API
+- We have added the register API to register the admin on the react-myntra-dummy web and app.
+
+
 # Tech components
 
 - **Node**

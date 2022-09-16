@@ -1,6 +1,7 @@
 import {Schema, model} from "mongoose";
 
-const adminSchema = new Schema({
+const adminSchema = new Schema(
+  {
     fullName: String,
     email: String,
     mobileNo: String,
@@ -20,8 +21,9 @@ const adminSchema = new Schema({
     isVerified: Boolean,
     deviceid: String,
     Platform: String,
+    role:String
   },
-  {
+  { 
     timestamps: true,
   }
 )

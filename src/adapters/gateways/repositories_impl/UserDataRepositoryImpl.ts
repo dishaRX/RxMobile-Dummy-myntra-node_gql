@@ -68,7 +68,7 @@ console.log("register")
     console.log("user : ", user);
     if (!user) {
       // return new Error("User not registered");
-      return {
+      return {  
         message: "User not registered",
         statusCode: 404,
       };
