@@ -33,6 +33,8 @@ The illustration below shows the four concentric circles that compose a Clean Ar
   - We have added the Delete address APi, In which user can delete there added address.
 - Add Payment Info (card/upi)
   - We have added the Add Payment Info API, In which user can save there payment method card/upi.
+- Get Payment Info list (card/upi)
+  - We have added the get Payment Info List API, In which user can get there saved payment details card/upi.
 
 # Tech components
 
