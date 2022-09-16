@@ -21,5 +21,21 @@ exports.default = {
                 return error;
             }
         },
+        getPaymentInfoList: (_, args, context, info) => {
+            if (!context._id || args.userId !== context._id.toString()) {
+                //For authrization
+                return {
+                    message: "Unauthorized",
+                    statusCode: 401,
+                };
+            }
+            try {
+                return GqlPaymentInfoHandler_1.PaymentInfoMutationHandler.getPaymentInfoList(args);
+            }
+            catch (error) {
+                console.log(`Error -------> ${error}`);
+                return error;
+            }
+        },
     },
 };

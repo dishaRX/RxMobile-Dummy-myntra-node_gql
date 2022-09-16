@@ -1,7 +1,3 @@
-type Query {
-  getPaymentInfoList(userId: String!): PaymentInfoListResponse
-}
-
 type Mutation {
   addPaymentInfo(
     userId: String!
@@ -12,6 +8,11 @@ type Mutation {
     paymentMethod: String!
     upiId: String
   ): PaymentInfoResponse
+
+  getPaymentInfoList(
+    userId: String!
+    paymentMethod: String!
+  ): PaymentInfoListResponse
 
   editPaymentInfo(
     userId: String!
