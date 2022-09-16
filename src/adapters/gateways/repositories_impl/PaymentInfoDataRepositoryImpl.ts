@@ -72,6 +72,7 @@ export class PaymentInfoDataRepositoryImpl
       data: paymentInfoList,
     };
   }
+<<<<<<< HEAD
 
   async editPaymentInfo(args: any): Promise<any> {
     const { paymentInfoId, userId, paymentMethod } = args;
@@ -125,4 +126,6 @@ export class PaymentInfoDataRepositoryImpl
       statusCode: 200,
     };
   }
+=======
+>>>>>>> 04bf28353fb2f2908b86955f0990e57191bec689
 }

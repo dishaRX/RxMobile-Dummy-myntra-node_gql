@@ -37,6 +37,7 @@ export default {
         return error;
       }
     },
+<<<<<<< HEAD
 
     editPaymentInfo: (_: any, args: any, context: any, info: any) => {
       if (!context._id || args.userId !== context._id.toString()) {
@@ -53,5 +54,7 @@ export default {
         return error;
       }
     },
+=======
+>>>>>>> 04bf28353fb2f2908b86955f0990e57191bec689
   },
 };
