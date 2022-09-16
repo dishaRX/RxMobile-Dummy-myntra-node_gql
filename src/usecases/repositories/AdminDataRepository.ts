@@ -1,5 +1,6 @@
 export interface AdminDataRepository {
-  registerAdmin(args:any): Promise<any>;
+  registerAdmin(args: any): Promise<any>;
+  loginAdmin(args: any): Promise<any>;
 
-  // loginUser(args: any): Promise<any>;
+
 }
