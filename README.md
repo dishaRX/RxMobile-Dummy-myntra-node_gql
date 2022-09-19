@@ -46,10 +46,17 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 - **Admin API**
 - Register API
 - We have added the register API to register the admin on the react-myntra-dummy web and app.
-
 - Login API
   - We have added the login API in which admin can login on the app/web using the email and password
-
+- Change password API
+  - We have added the change password API in which admin can change there password if they remember there existing password.
+- Forget Password API
+  - We have added the Forget password API in which admin can change there password if they forget there existing password we will sent the otp on mail for verification.
+- Reset Password API
+  - We have added the reset password API in which admin can change there password if they forget there existing password we will sent the otp on mail for verification and if otp is matched than they are able to change password.  
+- Product Api
+- Add main category API
+ - We have added the Add main category API to Add new main category of products in the react-myntra-dummy web and app.
 # Tech components
 
 - **Node**

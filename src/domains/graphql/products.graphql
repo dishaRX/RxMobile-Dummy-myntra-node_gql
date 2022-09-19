@@ -1,0 +1,59 @@
+type Maincategory {
+  mainCategory: String!
+  createdBY: Admin
+  category: [Category]
+  _id: String!
+}
+type Category {
+  Categoryname: String!
+  CategoryId: String!
+  CreatedBy: Admin!
+  Brands: [Brand]!
+  Maincategory: Maincategory!
+}
+type Admin {
+  _id: String!
+  fullName: String!
+  email: String!
+  mobileNo: String!
+  password: String!
+  gender: String!
+  dob: String!
+  country: String!
+  token: String!
+  isVerified: Boolean! #by default false
+  fcmTokens: [FcmToken]
+  deviceId: String
+  # platform: String #web/android/ios,
+  role: String!
+}
+type Brand {
+  Brandname: String!
+  BrandID: String!
+  Product: [Products]!
+  Maincategory: Maincategory!
+  Category: Category!
+  CreatedBy: Admin!
+}
+
+type Products {
+  Maincategory: Maincategory!
+  Category: Category!
+  Brand: Brand!
+  CreatedBy: Admin!
+  Productname: String!
+  Productdetails: String
+  ProductImage: String
+  ProductSize: String
+  Deliverable: String
+  Returnable: Boolean
+  _id: String
+}
+type Mutation {
+  addMainCategory(MaincategoryName: String!): maincategoryresponse
+}
+type maincategoryresponse {
+  message: String!
+  statusCode: Int!
+  data: Maincategory
+}

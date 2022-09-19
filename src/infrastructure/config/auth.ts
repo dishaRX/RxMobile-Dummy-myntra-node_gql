@@ -18,6 +18,7 @@ const auth = async (tokenData: any) => {
       }
       return user;
     } else {
+      console.log("hey");
       const admin = await Admin.findOne({
         _id: decoded.adminId,
         "tokens.token": token,
