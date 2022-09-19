@@ -72,4 +72,60 @@ export class PaymentInfoDataRepositoryImpl
       data: paymentInfoList,
     };
   }
+<<<<<<< HEAD
+
+  async editPaymentInfo(args: any): Promise<any> {
+    const { paymentInfoId, userId, paymentMethod } = args;
+    const paymentInfo = await PaymentInfo.findOne({
+      _id: paymentInfoId,
+      userId: userId,
+      paymentMethod: paymentMethod,
+    });
+
+    if (!paymentInfo) {
+      return {
+        message: "Payment Info not found",
+        statusCode: 404,
+      };
+    }
+
+    delete args.userId;
+    delete args.paymentInfoId;
+    delete args.paymentMethod;
+
+    const updates = Object.keys(args);
+    let allowedUpdates: any;
+    if (paymentMethod == 1) {
+      args.cardNumber = encrypt(args.cardNumber);
+      allowedUpdates = ["cardNumber", "cardName", "expiryMonth", "expiryYear"];
+    } else if (paymentMethod == 2) {
+      allowedUpdates = ["upiId"];
+    }
+
+    const isValidOperation = updates.every((update) => {
+      return allowedUpdates.includes(update);
+    });
+
+    if (!isValidOperation) {
+      return {
+        message: "Operation invalid",
+        statusCode: 400,
+      };
+    }
+
+    try {
+      updates.forEach((update) => (paymentInfo[update] = args[update]));
+
+      await paymentInfo.save();
+    } catch (error: any) {
+      console.log(error);
+    }
+
+    return {
+      message: "Payment Info updated",
+      statusCode: 200,
+    };
+  }
+=======
+>>>>>>> 04bf28353fb2f2908b86955f0990e57191bec689
 }

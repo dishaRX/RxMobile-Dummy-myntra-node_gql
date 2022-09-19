@@ -16,6 +16,7 @@ type Mutation {
 
   editPaymentInfo(
     userId: String!
+    paymentInfoId: String!
     cardNumber: String
     cardName: String
     expiryMonth: String

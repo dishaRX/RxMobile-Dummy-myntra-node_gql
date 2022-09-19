@@ -5,8 +5,11 @@ async function sendEmail(otp: any, email: string) {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
+<<<<<<< HEAD
+=======
       // user: "appatidar09@gmail.com",
       // pass: "pyntmaaxrgvbfuky",
+>>>>>>> 04bf28353fb2f2908b86955f0990e57191bec689
       user: "radixdt.2530@gmail.com",
       pass: "slonasgjwugkkbkc",
     },
@@ -14,7 +17,7 @@ async function sendEmail(otp: any, email: string) {
 
   let info = await transporter.sendMail(
     {
-      from: "appatidar09@gmail.com", // sender address
+      from: "radixdt.2530@gmail.com", // sender address
       to: email, // list of receivers
       subject: "OTP", // Subject line
       text: `This is your OTP ${otp} to reset your password`,
