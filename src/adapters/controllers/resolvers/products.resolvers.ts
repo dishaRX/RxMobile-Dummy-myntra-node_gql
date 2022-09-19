@@ -1,4 +1,7 @@
-import { ProductMutationHandler } from "../routes/GqlProductHandler";
+import {
+  ProductMutationHandler,
+  ProductQueryHandler,
+} from "../routes/GqlProductHandler";
 
 export default {
   Mutation: {
@@ -19,6 +22,22 @@ export default {
       } catch (error) {
         console.log(`error------->${error}`);
         console.log("catch");
+      }
+    },
+  },
+  Query: {
+    getAllMainCategory: async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        let res = ProductQueryHandler.getMainCategory();
+        return res;
+      } catch (error) {
+        console.log(`error------->${error}`);
       }
     },
   },
