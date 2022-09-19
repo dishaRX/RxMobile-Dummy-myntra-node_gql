@@ -57,6 +57,8 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 - Product Api
 - Add main category API
  - We have added the Add main category API to Add new main category of products in the react-myntra-dummy web and app.
+ - Get all main category API
+  - We have added the get all  main category API to to get all main categories of products in the react-myntra-dummy web and app.
 # Tech components
 
 - **Node**
