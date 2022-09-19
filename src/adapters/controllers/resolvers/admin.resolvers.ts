@@ -39,5 +39,21 @@ export default {
         return error;
       }
     },
+    forgotPassword: async (_: any, args: any) => {
+      try {
+        return AdminMutationHandler.forgotPassword(args);
+      } catch (error) {
+        console.log(`Error -------> ${error}`);
+        return error;
+      }
+    },
+    resetPassword: async (_: any, args: any) => {
+      try {
+        return AdminMutationHandler.resetPassword(args);
+      } catch (error) {
+        console.log(`Error -------> ${error}`);
+        return error;
+      }
+    },
   },
 };

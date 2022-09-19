@@ -2,6 +2,8 @@ import { RegisterAdminCase } from "../../../usecases/cases/admin/RegisterAdmin";
 import { AdminDataRepositoryImpl } from "../../gateways/repositories_impl/AdminDataRepositoryImpl";
 import { LoginAdminCase } from "../../../usecases/cases/admin/LoginAdmin";
 import { ChangeAdminPasswordCase } from "../../../usecases/cases/admin/ChangeAdminPassword";
+import { ForgotAdminPasswordCase } from "../../../usecases/cases/admin/ForgotAdminPassword";
+import { ResetAdminPasswordCase } from "../../../usecases/cases/admin/ResetAdminPassword"
 
 export class AdminMutationHandler {
   static registerAdmin = async (args: any) => {
@@ -39,4 +41,25 @@ export class AdminMutationHandler {
       return error;
     }
   };
+  static forgotPassword = async (args: any) => {
+    try {
+      const res = await new ForgotAdminPasswordCase(
+        new AdminDataRepositoryImpl()
+      ).forgotPassword(args);
+      return res;
+    } catch (error: any) {
+      return error;
+    }
+  };
+  static resetPassword = async (args: any) => {
+    try {
+      const res = await new ResetAdminPasswordCase(
+        new AdminDataRepositoryImpl()
+      ).resetPassword(args);
+      return res;
+    } catch (error:any) {
+      return error;
+    }
+  };
 }
+

@@ -1,5 +1,7 @@
 import { AdminDataRepository } from "../../../usecases/repositories/AdminDataRepository";
 import Admin from "../../../domains/models/Admin";
+import Otp from "../../../domains/models/Otp";
+import sendEmail from "../../../infrastructure/config/Email";
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 
@@ -143,5 +145,57 @@ export class AdminDataRepositoryImpl implements AdminDataRepository {
     } catch (error) {
       return error;
     }
+  }
+  async forgotadminPassword(args: any): Promise<any> {
+    const { email, role } = args;
+    const user = await Admin.findOne({ email: email });
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    if (!user) {
+      return {
+        message: "User not registered",
+        statusCode: 404,
+      };
+    }
+    const otpSchema = new Otp({
+      otp: otp,
+      email: email,
+      role: role,
+    });
+    let otpRes = await otpSchema.save();
+    try {
+      sendEmail(otpRes.otp, otpRes.email);
+    } catch (error) {
+      console.error("send mail error", error);
+    }
+    return {
+      message: "OTP sent on your email address",
+      statusCode: 200,
+    };
+  }
+  async resetadminPassword(args: any): Promise<any> {
+    const { email, otp, newPassword, role } = args;
+    const admin = await Admin.findOne({ email: email, role: role });
+    if (!admin) {
+      return {
+        message: "User not found",
+        statusCode: 404,
+      };
+    }
+    const otpSchema = await Otp.findOne({ email: email, otp: otp, role: role });
+    // console.log("otpSchema  ::::", otpSchema);
+    if (!otpSchema) {
+      return {
+        message: "OTP is incorrect",
+        statusCode: 400,
+      };
+    }
+    otpSchema.remove();
+    admin.password = await bcrypt.hash(newPassword, 8);
+    let updatedUser = await admin.save();
+
+    return {
+      message: "Password changed, Login to continue",
+      statusCode: 200,
+    };
   }
 }

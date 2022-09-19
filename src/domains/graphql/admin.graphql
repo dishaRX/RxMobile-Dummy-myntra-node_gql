@@ -39,6 +39,13 @@ type Mutation {
     oldPassword: String!
     newPassword: String!
   ): AdminResponse
+  forgotadminPassword(email: String!, role: String!):AdminResponse
+  resetadminPassword(
+    email: String!
+    otp: String!
+    newPassword: String!
+    role: String!
+  ):AdminResponse
 }
 type AdminResponse {
   message: String!
