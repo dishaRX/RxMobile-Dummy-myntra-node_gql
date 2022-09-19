@@ -37,11 +37,11 @@ The illustration below shows the four concentric circles that compose a Clean Ar
   - We have added the Add Payment Info API, In which user can save there payment method card/upi.
 - Get Payment Info list (card/upi)
   - We have added the get Payment Info List API, In which user can get there saved payment details card/upi.
-<<<<<<< HEAD
 - Edit Payment Info (card/upi)
   - We have added the edit Payment Info API, In which user can edit there payment details card/upi.
-=======
->>>>>>> 04bf28353fb2f2908b86955f0990e57191bec689
+- Delete Payment Info (card/upi)
+
+  - We have added the delete Payment Info API, In which user can delete there payment details card/upi.
 
 - **Admin API**
 - Register API
@@ -49,6 +49,7 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 
 - Login API
   - We have added the login API in which admin can login on the app/web using the email and password
+
 # Tech components
 
 - **Node**
