@@ -40,7 +40,8 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 - Register API
 - We have added the register API to register the admin on the react-myntra-dummy web and app.
 
-
+- Login API
+  - We have added the login API in which admin can login on the app/web using the email and password
 # Tech components
 
 - **Node**

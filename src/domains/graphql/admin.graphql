@@ -27,6 +27,13 @@ type Mutation {
     deviceId: String!
     platform: String! #web/android/ios
   ): AdminResponse
+  loginAdmin(
+    email: String!
+    password: String!
+    fcmToken: String!
+    deviceId: String!
+    role: String!,
+  ): AdminResponse
 }
 type AdminResponse {
   message: String!
