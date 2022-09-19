@@ -19,5 +19,25 @@ export default {
         return error;
       }
     },
+    changeadminPassword: async (_: any, args: any, context: any, info: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+          success: false,
+        };
+      }
+      try {
+        console.log("its resolver");
+        return AdminMutationHandler.changeadminPassword(
+          args.adminId,
+          args.oldPassword,
+          args.newPassword
+        );
+      } catch (error) {
+        console.log(`Error -------> ${error}`);
+        return error;
+      }
+    },
   },
 };

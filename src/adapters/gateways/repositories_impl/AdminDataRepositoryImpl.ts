@@ -113,4 +113,35 @@ export class AdminDataRepositoryImpl implements AdminDataRepository {
 
     // return response;
   }
+  async changeadminPassword(
+    userId: string,
+    oldPassword: string,
+    newPassword: string
+  ): Promise<any> {
+    try {
+      const admin = await Admin.findById(userId);
+      if (!admin) {
+        return {
+          message: "User not found",
+          statusCode: 404,
+        };
+      }
+      const isMatch = await bcrypt.compare(oldPassword, admin.password);
+      if (!isMatch) {
+        return {
+          message: "Old Password is incorrect",
+          statusCode: 400,
+        };
+      }
+      admin.password = await bcrypt.hash(newPassword, 8);
+      let updatedUser = await admin.save();
+      return {
+        message: "Password changed",
+        statusCode: 200,
+        data: updatedUser,
+      };
+    } catch (error) {
+      return error;
+    }
+  }
 }
