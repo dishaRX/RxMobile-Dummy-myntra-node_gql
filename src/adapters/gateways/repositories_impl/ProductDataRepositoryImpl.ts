@@ -45,4 +45,27 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       };
     }
   }
+  async getMainCategoryById(args: String): Promise<any> {
+    if (!args) {
+      return {
+        message: "main category id can not be null",
+        statusCode: 201,
+      };
+    }
+    try {
+      const data = await MainCategory.findOne({ _id: args });
+      console.log(data);
+      return {
+        message: "success true",
+        statusCode: 201,
+        data: data,
+      };
+    } catch (error) {
+      return {
+        message: "Not found",
+        statusCode: 404,
+        data: error,
+      };
+    }
+  }
 }
