@@ -11,7 +11,8 @@ type Admin {
   isVerified: Boolean! #by default false
   fcmTokens: [FcmToken]
   deviceId: String
-  platform: String #web/android/ios
+  platform: String #web/android/ios,
+  role: String
 }
 type Mutation {
   registerAdmin(
@@ -32,20 +33,19 @@ type Mutation {
     password: String!
     fcmToken: String!
     deviceId: String!
-    role: String!
   ): AdminResponse
   changeadminPassword(
     adminId: String!
     oldPassword: String!
     newPassword: String!
   ): AdminResponse
-  forgotadminPassword(email: String!, role: String!):AdminResponse
+  forgotadminPassword(email: String!, role: String!): AdminResponse
   resetadminPassword(
     email: String!
     otp: String!
     newPassword: String!
     role: String!
-  ):AdminResponse
+  ): AdminResponse
 }
 type AdminResponse {
   message: String!

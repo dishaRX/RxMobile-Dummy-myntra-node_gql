@@ -29,4 +29,20 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       };
     }
   }
+  async getAllMainCategory(): Promise<any> {
+    try {
+      const data = await MainCategory.find();
+      return {
+        message: "success true",
+        statusCode: 201,
+        data: data,
+      };
+    } catch (error) {
+      return {
+        message: "not found",
+        statusCode: 404,
+        data: error,
+      };
+    }
+  }
 }

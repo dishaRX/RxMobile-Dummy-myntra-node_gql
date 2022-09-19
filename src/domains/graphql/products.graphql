@@ -52,8 +52,17 @@ type Products {
 type Mutation {
   addMainCategory(MaincategoryName: String!): maincategoryresponse
 }
+type Query {
+  getAllMainCategory: getAllMainCategoryResponse
+}
+
 type maincategoryresponse {
   message: String!
   statusCode: Int!
   data: Maincategory
+}
+type getAllMainCategoryResponse {
+  message: String!
+  statusCode: Int!
+  data: [Maincategory]
 }
