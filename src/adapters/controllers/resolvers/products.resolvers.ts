@@ -40,5 +40,19 @@ export default {
         console.log(`error------->${error}`);
       }
     },
+    getMainCategoryById: async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        let res = ProductQueryHandler.getMainCategoryById(args.productid);
+        return res;
+      } catch (error) {
+        console.log(`err----------->${error}`);
+      }
+    },
   },
 };

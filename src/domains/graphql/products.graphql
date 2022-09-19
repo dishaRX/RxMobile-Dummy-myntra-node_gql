@@ -54,6 +54,7 @@ type Mutation {
 }
 type Query {
   getAllMainCategory: getAllMainCategoryResponse
+  getMainCategoryById(productid: String): maincategoryresponse
 }
 
 type maincategoryresponse {

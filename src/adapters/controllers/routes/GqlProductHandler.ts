@@ -1,5 +1,6 @@
 import { AddMainCategoryCase } from "../../../usecases/cases/product/AddMainCategory";
 import { GetAllMainCategoryCase } from "../../../usecases/cases/product/GetAllMainCategory";
+import { GetMainCategoryByIdCase } from "../../../usecases/cases/product/GetMainCategoryById";
 import { ProductDataRepositoryImpl } from "../../gateways/repositories_impl/ProductDataRepositoryImpl";
 
 export class ProductMutationHandler {
@@ -25,6 +26,17 @@ export class ProductQueryHandler {
       return res;
     } catch (err) {
       return err;
+    }
+  };
+  static getMainCategoryById = async (productid: string) => {
+    try {
+      const res = await new GetMainCategoryByIdCase(
+        new ProductDataRepositoryImpl()
+      ).getMainCategoryById(productid);
+      console.log(res);
+      return res;
+    } catch (error) {
+      return error;
     }
   };
 }
