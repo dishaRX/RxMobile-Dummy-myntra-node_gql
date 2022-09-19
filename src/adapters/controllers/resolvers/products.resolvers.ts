@@ -24,6 +24,25 @@ export default {
         console.log("catch");
       }
     },
+    updateMainCategoryById: async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        console.log(args.productid,args.upatedname);
+        let res = await ProductMutationHandler.updateMainCategoryById(
+          args.upatedname,
+          args.productid,
+          context
+        );
+        return res;
+      } catch (error) {
+        console.log(`err----------->${error}`);
+      }
+    },
   },
   Query: {
     getAllMainCategory: async (_: any, args: any, context: any) => {
@@ -72,5 +91,6 @@ export default {
         console.log(`err----------->${error}`);
       }
     },
+    
   },
 };

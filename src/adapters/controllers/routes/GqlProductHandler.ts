@@ -2,6 +2,7 @@ import { AddMainCategoryCase } from "../../../usecases/cases/product/AddMainCate
 import { DeleteMainCategoryByIdCase } from "../../../usecases/cases/product/DeleteMainCategoryById";
 import { GetAllMainCategoryCase } from "../../../usecases/cases/product/GetAllMainCategory";
 import { GetMainCategoryByIdCase } from "../../../usecases/cases/product/GetMainCategoryById";
+import { UpdateMainCategoryByIdCase } from "../../../usecases/cases/product/UpdateMainCategoryById";
 import { ProductDataRepositoryImpl } from "../../gateways/repositories_impl/ProductDataRepositoryImpl";
 export class ProductMutationHandler {
   //Products
@@ -15,7 +16,22 @@ export class ProductMutationHandler {
       return error;
     }
   };
+  static updateMainCategoryById = async (
+    productid:string,
+    MainCategory: string,
+    createdBY: any
+  ) => {
+    try {
+      const res = await new UpdateMainCategoryByIdCase(
+        new ProductDataRepositoryImpl()
+      ).deleteMainCategoryById( productid,MainCategory, createdBY);
+      return res;
+    } catch (error) {
+      return error;
+    }
+  };
 }
+
 
 export class ProductQueryHandler {
   static getMainCategory = async () => {
@@ -53,3 +69,4 @@ export class ProductQueryHandler {
     }
   };
 }
+
