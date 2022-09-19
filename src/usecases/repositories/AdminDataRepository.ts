@@ -6,5 +6,6 @@ export interface AdminDataRepository {
     oldPassword: any,
     newPassword: any
   ): Promise<any>;
-
+  forgotadminPassword(args: any): Promise<any>;
+  resetadminPassword(args: any): Promise<any>;
 }
