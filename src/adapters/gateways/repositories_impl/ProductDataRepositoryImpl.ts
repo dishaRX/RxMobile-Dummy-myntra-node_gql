@@ -93,4 +93,36 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       };
     }
   }
+  async updateMainCategoryById(
+    updatedata: String,
+    productid: any,
+    createdBy: any
+  ): Promise<any> {
+    if (!productid) {
+      return {
+        message: "main category id can not be null",
+        statusCode: 201,
+      };
+    }
+    try {
+      const forupdate = {
+        mainCategory: updatedata,
+      };
+      const data = await MainCategory.findOneAndUpdate(
+        { _id: productid, createdBY: createdBy._id },
+        forupdate
+      );
+      return {
+        message: "success true",
+        statusCode: 201,
+        data: data,
+      };
+    } catch (error) {
+      return {
+        message: "success false",
+        statusCode: 501,
+        data: error,
+      };
+    }
+  }
 }
