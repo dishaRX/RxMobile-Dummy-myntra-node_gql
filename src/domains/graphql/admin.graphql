@@ -32,13 +32,18 @@ type Mutation {
     password: String!
     fcmToken: String!
     deviceId: String!
-    role: String!,
+    role: String!
+  ): AdminResponse
+  changeadminPassword(
+    adminId: String!
+    oldPassword: String!
+    newPassword: String!
   ): AdminResponse
 }
 type AdminResponse {
   message: String!
   statusCode: Int!
-  data: User!
+  data: Admin
 }
 type Token {
   token: String
