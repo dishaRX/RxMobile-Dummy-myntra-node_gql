@@ -24,6 +24,12 @@ type Mutation {
     paymentMethod: String!
     upiId: String
   ): PaymentInfoResponse
+
+  deletePaymentInfo(
+    userId: String!
+    paymentInfoId: String!
+    paymentMethod: String!
+  ): PaymentInfoResponse
 }
 
 type PaymentInfoResponse {

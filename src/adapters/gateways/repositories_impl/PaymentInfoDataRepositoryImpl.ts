@@ -72,7 +72,6 @@ export class PaymentInfoDataRepositoryImpl
       data: paymentInfoList,
     };
   }
-<<<<<<< HEAD
 
   async editPaymentInfo(args: any): Promise<any> {
     const { paymentInfoId, userId, paymentMethod } = args;
@@ -126,6 +125,27 @@ export class PaymentInfoDataRepositoryImpl
       statusCode: 200,
     };
   }
-=======
->>>>>>> 04bf28353fb2f2908b86955f0990e57191bec689
+
+  async deletePaymentInfo(args: any): Promise<any> {
+    const { paymentInfoId, userId, paymentMethod } = args;
+    const paymentInfo = await PaymentInfo.findOne({
+      _id: paymentInfoId,
+      userId: userId,
+      paymentMethod: paymentMethod,
+    });
+
+    if (!paymentInfo) {
+      return {
+        message: "Payment Info not found",
+        statusCode: 404,
+      };
+    }
+
+    await paymentInfo.remove();
+
+    return {
+      message: "Payment Info removed.",
+      statusCode: 200,
+    };
+  }
 }
