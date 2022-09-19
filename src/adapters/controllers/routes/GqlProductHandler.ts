@@ -1,8 +1,8 @@
 import { AddMainCategoryCase } from "../../../usecases/cases/product/AddMainCategory";
+import { DeleteMainCategoryByIdCase } from "../../../usecases/cases/product/DeleteMainCategoryById";
 import { GetAllMainCategoryCase } from "../../../usecases/cases/product/GetAllMainCategory";
 import { GetMainCategoryByIdCase } from "../../../usecases/cases/product/GetMainCategoryById";
 import { ProductDataRepositoryImpl } from "../../gateways/repositories_impl/ProductDataRepositoryImpl";
-
 export class ProductMutationHandler {
   //Products
   static addMainCategory = async (MainCategoryName: String, Createdby: any) => {
@@ -34,6 +34,19 @@ export class ProductQueryHandler {
         new ProductDataRepositoryImpl()
       ).getMainCategoryById(productid);
       console.log(res);
+      return res;
+    } catch (error) {
+      return error;
+    }
+  };
+  static deleteMainCategoryById = async (
+    MainCategory: string,
+    createdBY: any
+  ) => {
+    try {
+      const res = await new DeleteMainCategoryByIdCase(
+        new ProductDataRepositoryImpl()
+      ).deleteMainCategoryById(MainCategory, createdBY);
       return res;
     } catch (error) {
       return error;

@@ -61,6 +61,9 @@ The illustration below shows the four concentric circles that compose a Clean Ar
   - We have added the get all  main category API to to get all main categories of products in the react-myntra-dummy web and app.
  - Get  main category by id API
     - We have added the get  main category by id API to to get  main category of products by id in the react-myntra-dummy web and app.
+ - Delete  main category by id API
+    - We have added the delete  main category by id API to to delete main category of products by id in the react-myntra-dummy web and app.
+   
 # Tech components
 
 - **Node**

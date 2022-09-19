@@ -54,5 +54,23 @@ export default {
         console.log(`err----------->${error}`);
       }
     },
+    deleteMainCategoryById: async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        console.log(args.productid);
+        let res = await ProductQueryHandler.deleteMainCategoryById(
+          args.productid,
+          context
+        );
+        return res;
+      } catch (error) {
+        console.log(`err----------->${error}`);
+      }
+    },
   },
 };
