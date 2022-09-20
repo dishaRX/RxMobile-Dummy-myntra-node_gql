@@ -53,24 +53,25 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 - Forget Password API
   - We have added the Forget password API in which admin can change there password if they forget there existing password we will sent the otp on mail for verification.
 - Reset Password API
-  - We have added the reset password API in which admin can change there password if they forget there existing password we will sent the otp on mail for verification and if otp is matched than they are able to change password.  
+  - We have added the reset password API in which admin can change there password if they forget there existing password we will sent the otp on mail for verification and if otp is matched than they are able to change password.
 - Product Api
 - Add main category API
- - We have added the Add main category API to Add new main category of products in the react-myntra-dummy web and app.
- - Get all main category API
-  - We have added the get all  main category API to to get all main categories of products in the react-myntra-dummy web and app.
- - Get  main category by id API
-    - We have added the get  main category by id API to to get  main category of products by id in the react-myntra-dummy web and app.
- - Delete  main category by id API
-    - We have added the delete  main category by id API to to delete main category of products by id in the react-myntra-dummy web and app.
+- We have added the Add main category API to Add new main category of products in the react-myntra-dummy web and app.
+- Get all main category API
+- We have added the get all main category API to get all main categories of products in the react-myntra-dummy web and app.
+- Get main category by id API
+  - We have added the get main category by id API to get main category of products by id in the react-myntra-dummy web and app.
+- Delete main category by id API
+  - We have added the delete main category by id API to delete main category of products by id in the react-myntra-dummy web and app.
 - Update main category by id API
-    - We have added the update  main category by id API to to update main category of products by id in the react-myntra-dummy web and app.
-- get main category by  userid API
-    - We have added get  main category by userid API to to get all  main category of products by userid of logged in user in the react-myntra-dummy web and app.
+  - We have added the update main category by id API to update main category of products by id in the react-myntra-dummy web and app.
+- get main category by userid API
+  - We have added get main category by userid API to get all main category of products by userid of logged in user in the react-myntra-dummy web and app.
 - add product category API
-    - We have added add product category  API to to add new category of product in  react-myntra-dummy web and app.
+  - We have added add product category API to add new category of product in react-myntra-dummy web and app.
+- get all product categories API
+  - We have added get all product categories API to get all categories of product in react-myntra-dummy web and app.
 
-   
 # Tech components
 
 - **Node**

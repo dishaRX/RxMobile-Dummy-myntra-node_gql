@@ -14,4 +14,5 @@ export interface ProductDataRepository {
     Categoryname: String,
     Createdby: any
   ): Promise<any>;
+  getAllProductCategories(createdBy: any): Promise<any>;
 }

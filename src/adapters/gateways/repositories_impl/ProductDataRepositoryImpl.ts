@@ -182,4 +182,22 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       };
     }
   }
+  async getAllProductCategories(createdBy: any): Promise<any> {
+    try {
+      const data = await Category.find().populate([
+        "createdBy",
+        "mainCategory",
+      ]);
+      return {
+        message: "success true",
+        statusCode: 201,
+        data: data,
+      };
+    } catch (error) {
+      return {
+        message: "success false",
+        statusCode: 404,
+      };
+    }
+  }
 }
