@@ -241,4 +241,29 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       };
     }
   }
+  async deleteProductCategoryById(args: String, createdBy: any): Promise<any> {
+    if (!args) {
+      return {
+        message: "main category id can not be null",
+        statusCode: 201,
+      };
+    }
+
+    try {
+      const deletedItem = await Category.findOneAndDelete({
+        _id: args,
+        createdBy: createdBy._id,
+      });
+      return {
+        message: "success true",
+        statusCode: 201,
+        data: deletedItem,
+      };
+    } catch (error) {
+      return {
+        message: "success false",
+        statusCode: 404,
+      };
+    }
+  }
 }

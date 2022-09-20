@@ -3,12 +3,14 @@ import { AddProductCategoryCase } from "../../../usecases/cases/product/AddProdu
 import { AllProductCategoriesCreatedByUserCase } from "../../../usecases/cases/product/AllProductCategoriesCreatedByUserCase";
 import { AllProductCategoryCase } from "../../../usecases/cases/product/AllProductCategoryCase";
 import { DeleteMainCategoryByIdCase } from "../../../usecases/cases/product/DeleteMainCategoryById";
+import { DeleteProductCategoryByIdCase } from "../../../usecases/cases/product/DeleteProductCategoryByIdCase";
 import { GetAllMainCategoryCase } from "../../../usecases/cases/product/GetAllMainCategory";
 import { GetMainCategoryByIdCase } from "../../../usecases/cases/product/GetMainCategoryById";
 import { GetMainCategoryByUserIdCase } from "../../../usecases/cases/product/GetMainCategoryByUserIdCase";
 import { GetProductCategoryByIdCase } from "../../../usecases/cases/product/GetProductCategoryByIdCase";
 import { UpdateMainCategoryByIdCase } from "../../../usecases/cases/product/UpdateMainCategoryById";
 import { ProductDataRepositoryImpl } from "../../gateways/repositories_impl/ProductDataRepositoryImpl";
+
 export class ProductMutationHandler {
   //Products
   static addMainCategory = async (MainCategoryName: String, Createdby: any) => {
@@ -122,6 +124,19 @@ export class ProductQueryHandler {
         new ProductDataRepositoryImpl()
       ).getProductCategoryById(productid);
       console.log(res);
+      return res;
+    } catch (error) {
+      return error;
+    }
+  };
+  static deleteProductCategoryById = async (
+    Category:string,
+    createdBY: any
+  ) => {
+    try {
+      const res = await new DeleteProductCategoryByIdCase(
+        new ProductDataRepositoryImpl()
+      ).deleteProductCategoryById(Category,createdBY);
       return res;
     } catch (error) {
       return error;
