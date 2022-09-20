@@ -1,5 +1,7 @@
 import { ProductDataRepository } from "../../../usecases/repositories/ProductDataRepository";
 import MainCategory from "../../../domains/models/MainCategory";
+import Category from "../../../domains/models/Category";
+
 export class ProductDataRepositoryImpl implements ProductDataRepository {
   async addMainCategory(
     MainCategoryName: String,
@@ -145,6 +147,38 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
         message: "success false",
         statusCode: 501,
         data: error,
+      };
+    }
+  }
+  async addProductCategory(
+    MainCategoryName: String,
+    Categoryname: String,
+    Createdby: any
+  ): Promise<any> {
+    if (!MainCategoryName || !Categoryname) {
+      return {
+        message: "please fill all the details",
+        statusCode: 501,
+      };
+    }
+    try {
+      const main = await MainCategory.findOne({
+        mainCategory: MainCategoryName,
+      });
+      const data = await Category.create({
+        Categoryname: Categoryname,
+        mainCategory: main,
+        createdBy: Createdby._id,
+      });
+      return {
+        message: "success true",
+        statusCode: 201,
+        data: data,
+      };
+    } catch (error) {
+      return {
+        message: "success false",
+        statusCode: 404,
       };
     }
   }

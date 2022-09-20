@@ -32,12 +32,30 @@ export default {
         };
       }
       try {
-        console.log(args.productid, args.upatedname);
         let res = await ProductMutationHandler.updateMainCategoryById(
           args.upatedname,
           args.productid,
           context
         );
+        return res;
+      } catch (error) {
+        console.log(`err----------->${error}`);
+      }
+    },
+    addProductCategory: async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        let res = await ProductMutationHandler.addProductCategory(
+          args.maincategoryname,
+          args.categoryname,
+          context
+        );
+        console.log(res);
         return res;
       } catch (error) {
         console.log(`err----------->${error}`);
@@ -102,7 +120,7 @@ export default {
         let res = await ProductQueryHandler.getMainCategoryByUserId(context);
         return res;
       } catch (error) {
-        return error
+        return error;
       }
     },
   },
