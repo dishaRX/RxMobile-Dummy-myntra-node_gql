@@ -15,4 +15,5 @@ export interface ProductDataRepository {
     Createdby: any
   ): Promise<any>;
   getAllProductCategories(createdBy: any): Promise<any>;
+  AllProductCategoriesCreatedByUser(createdBy: any): Promise<any>;
 }

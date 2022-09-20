@@ -1,5 +1,6 @@
 import { AddMainCategoryCase } from "../../../usecases/cases/product/AddMainCategory";
 import { AddProductCategoryCase } from "../../../usecases/cases/product/AddProductCategoryCase";
+import { AllProductCategoriesCreatedByUserCase } from "../../../usecases/cases/product/AllProductCategoriesCreatedByUserCase";
 import { AllProductCategoryCase } from "../../../usecases/cases/product/AllProductCategoryCase";
 import { DeleteMainCategoryByIdCase } from "../../../usecases/cases/product/DeleteMainCategoryById";
 import { GetAllMainCategoryCase } from "../../../usecases/cases/product/GetAllMainCategory";
@@ -100,6 +101,16 @@ export class ProductQueryHandler {
       const res = await new AllProductCategoryCase(
         new ProductDataRepositoryImpl()
       ).getAllProductCategories(createdBY);
+      return res;
+    } catch (error) {
+      return error;
+    }
+  };
+  static AllProductCategoriesCreatedByUser = async (createdBY: any) => {
+    try {
+      const res = await new AllProductCategoriesCreatedByUserCase(
+        new ProductDataRepositoryImpl()
+      ).AllProductCategoriesCreatedByUser(createdBY);
       return res;
     } catch (error) {
       return error;
