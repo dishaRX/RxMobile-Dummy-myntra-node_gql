@@ -66,6 +66,7 @@ type Query {
   getMainCategoryById(productid: String): maincategoryresponse
   deleteMainCategoryById(productid: String): maincategoryresponse
   getMainCategoryByUserId: getAllMainCategoryResponse
+  getAllProductCategories: getAllProductCategoriesResponse
 }
 
 type maincategoryresponse {
@@ -82,4 +83,9 @@ type categoryresponse {
   message: String!
   statusCode: Int!
   data: Category
+}
+type getAllProductCategoriesResponse {
+  message: String!
+  statusCode: Int!
+  data: [Category]
 }
