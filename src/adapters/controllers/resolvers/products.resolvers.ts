@@ -32,7 +32,7 @@ export default {
         };
       }
       try {
-        console.log(args.productid,args.upatedname);
+        console.log(args.productid, args.upatedname);
         let res = await ProductMutationHandler.updateMainCategoryById(
           args.upatedname,
           args.productid,
@@ -91,6 +91,19 @@ export default {
         console.log(`err----------->${error}`);
       }
     },
-    
+    getMainCategoryByUserId: async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        let res = await ProductQueryHandler.getMainCategoryByUserId(context);
+        return res;
+      } catch (error) {
+        return error
+      }
+    },
   },
 };

@@ -16,17 +16,17 @@ type Admin {
 }
 type Mutation {
   registerAdmin(
-    fullName: String!
-    email: String!
-    mobileNo: String!
-    gender: String!
-    dob: String!
-    country: String!
-    password: String!
-    isVerified: Boolean! #by default false
-    fcmToken: String!
-    deviceId: String!
-    platform: String! #web/android/ios
+      fullName: String!
+      email: String!
+      mobileNo: String!
+      gender: String!
+      dob: String!
+      country: String!
+      password: String!
+      isVerified: Boolean! #by default false
+      fcmToken: String!
+      deviceId: String!
+      platform: String! #web/android/ios
   ): AdminResponse
   loginAdmin(
     email: String!

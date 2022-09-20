@@ -125,4 +125,27 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       };
     }
   }
+  async getMainCategoryByUserId(args: any): Promise<any> {
+    try {
+      const data = await MainCategory.find({ createdBY: args._id });
+      if (data.length > 0) {
+        return {
+          message: "success true",
+          statusCode: 201,
+          data: data,
+        };
+      } else {
+        return {
+          message: "NO main categories found",
+          statusCode: 201,
+        };
+      }
+    } catch (error) {
+      return {
+        message: "success false",
+        statusCode: 501,
+        data: error,
+      };
+    }
+  }
 }
