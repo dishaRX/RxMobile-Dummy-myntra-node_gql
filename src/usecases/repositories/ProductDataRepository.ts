@@ -4,6 +4,6 @@ export interface ProductDataRepository {
   getMainCategoryById(args: String): Promise<any>;
   deleteMainCategoryById(args: String, createdBy: any): Promise<any>;  
   updateMainCategoryById(productid: String,updatedata:String,createdBy: any): Promise<any>;
-
+  getMainCategoryByUserId(createdBy:any): Promise<any>;
 
 }
