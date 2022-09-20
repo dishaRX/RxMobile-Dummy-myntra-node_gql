@@ -17,4 +17,5 @@ export interface ProductDataRepository {
   getAllProductCategories(createdBy: any): Promise<any>;
   AllProductCategoriesCreatedByUser(createdBy: any): Promise<any>;
   getProductCategoryById(args: String): Promise<any>;
+  deleteProductCategoryById(args: String, createdBy: any): Promise<any>;
 }
