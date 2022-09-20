@@ -203,6 +203,7 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
   async AllProductCategoriesCreatedByUser(createdBy: any): Promise<any> {
     try {
       const data = await Category.find({ createdBy: createdBy._id });
+      console.log(data);
       if (data.length > 0) {
         return {
           message: "success true",
@@ -215,6 +216,24 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
           statusCode: 201,
         };
       }
+    } catch (error) {
+      return {
+        message: "success false",
+        statusCode: 404,
+      };
+    }
+  }
+  async getProductCategoryById(args: String): Promise<any> {
+    try {
+      const data = await Category.findOne({ _id: args }).populate([
+        "mainCategory",
+        "createdBy",
+      ]);
+      return {
+        message: "success true",
+        statusCode: 201,
+        data: data,
+      };
     } catch (error) {
       return {
         message: "success false",

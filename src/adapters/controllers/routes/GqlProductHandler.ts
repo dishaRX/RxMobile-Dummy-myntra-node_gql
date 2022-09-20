@@ -6,9 +6,9 @@ import { DeleteMainCategoryByIdCase } from "../../../usecases/cases/product/Dele
 import { GetAllMainCategoryCase } from "../../../usecases/cases/product/GetAllMainCategory";
 import { GetMainCategoryByIdCase } from "../../../usecases/cases/product/GetMainCategoryById";
 import { GetMainCategoryByUserIdCase } from "../../../usecases/cases/product/GetMainCategoryByUserIdCase";
+import { GetProductCategoryByIdCase } from "../../../usecases/cases/product/GetProductCategoryByIdCase";
 import { UpdateMainCategoryByIdCase } from "../../../usecases/cases/product/UpdateMainCategoryById";
 import { ProductDataRepositoryImpl } from "../../gateways/repositories_impl/ProductDataRepositoryImpl";
-
 export class ProductMutationHandler {
   //Products
   static addMainCategory = async (MainCategoryName: String, Createdby: any) => {
@@ -111,6 +111,17 @@ export class ProductQueryHandler {
       const res = await new AllProductCategoriesCreatedByUserCase(
         new ProductDataRepositoryImpl()
       ).AllProductCategoriesCreatedByUser(createdBY);
+      return res;
+    } catch (error) {
+      return error;
+    }
+  };
+  static getProductCategoryById = async (productid: string) => {
+    try {
+      const res = await new GetProductCategoryByIdCase(
+        new ProductDataRepositoryImpl()
+      ).getProductCategoryById(productid);
+      console.log(res);
       return res;
     } catch (error) {
       return error;
