@@ -73,6 +73,8 @@ The illustration below shows the four concentric circles that compose a Clean Ar
   - We have added get all product categories API to get all categories of product in react-myntra-dummy web and app.
 - get all product categories Created by User API
     - We have added  get all  product categories created by user  API to get all categories of product which is created by user in  react-myntra-dummy web and app.
+- get product category  by id:
+    - We have added  get all  product categories created by user  API to to get all categories of product which is created by user in  react-myntra-dummy web and app.
 
 # Tech components
 

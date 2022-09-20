@@ -157,5 +157,20 @@ export default {
         return error;
       }
     },
+    getProductCategoryById: async (_: any, args:any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        let res = ProductQueryHandler.getProductCategoryById(args.categoryid);
+        return res;
+      } catch (error) {
+        console.log(`err----------->${error}`);
+      }
+    },
+    
   },
 };
