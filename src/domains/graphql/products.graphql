@@ -6,10 +6,10 @@ type Maincategory {
 }
 type Category {
   Categoryname: String!
-  CategoryId: String!
-  CreatedBy: Admin!
-  Brands: [Brand]!
-  Maincategory: Maincategory!
+  _id: String!
+  createdBy: Admin
+  Brands: [Brand]
+  mainCategory: Maincategory
 }
 type Admin {
   _id: String!
@@ -55,6 +55,11 @@ type Mutation {
     productid: String
     upatedname: String
   ): maincategoryresponse
+
+  addProductCategory(
+    maincategoryname: String
+    categoryname: String
+  ): categoryresponse
 }
 type Query {
   getAllMainCategory: getAllMainCategoryResponse
@@ -72,4 +77,9 @@ type getAllMainCategoryResponse {
   message: String!
   statusCode: Int!
   data: [Maincategory]
+}
+type categoryresponse {
+  message: String!
+  statusCode: Int!
+  data: Category
 }

@@ -66,7 +66,10 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 - Update main category by id API
     - We have added the update  main category by id API to to update main category of products by id in the react-myntra-dummy web and app.
 - get main category by  userid API
-    - We have added get  main category by userid API to to get all  main category of products by userid of logged in user in the react-myntra-dummy web and app.    
+    - We have added get  main category by userid API to to get all  main category of products by userid of logged in user in the react-myntra-dummy web and app.
+- add product category API
+    - We have added add product category  API to to add new category of product in  react-myntra-dummy web and app.
+
    
 # Tech components
 
