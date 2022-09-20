@@ -67,6 +67,7 @@ type Query {
   deleteMainCategoryById(productid: String): maincategoryresponse
   getMainCategoryByUserId: getAllMainCategoryResponse
   getAllProductCategories: getAllProductCategoriesResponse
+  AllProductCategoriesCreatedByUser:getAllProductCategoriesResponse
 }
 
 type maincategoryresponse {
