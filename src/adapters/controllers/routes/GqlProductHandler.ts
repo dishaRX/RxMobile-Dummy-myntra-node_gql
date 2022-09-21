@@ -6,12 +6,14 @@ import { AllProductCategoryCase } from "../../../usecases/cases/product/AllProdu
 import { DeleteMainCategoryByIdCase } from "../../../usecases/cases/product/DeleteMainCategoryById";
 import { DeleteProductCategoryByIdCase } from "../../../usecases/cases/product/DeleteProductCategoryByIdCase";
 import { GetAllMainCategoryCase } from "../../../usecases/cases/product/GetAllMainCategory";
+import { GetAllProductBrandsCase } from "../../../usecases/cases/product/GetAllProductBrandsCase";
 import { GetMainCategoryByIdCase } from "../../../usecases/cases/product/GetMainCategoryById";
 import { GetMainCategoryByUserIdCase } from "../../../usecases/cases/product/GetMainCategoryByUserIdCase";
 import { GetProductCategoryByIdCase } from "../../../usecases/cases/product/GetProductCategoryByIdCase";
 import { UpdateMainCategoryByIdCase } from "../../../usecases/cases/product/UpdateMainCategoryById";
 import { UpdateProductCategoryByIdCase } from "../../../usecases/cases/product/UpdateProductCategoryByIdCase";
 import { ProductDataRepositoryImpl } from "../../gateways/repositories_impl/ProductDataRepositoryImpl";
+
 export class ProductMutationHandler {
   //Products
   static addMainCategory = async (MainCategoryName: String, Createdby: any) => {
@@ -60,7 +62,7 @@ export class ProductMutationHandler {
     try {
       const res = await new UpdateProductCategoryByIdCase(
         new ProductDataRepositoryImpl()
-      ).updateProductCategoryById(productid, Category,createdBY);
+      ).updateProductCategoryById(productid, Category, createdBY);
       return res;
     } catch (error) {
       return error;
@@ -70,17 +72,15 @@ export class ProductMutationHandler {
     maincategory: string,
     category: string,
     brandname: string,
-    user:any
+    user: any
   ) => {
     try {
       const res = await new AddProductBrandCase(
         new ProductDataRepositoryImpl()
-      ).addProductBrand(maincategory, category, brandname,user);
+      ).addProductBrand(maincategory, category, brandname, user);
       return res;
-
-
     } catch (error) {
-      return error
+      return error;
     }
   };
 }
@@ -172,6 +172,16 @@ export class ProductQueryHandler {
       return res;
     } catch (error) {
       return error;
+    }
+  };
+  static getAllProductBrands = async (createdBY: any) => {
+    try {
+      const res = await new GetAllProductBrandsCase(
+        new ProductDataRepositoryImpl()
+      ).getAllProductBrands(createdBY);
+      return res;
+    } catch (error) {
+      return error
     }
   };
 }

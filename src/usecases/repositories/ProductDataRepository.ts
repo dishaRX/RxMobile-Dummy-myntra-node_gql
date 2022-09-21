@@ -29,4 +29,5 @@ export interface ProductDataRepository {
     brandname: string,
     createdBy: any
   ): Promise<any>;
+  getAllProductBrands(createdBY:any):Promise<any>
 }
