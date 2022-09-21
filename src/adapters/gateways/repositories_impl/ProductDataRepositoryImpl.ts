@@ -266,4 +266,37 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       };
     }
   }
+  async updateProductCategoryById(
+    productid: String,
+    updatedata: String,
+    createdBy: any
+  ): Promise<any> {
+    if (!productid) {
+      return {
+        message: "main category id can not be null",
+        statusCode: 201,
+      };
+    }
+    try {
+      const forupdate = {
+        Categoryname: updatedata,
+      };
+      console.log(forupdate);
+      const data = await Category.findOneAndUpdate(
+        { _id: productid, createdBy: createdBy._id },
+        forupdate
+      );
+      return {
+        message: "success true",
+        statusCode: 201,
+        data: data,
+      };
+    } catch (error) {
+      return {
+        message: "success false",
+        statusCode: 501,
+        data: error,
+      };
+    }
+  }
 }

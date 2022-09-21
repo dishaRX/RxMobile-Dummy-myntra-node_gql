@@ -9,6 +9,7 @@ import { GetMainCategoryByIdCase } from "../../../usecases/cases/product/GetMain
 import { GetMainCategoryByUserIdCase } from "../../../usecases/cases/product/GetMainCategoryByUserIdCase";
 import { GetProductCategoryByIdCase } from "../../../usecases/cases/product/GetProductCategoryByIdCase";
 import { UpdateMainCategoryByIdCase } from "../../../usecases/cases/product/UpdateMainCategoryById";
+import { UpdateProductCategoryByIdCase } from "../../../usecases/cases/product/UpdateProductCategoryByIdCase";
 import { ProductDataRepositoryImpl } from "../../gateways/repositories_impl/ProductDataRepositoryImpl";
 
 export class ProductMutationHandler {
@@ -46,6 +47,20 @@ export class ProductMutationHandler {
       const res = await new AddProductCategoryCase(
         new ProductDataRepositoryImpl()
       ).addProductCategory(maincategoryname, categoryname, user);
+      return res;
+    } catch (error) {
+      return error;
+    }
+  };
+  static updateProductCategoryById = async (
+    productid: string,
+    Category: string,
+    createdBY: any
+  ) => {
+    try {
+      const res = await new UpdateProductCategoryByIdCase(
+        new ProductDataRepositoryImpl()
+      ).updateProductCategoryById(productid, Category, createdBY);
       return res;
     } catch (error) {
       return error;
@@ -130,13 +145,13 @@ export class ProductQueryHandler {
     }
   };
   static deleteProductCategoryById = async (
-    Category:string,
+    Category: string,
     createdBY: any
   ) => {
     try {
       const res = await new DeleteProductCategoryByIdCase(
         new ProductDataRepositoryImpl()
-      ).deleteProductCategoryById(Category,createdBY);
+      ).deleteProductCategoryById(Category, createdBY);
       return res;
     } catch (error) {
       return error;
