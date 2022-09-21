@@ -55,10 +55,13 @@ type Mutation {
     productid: String
     upatedname: String
   ): maincategoryresponse
-
   addProductCategory(
     maincategoryname: String
     categoryname: String
+  ): categoryresponse
+  updateProductCategoryById(
+    categoryid:String
+    updatedcategoryname:String
   ): categoryresponse
 }
 type Query {

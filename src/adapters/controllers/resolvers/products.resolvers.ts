@@ -61,6 +61,24 @@ export default {
         console.log(`err----------->${error}`);
       }
     },
+    updateProductCategoryById: async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        let res = await ProductMutationHandler.updateProductCategoryById(
+          args.categoryid,
+          args.updatedcategoryname,
+          context
+        );
+        return res;
+      } catch (error) {
+        return error;
+      }
+    },
   },
   Query: {
     getAllMainCategory: async (_: any, args: any, context: any) => {
@@ -157,7 +175,7 @@ export default {
         return error;
       }
     },
-    getProductCategoryById: async (_: any, args:any, context: any) => {
+    getProductCategoryById: async (_: any, args: any, context: any) => {
       if (!context._id) {
         return {
           message: "Unauthorized",
@@ -171,7 +189,7 @@ export default {
         console.log(`err----------->${error}`);
       }
     },
-    deleteProductCategoryById:async(_: any, args:any, context: any)=>{
+    deleteProductCategoryById: async (_: any, args: any, context: any) => {
       if (!context._id) {
         return {
           message: "Unauthorized",
@@ -185,10 +203,9 @@ export default {
           context
         );
         return res;
-        
       } catch (error) {
-        return error
+        return error;
       }
-    }
+    },
   },
 };
