@@ -27,12 +27,12 @@ type Admin {
   # platform: String #web/android/ios,
   role: String!
 }
-type Brand{
+type Brand {
   brandname: String!
-  _id:String!
+  _id: String!
   products: [Products]
-  mainCategory:Maincategory!
-  category:Category!
+  mainCategory: Maincategory!
+  category: Category!
   createdBy: Admin!
 }
 
@@ -64,9 +64,9 @@ type Mutation {
     updatedcategoryname: String
   ): categoryresponse
   addProductBrand(
-    mainCategory:String
-    category:String
-    brandname:String
+    mainCategory: String
+    category: String
+    brandname: String
   ): brandresponse
 }
 type Query {
@@ -78,6 +78,7 @@ type Query {
   AllProductCategoriesCreatedByUser: getAllProductCategoriesResponse
   getProductCategoryById(categoryid: String): categoryresponse
   deleteProductCategoryById(categoryid: String): categoryresponse
+  getAllProductBrands: getAllProductBrandResponse
 }
 
 type maincategoryresponse {
@@ -103,5 +104,10 @@ type getAllProductCategoriesResponse {
 type brandresponse {
   message: String!
   statusCode: Int!
-  data:Brand
+  data: Brand
+}
+type getAllProductBrandResponse {
+  message: String!
+  statusCode: Int!
+  data: [Brand]
 }
