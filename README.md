@@ -79,6 +79,8 @@ The illustration below shows the four concentric circles that compose a Clean Ar
     - We have added delete product categories by id API for delete any specific category   in  react-myntra-dummy web and app.
 - update product category  by id:
   - We have added update product category by id API for update any specific category of product   in  react-myntra-dummy web and app.    
+- Add product brand API
+ - We have added the Add product brand API to Add new Brands of products in the react-myntra-dummy web and app.
 
 # Tech components
 

@@ -15,7 +15,6 @@ export class AdminDataRepositoryImpl implements AdminDataRepository {
       dob,
       country,
       password,
-      role,
       fcmToken,
       deviceId,
       platform,
@@ -37,7 +36,7 @@ export class AdminDataRepositoryImpl implements AdminDataRepository {
       gender: gender,
       dob: dob,
       country: country,
-      role: role,
+      role: "admin",
       isVerified: false,
       deviceId: deviceId,
       platform: platform,
@@ -54,11 +53,14 @@ export class AdminDataRepositoryImpl implements AdminDataRepository {
 
     let adminRes = await admin.save();
     console.log("adminRes ::" + adminRes);
-
+    const adminres = {
+      ...adminRes._doc,
+      token: adminRes.tokens[0].token,
+    };
     return {
       message: "Registered successfully",
       statusCode: 200,
-      data: adminRes,
+      data: adminres,
     };
   }
   async loginAdmin(args: any): Promise<any> {

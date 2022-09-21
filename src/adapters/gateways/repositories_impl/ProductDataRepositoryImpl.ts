@@ -1,7 +1,8 @@
 import { ProductDataRepository } from "../../../usecases/repositories/ProductDataRepository";
 import MainCategory from "../../../domains/models/MainCategory";
 import Category from "../../../domains/models/Category";
-
+import Brands from "../../../domains/models/Brands";
+import Admin from "../../../domains/models/Admin";
 export class ProductDataRepositoryImpl implements ProductDataRepository {
   async addMainCategory(
     MainCategoryName: String,
@@ -295,6 +296,44 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       return {
         message: "success false",
         statusCode: 501,
+        data: error,
+      };
+    }
+  }
+  async addProductBrand(
+    mainCategory: string,
+    category: string,
+    brandname: string,
+    createdBy: any
+  ): Promise<any> {
+    if (!mainCategory || !category || !brandname) {
+      return {
+        message: "please fill all the details",
+        statusCode: 501,
+      };
+    }
+    try {
+      const main = await MainCategory.findOne({ mainCategory: mainCategory });
+      const categorydetails = await Category.findOne({
+        Categoryname: category,
+      });
+      const user = await Admin.findOne({ _id: createdBy._id });
+      const brand = await Brands.create({
+        brandname: brandname,
+        createdBy: user,
+        category: categorydetails,
+        mainCategory: main,
+      });
+      console.log(brand);
+      return {
+        message: "success true",
+        statusCode: 201,
+        data: brand,
+      };
+    } catch (error) {
+      return {
+        message: "success false",
+        statusCode: 404,
         data: error,
       };
     }

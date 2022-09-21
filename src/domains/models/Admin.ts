@@ -1,5 +1,5 @@
-import {Schema, model} from "mongoose";
-
+import mongoose from "../../infrastructure/config/MongoDatabase";
+const Schema = mongoose.Schema;
 const adminSchema = new Schema(
   {
     fullName: String,
@@ -27,4 +27,4 @@ const adminSchema = new Schema(
     timestamps: true,
   }
 )
-export = model("Admin",adminSchema);
+export =mongoose.model("Admin",adminSchema);

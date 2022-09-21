@@ -79,6 +79,26 @@ export default {
         return error;
       }
     },
+    addProductBrand: async (_: any, args: any, context: any) => {
+      console.log("its args---->",args)
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        let res = await ProductMutationHandler.addProductBrand(
+          args.mainCategory,
+          args.category,
+          args.brandname,
+          context
+        );
+        return res;
+      } catch (error) {
+        return error;
+      }
+    },
   },
   Query: {
     getAllMainCategory: async (_: any, args: any, context: any) => {
