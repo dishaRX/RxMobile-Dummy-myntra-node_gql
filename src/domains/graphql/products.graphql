@@ -27,13 +27,13 @@ type Admin {
   # platform: String #web/android/ios,
   role: String!
 }
-type Brand {
-  Brandname: String!
-  BrandID: String!
-  Product: [Products]!
-  Maincategory: Maincategory!
-  Category: Category!
-  CreatedBy: Admin!
+type Brand{
+  brandname: String!
+  _id:String!
+  products: [Products]
+  mainCategory:Maincategory!
+  category:Category!
+  createdBy: Admin!
 }
 
 type Products {
@@ -60,9 +60,14 @@ type Mutation {
     categoryname: String
   ): categoryresponse
   updateProductCategoryById(
-    categoryid:String
-    updatedcategoryname:String
+    categoryid: String
+    updatedcategoryname: String
   ): categoryresponse
+  addProductBrand(
+    mainCategory:String
+    category:String
+    brandname:String
+  ): brandresponse
 }
 type Query {
   getAllMainCategory: getAllMainCategoryResponse
@@ -94,4 +99,9 @@ type getAllProductCategoriesResponse {
   message: String!
   statusCode: Int!
   data: [Category]
+}
+type brandresponse {
+  message: String!
+  statusCode: Int!
+  data:Brand
 }
