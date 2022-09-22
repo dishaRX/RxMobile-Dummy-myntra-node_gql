@@ -30,4 +30,5 @@ export interface ProductDataRepository {
     createdBy: any
   ): Promise<any>;
   getAllProductBrands(createdBY:any):Promise<any>
+  getAllProductBrandCreatedByUser(user:any):Promise<any>
 }
