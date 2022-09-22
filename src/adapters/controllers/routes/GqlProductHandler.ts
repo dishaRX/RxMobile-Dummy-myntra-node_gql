@@ -4,6 +4,7 @@ import { AddProductCategoryCase } from "../../../usecases/cases/product/AddProdu
 import { AllProductCategoriesCreatedByUserCase } from "../../../usecases/cases/product/AllProductCategoriesCreatedByUserCase";
 import { AllProductCategoryCase } from "../../../usecases/cases/product/AllProductCategoryCase";
 import { DeleteMainCategoryByIdCase } from "../../../usecases/cases/product/DeleteMainCategoryById";
+import { DeleteProductBrandByIdCase } from "../../../usecases/cases/product/DeleteProductBrandByIdCase";
 import { DeleteProductCategoryByIdCase } from "../../../usecases/cases/product/DeleteProductCategoryByIdCase";
 import { GetAllMainCategoryCase } from "../../../usecases/cases/product/GetAllMainCategory";
 import { GetAllProductBrandsCase } from "../../../usecases/cases/product/GetAllProductBrandsCase";
@@ -14,7 +15,6 @@ import { GetProductCategoryByIdCase } from "../../../usecases/cases/product/GetP
 import { UpdateMainCategoryByIdCase } from "../../../usecases/cases/product/UpdateMainCategoryById";
 import { UpdateProductCategoryByIdCase } from "../../../usecases/cases/product/UpdateProductCategoryByIdCase";
 import { ProductDataRepositoryImpl } from "../../gateways/repositories_impl/ProductDataRepositoryImpl";
-
 export class ProductMutationHandler {
   //Products
   static addMainCategory = async (MainCategoryName: String, Createdby: any) => {
@@ -190,6 +190,16 @@ export class ProductQueryHandler {
       const res = await new GetAllProductBrandsCreatedByUserCase(
         new ProductDataRepositoryImpl()
       ).getAllProductBrandCreatedByUser(createdBy);
+      return res;
+    } catch (error) {
+      return error;
+    }
+  };
+  static deleteProductBrandById = async (Category: string, createdBY: any) => {
+    try {
+      const res = await new DeleteProductBrandByIdCase(
+        new ProductDataRepositoryImpl()
+      ).deleteProductBrandById(Category, createdBY);
       return res;
     } catch (error) {
       return error;

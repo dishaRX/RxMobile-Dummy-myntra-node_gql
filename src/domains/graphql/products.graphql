@@ -80,6 +80,7 @@ type Query {
   deleteProductCategoryById(categoryid: String): categoryresponse
   getAllProductBrands: getAllProductBrandResponse
   getAllProductBrandsCreatedByUser: getAllProductBrandResponse
+  deleteProductBrandById(brandid: String):brandresponse
 }
 
 type maincategoryresponse {
