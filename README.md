@@ -71,19 +71,21 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 - get all product categories API
   - We have added get all product categories API to get all categories of product in react-myntra-dummy web and app.
 - get all product categories Created by User API
-    - We have added  get all  product categories created by user  API to get all categories of product which is created by user in  react-myntra-dummy web and app.
-- get product category  by id:
-    - We have added  get  product categories  by id  API to to get a particular category of product  in  react-myntra-dummy web and app.
-- delete product category  by id:
-    - We have added delete product categories by id API for delete any specific category   in  react-myntra-dummy web and app.
-- update product category  by id:
-  - We have added update product category by id API for update any specific category of product   in  react-myntra-dummy web and app.    
+  - We have added get all product categories created by user API to get all categories of product which is created by user in react-myntra-dummy web and app.
+- get product category by id:
+  - We have added get product categories by id API to to get a particular category of product in react-myntra-dummy web and app.
+- delete product category by id:
+  - We have added delete product categories by id API for delete any specific category in react-myntra-dummy web and app.
+- update product category by id:
+  - We have added update product category by id API for update any specific category of product in react-myntra-dummy web and app.
 - Add product brand API
- - We have added the Add product brand API to Add new Brands of products in the react-myntra-dummy web and app.
+- We have added the Add product brand API to Add new Brands of products in the react-myntra-dummy web and app.
 - get all product brands API
- - We have added the get all product brands API to get all brands of products in the react-myntra-dummy web and app.
+- We have added the get all product brands API to get all brands of products in the react-myntra-dummy web and app.
 - get all product brands created by user API
- - We have added the get all product brands created by user API to get all brands of products which is created by logged in user in the react-myntra-dummy web and app.
+- We have added the get all product brands created by user API to get all brands of products which is created by logged in user in the react-myntra-dummy web and app.
+- delete product brands created by loggedin user API
+ - We have added the delete product brands created by logged in user API to delete a particular brand of product which is created by loggedin user in the react-myntra-dummy web and app.
 
 # Tech components
 

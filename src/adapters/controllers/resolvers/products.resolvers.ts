@@ -261,5 +261,22 @@ export default {
         return error;
       }
     },
+    deleteProductBrandById: async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        let res = await ProductQueryHandler.deleteProductBrandById(
+          args.brandid,
+          context
+        );
+        return res;
+      } catch (error) {
+        console.log(`err----------->${error}`);
+      }
+    },
   },
 };
