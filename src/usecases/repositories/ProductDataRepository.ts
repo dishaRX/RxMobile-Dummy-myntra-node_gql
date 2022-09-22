@@ -32,4 +32,5 @@ export interface ProductDataRepository {
   getAllProductBrands(createdBY: any): Promise<any>;
   getAllProductBrandCreatedByUser(user: any): Promise<any>;
   deleteProductBrandById(args: String, createdBy: any): Promise<any>;
+  getProductBrandById(args: String): Promise<any>;
 }

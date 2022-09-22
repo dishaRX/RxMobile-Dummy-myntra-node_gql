@@ -11,6 +11,7 @@ import { GetAllProductBrandsCase } from "../../../usecases/cases/product/GetAllP
 import { GetAllProductBrandsCreatedByUserCase } from "../../../usecases/cases/product/GetAllProductBrandsCreatedByUserCase";
 import { GetMainCategoryByIdCase } from "../../../usecases/cases/product/GetMainCategoryById";
 import { GetMainCategoryByUserIdCase } from "../../../usecases/cases/product/GetMainCategoryByUserIdCase";
+import { GetProductBrandByIdCase } from "../../../usecases/cases/product/GetProductBrandByIdCase";
 import { GetProductCategoryByIdCase } from "../../../usecases/cases/product/GetProductCategoryByIdCase";
 import { UpdateMainCategoryByIdCase } from "../../../usecases/cases/product/UpdateMainCategoryById";
 import { UpdateProductCategoryByIdCase } from "../../../usecases/cases/product/UpdateProductCategoryByIdCase";
@@ -200,6 +201,17 @@ export class ProductQueryHandler {
       const res = await new DeleteProductBrandByIdCase(
         new ProductDataRepositoryImpl()
       ).deleteProductBrandById(Category, createdBY);
+      return res;
+    } catch (error) {
+      return error;
+    }
+  };
+  static getProductBrandById = async (productid: string) => {
+    try {
+      const res = await new GetProductBrandByIdCase(
+        new ProductDataRepositoryImpl()
+      ).getProductBrandById(productid);
+      console.log(res);
       return res;
     } catch (error) {
       return error;
