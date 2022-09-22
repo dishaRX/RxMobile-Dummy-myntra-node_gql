@@ -278,5 +278,19 @@ export default {
         console.log(`err----------->${error}`);
       }
     },
+    getProductBrandById: async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        let res = ProductQueryHandler.getProductBrandById(args.brandid);
+        return res;
+      } catch (error) {
+        console.log(`err----------->${error}`);
+      }
+    },
   },
 };

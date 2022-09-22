@@ -6,8 +6,9 @@ export class GetMainCategoryByIdCase {
     this.maincategorybyidDataRepository = productDataRepository;
   }
 
-  public getMainCategoryById = async (productid:string) => {
-    return await this.maincategorybyidDataRepository.getMainCategoryById(productid)
-    ;
+  public getMainCategoryById = async (productid: string) => {
+    return await this.maincategorybyidDataRepository.getMainCategoryById(
+      productid
+    );
   };
 }

@@ -40,6 +40,7 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 - Edit Payment Info (card/upi)
   - We have added the edit Payment Info API, In which user can edit there payment details card/upi.
 - Delete Payment Info (card/upi)
+
   - We have added the delete Payment Info API, In which user can delete there payment details card/upi.
 
 - **Admin API**
@@ -85,7 +86,9 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 - get all product brands created by user API
 - We have added the get all product brands created by user API to get all brands of products which is created by logged in user in the react-myntra-dummy web and app.
 - delete product brands created by loggedin user API
- - We have added the delete product brands created by logged in user API to delete a particular brand of product which is created by loggedin user in the react-myntra-dummy web and app.
+- We have added the delete product brands created by logged in user API to delete a particular brand of product which is created by loggedin user in the react-myntra-dummy web and app.
+- get product brand by id API
+- We have added the get product brand by if API to get a specific brand of product in the react-myntra-dummy web and app.
 
 # Tech components
 
