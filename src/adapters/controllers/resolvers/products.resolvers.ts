@@ -99,6 +99,25 @@ export default {
         return error;
       }
     },
+    updateProductBrandById: async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        console.log(args);
+        let res = await ProductMutationHandler.updateProductBrandById(
+          args.brandid,
+          args.updatedname,
+          context
+        );
+        return res;
+      } catch (error) {
+        return error;
+      }
+    },
   },
   Query: {
     getAllMainCategory: async (_: any, args: any, context: any) => {
