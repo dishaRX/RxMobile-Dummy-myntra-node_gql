@@ -89,6 +89,8 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 - We have added the delete product brands created by logged in user API to delete a particular brand of product which is created by loggedin user in the react-myntra-dummy web and app.
 - get product brand by id API
 - We have added the get product brand by if API to get a specific brand of product in the react-myntra-dummy web and app.
+- update product brand by id API
+- We have added the update product brand by id API to update details of a specific brand of product in the react-myntra-dummy web and app.
 
 # Tech components
 

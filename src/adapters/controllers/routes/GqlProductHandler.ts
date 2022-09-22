@@ -14,6 +14,7 @@ import { GetMainCategoryByUserIdCase } from "../../../usecases/cases/product/Get
 import { GetProductBrandByIdCase } from "../../../usecases/cases/product/GetProductBrandByIdCase";
 import { GetProductCategoryByIdCase } from "../../../usecases/cases/product/GetProductCategoryByIdCase";
 import { UpdateMainCategoryByIdCase } from "../../../usecases/cases/product/UpdateMainCategoryById";
+import { UpdateProductBrandByIdCase } from "../../../usecases/cases/product/UpdateProductBrandByIdCase";
 import { UpdateProductCategoryByIdCase } from "../../../usecases/cases/product/UpdateProductCategoryByIdCase";
 import { ProductDataRepositoryImpl } from "../../gateways/repositories_impl/ProductDataRepositoryImpl";
 export class ProductMutationHandler {
@@ -80,6 +81,21 @@ export class ProductMutationHandler {
       const res = await new AddProductBrandCase(
         new ProductDataRepositoryImpl()
       ).addProductBrand(maincategory, category, brandname, user);
+      return res;
+    } catch (error) {
+      return error;
+    }
+  };
+  static updateProductBrandById = async (
+    productid: string,
+    Category: string,
+    createdBY: any
+  ) => {
+    try {
+      console.log(productid)
+      const res = await new UpdateProductBrandByIdCase(
+        new ProductDataRepositoryImpl()
+      ).updateProductBrandById(productid, Category, createdBY);
       return res;
     } catch (error) {
       return error;
