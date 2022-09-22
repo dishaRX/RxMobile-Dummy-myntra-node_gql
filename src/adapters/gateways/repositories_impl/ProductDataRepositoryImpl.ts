@@ -357,4 +357,32 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       };
     }
   }
+  async getAllProductBrandCreatedByUser(user: any): Promise<any> {
+    try {
+      const data = await Brands.find({ createdBy: user._id }).populate([
+        "createdBy",
+        "mainCategory",
+        "category",
+      ]);
+      console.log(data);
+      if (data.length > 0) {
+        return {
+          message: "success true",
+          statusCode: 201,
+          data: data,
+        };
+      } else {
+        return {
+          message: "no product categories found",
+          statusCode: 201,
+        };
+      }
+    } catch (error) {
+      return {
+        message: "success false",
+        statusCode: 404,
+        data: error,
+      };
+    }
+  }
 }

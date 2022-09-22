@@ -241,5 +241,25 @@ export default {
         return error;
       }
     },
+    getAllProductBrandsCreatedByUser: async (
+      _: any,
+      args: any,
+      context: any
+    ) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        let res = await ProductQueryHandler.getAllProductBrandCreatedByUser(
+          context
+        );
+        return res;
+      } catch (error) {
+        return error;
+      }
+    },
   },
 };

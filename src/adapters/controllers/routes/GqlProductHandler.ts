@@ -7,6 +7,7 @@ import { DeleteMainCategoryByIdCase } from "../../../usecases/cases/product/Dele
 import { DeleteProductCategoryByIdCase } from "../../../usecases/cases/product/DeleteProductCategoryByIdCase";
 import { GetAllMainCategoryCase } from "../../../usecases/cases/product/GetAllMainCategory";
 import { GetAllProductBrandsCase } from "../../../usecases/cases/product/GetAllProductBrandsCase";
+import { GetAllProductBrandsCreatedByUserCase } from "../../../usecases/cases/product/GetAllProductBrandsCreatedByUserCase";
 import { GetMainCategoryByIdCase } from "../../../usecases/cases/product/GetMainCategoryById";
 import { GetMainCategoryByUserIdCase } from "../../../usecases/cases/product/GetMainCategoryByUserIdCase";
 import { GetProductCategoryByIdCase } from "../../../usecases/cases/product/GetProductCategoryByIdCase";
@@ -181,7 +182,17 @@ export class ProductQueryHandler {
       ).getAllProductBrands(createdBY);
       return res;
     } catch (error) {
-      return error
+      return error;
+    }
+  };
+  static getAllProductBrandCreatedByUser = async (createdBy: any) => {
+    try {
+      const res = await new GetAllProductBrandsCreatedByUserCase(
+        new ProductDataRepositoryImpl()
+      ).getAllProductBrandCreatedByUser(createdBy);
+      return res;
+    } catch (error) {
+      return error;
     }
   };
 }
