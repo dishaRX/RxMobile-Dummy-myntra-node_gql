@@ -239,4 +239,47 @@ export class UserDataRepositoryImpl implements UserDataRepository {
       statusCode: 200,
     };
   }
+
+  async updateUser(args: any): Promise<any> {
+    const { userId, fullName, gender, dob, country } = args;
+    try {
+      const user = await Users.findById(userId);
+      if (!user) {
+        return {
+          message: "User not found",
+          statusCode: 404,
+        };
+      }
+
+      delete args.userId;
+      console.log("args after: ", args);
+
+      const updates = Object.keys(args);
+      const allowedUpdates = ["fullName", "gender", "dob", "country"];
+
+      const isValidOperation = updates.every((update) => {
+        return allowedUpdates.includes(update);
+      });
+
+      if (!isValidOperation) {
+        return {
+          message: " Operation invalid",
+          statusCode: 400,
+        };
+      }
+      user.fullName = fullName;
+      user.gender = gender;
+      user.dob = dob;
+      user.country = country;
+      let updatedUser = await user.save();
+
+      return {
+        message: "Profile updated successfully",
+        statusCode: 200,
+        data: updatedUser,
+      };
+    } catch (error) {
+      return error;
+    }
+  }
 }

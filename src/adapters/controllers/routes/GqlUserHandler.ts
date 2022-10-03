@@ -5,6 +5,7 @@ import { ChangeUserPasswordCase } from "../../../usecases/cases/user/ChangeUserP
 import { ResetUserPasswordCase } from "../../../usecases/cases/user/ResetUserPasswordCase";
 import { ForgotUserPasswordCase } from "../../../usecases/cases/user/ForgotUserPasswordCase";
 import { LogoutUserCase } from "../../../usecases/cases/user/LogoutUserCase";
+import { UpdateUserCase } from "../../../usecases/cases/user/UpdateUserCase";
 
 class UserQueryHandler {}
 
@@ -72,6 +73,16 @@ class UserMutationHandler {
       const res = await new ResetUserPasswordCase(
         new UserDataRepositoryImpl()
       ).resetPassword(args);
+      return res;
+    } catch (error: any) {
+      return error;
+    }
+  };
+  static updateUser = async (args: any) => {
+    try {
+      const res = await new UpdateUserCase(
+        new UserDataRepositoryImpl()
+      ).updateUser(args);
       return res;
     } catch (error: any) {
       return error;

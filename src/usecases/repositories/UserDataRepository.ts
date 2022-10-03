@@ -19,4 +19,6 @@ export interface UserDataRepository {
   forgotPassword(args: any): Promise<any>;
 
   resetPassword(args: any): Promise<any>;
+
+  updateUser(args: any): Promise<any>;
 }
