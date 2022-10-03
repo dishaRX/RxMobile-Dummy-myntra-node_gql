@@ -26,14 +26,14 @@ const launchServer = async () => {
   const server = new ExpressServer(config.URL_PORT, config.OPENAPI_YAML);
   try {
     // server.app.use(
-    //   "/graphql",
+    //   "/react-myntra",
     //   graphqlHTTP({
     //     schema: gqlSchema,
-    //     graphiql: true, //for grapghql docs
-    //     formatError: (err) => {
-    //       console.log(`Error :: ${err}`);
-    //       return err;
-    //     },
+    //     graphiql: false, //for grapghql docs
+    //     // formatError: (err) => {
+    //     //   console.log(`Error :: ${err}`);
+    //     //   return err;
+    //     // },
     //   })
     // );
 

@@ -27,9 +27,25 @@ export default {
       }
     },
 
+    logoutUser: async (_: any, args: any, context: any, info: any) => {
+      if (!context._id || args.userId !== context._id.toString()) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+
+      try {
+        return UserMutationHandler.logoutUser(args);
+      } catch (error) {
+        console.log(`Error -------> ${error}`);
+        return error;
+      }
+    },
+
     changePassword: async (_: any, args: any, context: any, info: any) => {
       // console.log(`Change Password args: ${JSON.stringify(context)}`);
-      if (!context._id) {
+      if (!context._id || args.userId !== context._id.toString()) {
         return {
           message: "Unauthorized",
           statusCode: 401,

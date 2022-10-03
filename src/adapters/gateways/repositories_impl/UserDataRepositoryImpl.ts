@@ -21,7 +21,7 @@ export class UserDataRepositoryImpl implements UserDataRepository {
       deviceId,
       platform,
     } = args;
-console.log("register")
+    console.log("register");
     const isUser = await Users.findOne({ email: email });
     if (isUser) {
       // return new Error("User is already registered");
@@ -56,11 +56,16 @@ console.log("register")
     let userRes = await user.save();
     console.log("userRes ::" + userRes);
 
+    const finalRes = {
+      ...userRes._doc,
+      token: userRes.tokens[0].token,
+    };
+    console.log("userRes aaaaaaaaaaaaa ::" + JSON.stringify(finalRes));
     // return userRes;
     return {
       message: "Registered successfully",
       statusCode: 200,
-      data: userRes,
+      data: finalRes,
     };
   }
 
@@ -70,7 +75,7 @@ console.log("register")
     console.log("user : ", user);
     if (!user) {
       // return new Error("User not registered");
-      return {  
+      return {
         message: "User not registered",
         statusCode: 404,
       };
@@ -107,6 +112,7 @@ console.log("register")
       country: userRes.country,
       password: userRes.password,
       tokens: userRes.tokens,
+      isVerified: userRes.isVerified,
       token: token,
     };
     console.log("userRes ::" + response);
@@ -118,6 +124,29 @@ console.log("register")
     };
 
     // return response;
+  }
+
+  async logoutUser(args: any): Promise<any> {
+    try {
+      const { userId, authToken } = args;
+      const user = await Users.findById(userId);
+      if (!user) {
+        return {
+          message: "User not found",
+          statusCode: 404,
+        };
+      }
+      user.tokens = user.tokens.filter((token: any) => {
+        return token.token !== authToken;
+      });
+      await user.save();
+      return {
+        message: "Success",
+        statusCode: 200,
+      };
+    } catch (error) {
+      return error;
+    }
   }
 
   async changePassword(

@@ -33,6 +33,7 @@ type Mutation {
   ): UserResponse
 
   forgotPassword(email: String!, role: String!): UserResponse
+  logoutUser(userId: String!, authToken: String!): UserResponse
 
   resetPassword(
     email: String!
