@@ -12,6 +12,8 @@ var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PaymentInfoMutationHandler = exports.PaymentInfoQueryHandler = void 0;
 const AddPaymentInfo_1 = require("../../../usecases/cases/paymentInfo/AddPaymentInfo");
+const DeletePaymentInfo_1 = require("../../../usecases/cases/paymentInfo/DeletePaymentInfo");
+const EditPaymentInfo_1 = require("../../../usecases/cases/paymentInfo/EditPaymentInfo");
 const GetPaymentInfoList_1 = require("../../../usecases/cases/paymentInfo/GetPaymentInfoList");
 const PaymentInfoDataRepositoryImpl_1 = require("../../gateways/repositories_impl/PaymentInfoDataRepositoryImpl");
 class PaymentInfoQueryHandler {
@@ -34,6 +36,24 @@ PaymentInfoMutationHandler.addPaymentInfo = (args) => __awaiter(void 0, void 0, 
 PaymentInfoMutationHandler.getPaymentInfoList = (args) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const res = yield new GetPaymentInfoList_1.GetPaymentInfoListCase(new PaymentInfoDataRepositoryImpl_1.PaymentInfoDataRepositoryImpl()).getPaymentInfoList(args);
+        return res;
+    }
+    catch (error) {
+        return error;
+    }
+});
+PaymentInfoMutationHandler.editPaymentInfo = (args) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const res = yield new EditPaymentInfo_1.EditPaymentInfoCase(new PaymentInfoDataRepositoryImpl_1.PaymentInfoDataRepositoryImpl()).editPaymentInfo(args);
+        return res;
+    }
+    catch (error) {
+        return error;
+    }
+});
+PaymentInfoMutationHandler.deletePaymentInfo = (args) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const res = yield new DeletePaymentInfo_1.DeletePaymentInfoCase(new PaymentInfoDataRepositoryImpl_1.PaymentInfoDataRepositoryImpl()).deletePaymentInfo(args);
         return res;
     }
     catch (error) {

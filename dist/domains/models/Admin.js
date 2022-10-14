@@ -1,6 +1,10 @@
 "use strict";
-const mongoose_1 = require("mongoose");
-const adminSchema = new mongoose_1.Schema({
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+const MongoDatabase_1 = __importDefault(require("../../infrastructure/config/MongoDatabase"));
+const Schema = MongoDatabase_1.default.Schema;
+const adminSchema = new Schema({
     fullName: String,
     email: String,
     mobileNo: String,
@@ -20,7 +24,8 @@ const adminSchema = new mongoose_1.Schema({
     isVerified: Boolean,
     deviceid: String,
     Platform: String,
+    role: String
 }, {
     timestamps: true,
 });
-module.exports = (0, mongoose_1.model)("Admin", adminSchema);
+module.exports = MongoDatabase_1.default.model("Admin", adminSchema);

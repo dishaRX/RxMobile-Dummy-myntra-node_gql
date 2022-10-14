@@ -20,7 +20,7 @@ export default {
 
         return A;
       } catch (error) {
-        console.log(`error------->${error}`);
+        console.log(`error : ------->${error}`);
         console.log("catch");
       }
     },
@@ -39,7 +39,7 @@ export default {
         );
         return res;
       } catch (error) {
-        console.log(`err----------->${error}`);
+        console.log(`err : ----------->${error}`);
       }
     },
     addProductCategory: async (_: any, args: any, context: any) => {
@@ -58,7 +58,7 @@ export default {
         console.log(res);
         return res;
       } catch (error) {
-        console.log(`err----------->${error}`);
+        console.log(`err : ----------->${error}`);
       }
     },
     updateProductCategoryById: async (_: any, args: any, context: any) => {

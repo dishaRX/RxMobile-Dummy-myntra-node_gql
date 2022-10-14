@@ -50,11 +50,13 @@ class UserDataRepositoryImpl {
             user.fcmTokens = [{ fcmToken }];
             let userRes = yield user.save();
             console.log("userRes ::" + userRes);
+            const finalRes = Object.assign(Object.assign({}, userRes._doc), { token: userRes.tokens[0].token });
+            console.log("userRes aaaaaaaaaaaaa ::" + JSON.stringify(finalRes));
             // return userRes;
             return {
                 message: "Registered successfully",
                 statusCode: 200,
-                data: userRes,
+                data: finalRes,
             };
         });
     }
@@ -94,6 +96,7 @@ class UserDataRepositoryImpl {
                 country: userRes.country,
                 password: userRes.password,
                 tokens: userRes.tokens,
+                isVerified: userRes.isVerified,
                 token: token,
             };
             console.log("userRes ::" + response);
@@ -103,6 +106,31 @@ class UserDataRepositoryImpl {
                 data: response,
             };
             // return response;
+        });
+    }
+    logoutUser(args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { userId, authToken } = args;
+                const user = yield Users_1.default.findById(userId);
+                if (!user) {
+                    return {
+                        message: "User not found",
+                        statusCode: 404,
+                    };
+                }
+                user.tokens = user.tokens.filter((token) => {
+                    return token.token !== authToken;
+                });
+                yield user.save();
+                return {
+                    message: "Success",
+                    statusCode: 200,
+                };
+            }
+            catch (error) {
+                return error;
+            }
         });
     }
     changePassword(userId, oldPassword, newPassword) {
@@ -191,6 +219,46 @@ class UserDataRepositoryImpl {
                 message: "Password changed, Login to continue",
                 statusCode: 200,
             };
+        });
+    }
+    updateUser(args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { userId, fullName, gender, dob, country } = args;
+            try {
+                const user = yield Users_1.default.findById(userId);
+                if (!user) {
+                    return {
+                        message: "User not found",
+                        statusCode: 404,
+                    };
+                }
+                delete args.userId;
+                console.log("args after: ", args);
+                const updates = Object.keys(args);
+                const allowedUpdates = ["fullName", "gender", "dob", "country"];
+                const isValidOperation = updates.every((update) => {
+                    return allowedUpdates.includes(update);
+                });
+                if (!isValidOperation) {
+                    return {
+                        message: " Operation invalid",
+                        statusCode: 400,
+                    };
+                }
+                user.fullName = fullName;
+                user.gender = gender;
+                user.dob = dob;
+                user.country = country;
+                let updatedUser = yield user.save();
+                return {
+                    message: "Profile updated successfully",
+                    statusCode: 200,
+                    data: updatedUser,
+                };
+            }
+            catch (error) {
+                return error;
+            }
         });
     }
 }
