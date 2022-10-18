@@ -163,14 +163,17 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       };
     }
     try {
-      const main = await MainCategory.findOne({
+      let main = await MainCategory.findOne({
         mainCategory: MainCategoryName,
       });
-      const data = await Category.create({
+      let data = await Category.create({
         Categoryname: Categoryname,
         mainCategory: main,
         createdBy: Createdby._id,
       });
+      main?.category.push(data.id);
+      const res = await main?.save();
+      console.log("main data ::: res :: ", res);
       return {
         message: "success true",
         statusCode: 201,
@@ -458,6 +461,23 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       return {
         message: "success false",
         statusCode: 501,
+        data: error,
+      };
+    }
+  }
+
+  async getCategoryMenuList(): Promise<any> {
+    try {
+      const data = await MainCategory.find().populate(["category"]);
+      return {
+        message: "success",
+        statusCode: 200,
+        data: data,
+      };
+    } catch (error) {
+      return {
+        message: "not found",
+        statusCode: 404,
         data: error,
       };
     }
