@@ -7,6 +7,6 @@ export class ForgotAdminPasswordCase {
     this.userDataRepository = productDataRepository;
   }
 
-  public forgotPassword = async (args: any) =>
+  public forgotadminPassword = async (args: any) =>
     await this.userDataRepository.forgotadminPassword(args);
 }

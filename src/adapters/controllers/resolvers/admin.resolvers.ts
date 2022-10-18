@@ -39,17 +39,17 @@ export default {
         return error;
       }
     },
-    forgotPassword: async (_: any, args: any) => {
+    forgotadminPassword: async (_: any, args: any) => {
       try {
-        return AdminMutationHandler.forgotPassword(args);
+        return AdminMutationHandler.forgotadminPassword(args);
       } catch (error) {
         console.log(`Error -------> ${error}`);
         return error;
       }
     },
-    resetPassword: async (_: any, args: any) => {
+    resetadminPassword: async (_: any, args: any) => {
       try {
-        return AdminMutationHandler.resetPassword(args);
+        return AdminMutationHandler.resetadminPassword(args);
       } catch (error) {
         console.log(`Error -------> ${error}`);
         return error;

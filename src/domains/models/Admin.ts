@@ -6,6 +6,7 @@ const adminSchema = new Schema(
     email: String,
     mobileNo: String,
     dob: String,
+    country: String,
     gender: String,
     password: String,
     tokens: [
@@ -21,10 +22,10 @@ const adminSchema = new Schema(
     isVerified: Boolean,
     deviceid: String,
     Platform: String,
-    role:String
+    role: String,
   },
-  { 
+  {
     timestamps: true,
   }
-)
-export =mongoose.model("Admin",adminSchema);
+);
+export = mongoose.model("Admin", adminSchema);
