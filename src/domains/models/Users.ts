@@ -35,4 +35,10 @@ userSchema.virtual("addresses", {
   localField: "_id",
   foreignField: "userId",
 });
+
+userSchema.virtual("wishlists", {
+  ref: "Wishlist",
+  localField: "_id",
+  foreignField: "userId",
+});
 export = mongoose.model("User", userSchema);

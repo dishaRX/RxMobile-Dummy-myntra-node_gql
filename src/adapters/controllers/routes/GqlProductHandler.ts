@@ -1,6 +1,7 @@
 import { AddMainCategoryCase } from "../../../usecases/cases/product/AddMainCategory";
 import { AddProductBrandCase } from "../../../usecases/cases/product/AddProductBrandCase";
 import { AddProductCategoryCase } from "../../../usecases/cases/product/AddProductCategoryCase";
+import { AddToWishlistCase } from "../../../usecases/cases/product/AddToWishlist";
 import { AllProductCategoriesCreatedByUserCase } from "../../../usecases/cases/product/AllProductCategoriesCreatedByUserCase";
 import { AllProductCategoryCase } from "../../../usecases/cases/product/AllProductCategoryCase";
 import { DeleteMainCategoryByIdCase } from "../../../usecases/cases/product/DeleteMainCategoryById";
@@ -100,6 +101,17 @@ export class ProductMutationHandler {
       return res;
     } catch (error) {
       return error;
+    }
+  };
+
+  static addToWishlist = async (args: any) => {
+    try {
+      const res = await new AddToWishlistCase(
+        new ProductDataRepositoryImpl()
+      ).addToWishlist(args);
+      return res;
+    } catch (err) {
+      return err;
     }
   };
 }
