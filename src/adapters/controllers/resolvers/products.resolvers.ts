@@ -311,5 +311,13 @@ export default {
         console.log(`err----------->${error}`);
       }
     },
+    getCategoryMenuList: async (_: any, args: any, context: any) => {
+      try {
+        let res = ProductQueryHandler.getCategoryMenuList();
+        return res;
+      } catch (error) {
+        console.log(`error------->${error}`);
+      }
+    },
   },
 };

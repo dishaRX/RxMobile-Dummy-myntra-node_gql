@@ -9,6 +9,7 @@ import { DeleteProductCategoryByIdCase } from "../../../usecases/cases/product/D
 import { GetAllMainCategoryCase } from "../../../usecases/cases/product/GetAllMainCategory";
 import { GetAllProductBrandsCase } from "../../../usecases/cases/product/GetAllProductBrandsCase";
 import { GetAllProductBrandsCreatedByUserCase } from "../../../usecases/cases/product/GetAllProductBrandsCreatedByUserCase";
+import { GetCategoryMenuListCase } from "../../../usecases/cases/product/GetCategoryMenuList";
 import { GetMainCategoryByIdCase } from "../../../usecases/cases/product/GetMainCategoryById";
 import { GetMainCategoryByUserIdCase } from "../../../usecases/cases/product/GetMainCategoryByUserIdCase";
 import { GetProductBrandByIdCase } from "../../../usecases/cases/product/GetProductBrandByIdCase";
@@ -92,7 +93,7 @@ export class ProductMutationHandler {
     createdBY: any
   ) => {
     try {
-      console.log(productid)
+      console.log(productid);
       const res = await new UpdateProductBrandByIdCase(
         new ProductDataRepositoryImpl()
       ).updateProductBrandById(productid, Category, createdBY);
@@ -231,6 +232,17 @@ export class ProductQueryHandler {
       return res;
     } catch (error) {
       return error;
+    }
+  };
+
+  static getCategoryMenuList = async () => {
+    try {
+      const res = await new GetCategoryMenuListCase(
+        new ProductDataRepositoryImpl()
+      ).getCategoryMenuList();
+      return res;
+    } catch (err) {
+      return err;
     }
   };
 }

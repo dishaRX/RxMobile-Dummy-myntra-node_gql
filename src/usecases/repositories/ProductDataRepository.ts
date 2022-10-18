@@ -38,4 +38,5 @@ export interface ProductDataRepository {
     updatedata: String,
     createdBy: any
   ): Promise<any>;
+  getCategoryMenuList(): Promise<any>;
 }
