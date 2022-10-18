@@ -7,6 +7,6 @@ export class ResetAdminPasswordCase {
     this.adminDataRepository = productDataRepository;
   }
 
-  public resetPassword = async (args: any) =>
+  public resetadminPassword = async (args: any) =>
     await this.adminDataRepository.resetadminPassword(args);
 }

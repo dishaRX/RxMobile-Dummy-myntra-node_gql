@@ -3,7 +3,7 @@ import { AdminDataRepositoryImpl } from "../../gateways/repositories_impl/AdminD
 import { LoginAdminCase } from "../../../usecases/cases/admin/LoginAdmin";
 import { ChangeAdminPasswordCase } from "../../../usecases/cases/admin/ChangeAdminPassword";
 import { ForgotAdminPasswordCase } from "../../../usecases/cases/admin/ForgotAdminPassword";
-import { ResetAdminPasswordCase } from "../../../usecases/cases/admin/ResetAdminPassword"
+import { ResetAdminPasswordCase } from "../../../usecases/cases/admin/ResetAdminPassword";
 
 export class AdminMutationHandler {
   static registerAdmin = async (args: any) => {
@@ -28,38 +28,37 @@ export class AdminMutationHandler {
     }
   };
   static changeadminPassword = async (
-    adminId:string,
+    adminId: string,
     oldPassword: string,
     newPassword: string
   ) => {
     try {
       const res = await new ChangeAdminPasswordCase(
         new AdminDataRepositoryImpl()
-      ).changeadminPassword(adminId,oldPassword,newPassword);
+      ).changeadminPassword(adminId, oldPassword, newPassword);
       return res;
     } catch (error: any) {
       return error;
     }
   };
-  static forgotPassword = async (args: any) => {
+  static forgotadminPassword = async (args: any) => {
     try {
       const res = await new ForgotAdminPasswordCase(
         new AdminDataRepositoryImpl()
-      ).forgotPassword(args);
+      ).forgotadminPassword(args);
       return res;
     } catch (error: any) {
       return error;
     }
   };
-  static resetPassword = async (args: any) => {
+  static resetadminPassword = async (args: any) => {
     try {
       const res = await new ResetAdminPasswordCase(
         new AdminDataRepositoryImpl()
-      ).resetPassword(args);
+      ).resetadminPassword(args);
       return res;
-    } catch (error:any) {
+    } catch (error: any) {
       return error;
     }
   };
 }
-
