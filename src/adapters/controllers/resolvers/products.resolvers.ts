@@ -118,6 +118,21 @@ export default {
         return error;
       }
     },
+
+    addToWishlist: async (_: any, args: any, context: any, info: any) => {
+      if (!context._id || args.userId !== context._id.toString()) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        return ProductMutationHandler.addToWishlist(args);
+      } catch (error) {
+        console.log(`Error -------> ${error}`);
+        return error;
+      }
+    },
   },
   Query: {
     getAllMainCategory: async (_: any, args: any, context: any) => {
@@ -311,6 +326,7 @@ export default {
         console.log(`err----------->${error}`);
       }
     },
+
     getCategoryMenuList: async (_: any, args: any, context: any) => {
       try {
         let res = ProductQueryHandler.getCategoryMenuList();

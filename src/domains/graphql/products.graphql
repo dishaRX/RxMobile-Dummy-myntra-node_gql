@@ -68,7 +68,9 @@ type Mutation {
     category: String
     brandname: String
   ): brandresponse
+
   updateProductBrandById(brandid: String, updatedname: String): brandresponse
+  addToWishlist(userId: String!, productId: String!): response
 }
 type Query {
   getAllMainCategory: getAllMainCategoryResponse
@@ -87,6 +89,10 @@ type Query {
   getCategoryMenuList: getAllMainCategoryResponse
 }
 
+type response {
+  message: String!
+  statusCode: Int!
+}
 type maincategoryresponse {
   message: String!
   statusCode: Int!
