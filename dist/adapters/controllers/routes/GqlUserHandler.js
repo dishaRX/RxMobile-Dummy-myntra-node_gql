@@ -17,6 +17,8 @@ const UserDataRepositoryImpl_1 = require("../../gateways/repositories_impl/UserD
 const ChangeUserPasswordCase_1 = require("../../../usecases/cases/user/ChangeUserPasswordCase");
 const ResetUserPasswordCase_1 = require("../../../usecases/cases/user/ResetUserPasswordCase");
 const ForgotUserPasswordCase_1 = require("../../../usecases/cases/user/ForgotUserPasswordCase");
+const LogoutUserCase_1 = require("../../../usecases/cases/user/LogoutUserCase");
+const UpdateUserCase_1 = require("../../../usecases/cases/user/UpdateUserCase");
 class UserQueryHandler {
 }
 exports.UserQueryHandler = UserQueryHandler;
@@ -37,6 +39,15 @@ UserMutationHandler.registerUser = (args) => __awaiter(void 0, void 0, void 0, f
 UserMutationHandler.loginUser = (args) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const res = yield new LoginUser_1.LoginUserCase(new UserDataRepositoryImpl_1.UserDataRepositoryImpl()).loginUser(args);
+        return res;
+    }
+    catch (error) {
+        return error;
+    }
+});
+UserMutationHandler.logoutUser = (args) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const res = yield new LogoutUserCase_1.LogoutUserCase(new UserDataRepositoryImpl_1.UserDataRepositoryImpl()).logoutUser(args);
         return res;
     }
     catch (error) {
@@ -64,6 +75,15 @@ UserMutationHandler.forgotPassword = (args) => __awaiter(void 0, void 0, void 0,
 UserMutationHandler.resetPassword = (args) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const res = yield new ResetUserPasswordCase_1.ResetUserPasswordCase(new UserDataRepositoryImpl_1.UserDataRepositoryImpl()).resetPassword(args);
+        return res;
+    }
+    catch (error) {
+        return error;
+    }
+});
+UserMutationHandler.updateUser = (args) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const res = yield new UpdateUserCase_1.UpdateUserCase(new UserDataRepositoryImpl_1.UserDataRepositoryImpl()).updateUser(args);
         return res;
     }
     catch (error) {

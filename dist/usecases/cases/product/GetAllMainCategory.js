@@ -9,11 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetProductByIdCase = void 0;
-class GetProductByIdCase {
+exports.GetAllMainCategoryCase = void 0;
+class GetAllMainCategoryCase {
     constructor(productDataRepository) {
-        this.getProductById = (id) => __awaiter(this, void 0, void 0, function* () { return yield this.productDataRepository.getProductById(id); });
-        this.productDataRepository = productDataRepository;
+        this.GetAllMainCategory = () => __awaiter(this, void 0, void 0, function* () {
+            return yield this.maincategoryDataRepository.getAllMainCategory();
+        });
+        this.maincategoryDataRepository = productDataRepository;
     }
 }
-exports.GetProductByIdCase = GetProductByIdCase;
+exports.GetAllMainCategoryCase = GetAllMainCategoryCase;

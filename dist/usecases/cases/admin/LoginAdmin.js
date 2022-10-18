@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetProductByPriceCase = void 0;
-class GetProductByPriceCase {
+exports.LoginAdminCase = void 0;
+class LoginAdminCase {
     constructor(productDataRepository) {
-        this.getProductByPrice = (min, max) => __awaiter(this, void 0, void 0, function* () { return yield this.productDataRepository.getProductByPrice(min, max); });
-        this.productDataRepository = productDataRepository;
+        this.loginAdmin = (args) => __awaiter(this, void 0, void 0, function* () { return yield this.userDataRepository.loginAdmin(args); });
+        this.userDataRepository = productDataRepository;
     }
 }
-exports.GetProductByPriceCase = GetProductByPriceCase;
+exports.LoginAdminCase = LoginAdminCase;

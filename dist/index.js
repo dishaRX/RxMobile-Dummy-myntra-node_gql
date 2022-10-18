@@ -31,14 +31,14 @@ const launchServer = () => __awaiter(void 0, void 0, void 0, function* () {
     const server = new expressServer_1.default(config_1.default.URL_PORT, config_1.default.OPENAPI_YAML);
     try {
         // server.app.use(
-        //   "/graphql",
+        //   "/react-myntra",
         //   graphqlHTTP({
         //     schema: gqlSchema,
-        //     graphiql: true, //for grapghql docs
-        //     formatError: (err) => {
-        //       console.log(`Error :: ${err}`);
-        //       return err;
-        //     },
+        //     graphiql: false, //for grapghql docs
+        //     // formatError: (err) => {
+        //     //   console.log(`Error :: ${err}`);
+        //     //   return err;
+        //     // },
         //   })
         // );
         const apoloServer = new ApolloServer({

@@ -18,7 +18,7 @@ export default {
       try {
         return PaymentInfoMutationHandler.addPaymentInfo(args);
       } catch (error) {
-        console.log(`Error -------> ${error}`);
+        console.log(`Error : -------> ${error}`);
         return error;
       }
     },
@@ -33,7 +33,7 @@ export default {
       try {
         return PaymentInfoMutationHandler.getPaymentInfoList(args);
       } catch (error) {
-        console.log(`Error -------> ${error}`);
+        console.log(`Error : -------> ${error}`);
         return error;
       }
     },

@@ -33,9 +33,24 @@ exports.default = {
                 return error;
             }
         },
+        logoutUser: (_, args, context, info) => __awaiter(void 0, void 0, void 0, function* () {
+            if (!context._id || args.userId !== context._id.toString()) {
+                return {
+                    message: "Unauthorized",
+                    statusCode: 401,
+                };
+            }
+            try {
+                return GqlUserHandler_1.UserMutationHandler.logoutUser(args);
+            }
+            catch (error) {
+                console.log(`Error -------> ${error}`);
+                return error;
+            }
+        }),
         changePassword: (_, args, context, info) => __awaiter(void 0, void 0, void 0, function* () {
             // console.log(`Change Password args: ${JSON.stringify(context)}`);
-            if (!context._id) {
+            if (!context._id || args.userId !== context._id.toString()) {
                 return {
                     message: "Unauthorized",
                     statusCode: 401,
@@ -61,6 +76,21 @@ exports.default = {
         resetPassword: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
             try {
                 return GqlUserHandler_1.UserMutationHandler.resetPassword(args);
+            }
+            catch (error) {
+                console.log(`Error -------> ${error}`);
+                return error;
+            }
+        }),
+        updateUser: (_, args, context, info) => __awaiter(void 0, void 0, void 0, function* () {
+            if (!context._id || args.userId !== context._id.toString()) {
+                return {
+                    message: "Unauthorized",
+                    statusCode: 401,
+                };
+            }
+            try {
+                return GqlUserHandler_1.UserMutationHandler.updateUser(args);
             }
             catch (error) {
                 console.log(`Error -------> ${error}`);

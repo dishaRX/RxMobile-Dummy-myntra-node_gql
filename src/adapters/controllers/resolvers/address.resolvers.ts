@@ -17,7 +17,7 @@ export default {
       try {
         return AddressQueryHandler.getAddressList(args);
       } catch (error) {
-        console.log(`Error -------> ${error}`);
+        console.log(`Error : -------> ${error}`);
         return error;
       }
     },

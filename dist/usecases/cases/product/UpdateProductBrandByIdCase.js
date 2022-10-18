@@ -9,11 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AddNewProductReviewCase = void 0;
-class AddNewProductReviewCase {
+exports.UpdateProductBrandByIdCase = void 0;
+class UpdateProductBrandByIdCase {
     constructor(productDataRepository) {
-        this.addNewProductReview = (id, rating, comment) => __awaiter(this, void 0, void 0, function* () { return yield this.productDataRepository.addNewProductReview(id, rating, comment); });
-        this.productDataRepository = productDataRepository;
+        this.updateProductBrandById = (productid, updateddata, admin) => __awaiter(this, void 0, void 0, function* () {
+            return yield this.updateproductbrandbyidDataRepository.updateProductBrandById(productid, updateddata, admin);
+        });
+        this.updateproductbrandbyidDataRepository = productDataRepository;
     }
 }
-exports.AddNewProductReviewCase = AddNewProductReviewCase;
+exports.UpdateProductBrandByIdCase = UpdateProductBrandByIdCase;

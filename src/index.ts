@@ -6,7 +6,6 @@ import logger from "../src/adapters/controllers/generated/src/logger";
 import { graphqlHTTP } from "express-graphql";
 import gqlSchema from "./infrastructure/config/GraphQlSchema";
 import { errorName, errorType } from "./adapters/gateways/errors/Constants";
-import { error } from "console";
 
 import Auth from "./infrastructure/config/auth";
 

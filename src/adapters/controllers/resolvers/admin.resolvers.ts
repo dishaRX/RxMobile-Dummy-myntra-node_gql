@@ -7,7 +7,7 @@ export default {
         console.log("args :::::", args);
         return AdminMutationHandler.registerAdmin(args);
       } catch (error) {
-        console.log(`Error -------> ${error}`);
+        console.log(`Error : -------> ${error}`);
         return error;
       }
     },
@@ -15,7 +15,7 @@ export default {
       try {
         return AdminMutationHandler.loginAdmin(args);
       } catch (error) {
-        console.log(`Error -------> ${error}`);
+        console.log(`Error : -------> ${error}`);
         return error;
       }
     },
