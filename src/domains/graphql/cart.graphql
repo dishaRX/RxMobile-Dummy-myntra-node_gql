@@ -7,19 +7,25 @@ type Mutation {
   ): response
 }
 
+type Query {
+  getCartItemList(userId: String!): cartItemResponse
+}
+
 type response {
   message: String!
   statusCode: Int!
 }
 
-type wishlistItemResponse {
+type cartItemResponse {
   message: String!
   statusCode: Int!
-  data: [Wishlist]
+  data: [Cart]
 }
 
-type Wishlist {
+type Cart {
   _id: String!
   productId: String
   userId: String
+  size: String
+  quantity: Int
 }
