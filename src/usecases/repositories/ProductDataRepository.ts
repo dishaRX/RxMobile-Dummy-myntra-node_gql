@@ -40,4 +40,5 @@ export interface ProductDataRepository {
   ): Promise<any>;
   getCategoryMenuList(): Promise<any>;
   addToWishlist(args: any): Promise<any>;
+  getWishlistItemList(args: any): Promise<any>;
 }
