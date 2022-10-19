@@ -53,4 +53,24 @@ export class CartDataRepositoryImpl implements CartDataRepository {
       statusCode: 500,
     };
   }
+
+  async getCartItemList(args: any): Promise<Response> {
+    const { userId } = args;
+
+    try {
+      let cart = await Cart.find({
+        userId: userId,
+      });
+      return {
+        message: "Success",
+        statusCode: 200,
+        data: cart,
+      };
+    } catch (error) {
+      return {
+        message: "Something went wrong",
+        statusCode: 500,
+      };
+    }
+  }
 }
