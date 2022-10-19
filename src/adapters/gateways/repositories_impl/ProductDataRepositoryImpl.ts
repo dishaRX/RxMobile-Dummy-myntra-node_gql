@@ -3,7 +3,7 @@ import MainCategory from "../../../domains/models/MainCategory";
 import Category from "../../../domains/models/Category";
 import Brands from "../../../domains/models/Brands";
 import Admin from "../../../domains/models/Admin";
-import { Response } from "./response";
+import { Response } from "./Response";
 import Wishlist from "../../../domains/models/Wishlist";
 export class ProductDataRepositoryImpl implements ProductDataRepository {
   async addMainCategory(
@@ -505,5 +505,25 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       message: "Item added to wishlist",
       statusCode: 200,
     };
+  }
+
+  async getWishlistItemList(args: any): Promise<Response> {
+    const { userId } = args;
+
+    try {
+      let wishlist = await Wishlist.find({
+        userId: userId,
+      });
+      return {
+        message: "Success",
+        statusCode: 200,
+        data: wishlist,
+      };
+    } catch (error) {
+      return {
+        message: "Something went wrong",
+        statusCode: 500,
+      };
+    }
   }
 }

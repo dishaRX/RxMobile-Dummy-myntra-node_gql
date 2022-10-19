@@ -15,6 +15,7 @@ import { GetMainCategoryByIdCase } from "../../../usecases/cases/product/GetMain
 import { GetMainCategoryByUserIdCase } from "../../../usecases/cases/product/GetMainCategoryByUserIdCase";
 import { GetProductBrandByIdCase } from "../../../usecases/cases/product/GetProductBrandByIdCase";
 import { GetProductCategoryByIdCase } from "../../../usecases/cases/product/GetProductCategoryByIdCase";
+import { GetWishlistItemListCase } from "../../../usecases/cases/product/GetWishlistItemList";
 import { UpdateMainCategoryByIdCase } from "../../../usecases/cases/product/UpdateMainCategoryById";
 import { UpdateProductBrandByIdCase } from "../../../usecases/cases/product/UpdateProductBrandByIdCase";
 import { UpdateProductCategoryByIdCase } from "../../../usecases/cases/product/UpdateProductCategoryByIdCase";
@@ -252,6 +253,17 @@ export class ProductQueryHandler {
       const res = await new GetCategoryMenuListCase(
         new ProductDataRepositoryImpl()
       ).getCategoryMenuList();
+      return res;
+    } catch (err) {
+      return err;
+    }
+  };
+
+  static getWishlistItemList = async (args: any) => {
+    try {
+      const res = await new GetWishlistItemListCase(
+        new ProductDataRepositoryImpl()
+      ).getWishlistItemList(args);
       return res;
     } catch (err) {
       return err;
