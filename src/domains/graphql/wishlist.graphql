@@ -1,0 +1,24 @@
+type Mutation {
+  addToWishlist(userId: String!, productId: String!): response
+  removeItemFromWishlist(userId: String!, productId: String!): response
+}
+type Query {
+  getWishlistItemList(userId: String!): wishlistItemResponse
+}
+
+type response {
+  message: String!
+  statusCode: Int!
+}
+
+type wishlistItemResponse {
+  message: String!
+  statusCode: Int!
+  data: [Wishlist]
+}
+
+type Wishlist {
+  _id: String!
+  productId: String
+  userId: String
+}

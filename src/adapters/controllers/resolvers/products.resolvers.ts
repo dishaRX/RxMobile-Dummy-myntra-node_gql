@@ -118,41 +118,6 @@ export default {
         return error;
       }
     },
-
-    addToWishlist: async (_: any, args: any, context: any, info: any) => {
-      if (!context._id || args.userId !== context._id.toString()) {
-        return {
-          message: "Unauthorized",
-          statusCode: 401,
-        };
-      }
-      try {
-        return ProductMutationHandler.addToWishlist(args);
-      } catch (error) {
-        console.log(`Error -------> ${error}`);
-        return error;
-      }
-    },
-
-    removeItemFromWishlist: async (
-      _: any,
-      args: any,
-      context: any,
-      info: any
-    ) => {
-      if (!context._id || args.userId !== context._id.toString()) {
-        return {
-          message: "Unauthorized",
-          statusCode: 401,
-        };
-      }
-      try {
-        return ProductMutationHandler.removeItemFromWishlist(args);
-      } catch (error) {
-        console.log(`Error -------> ${error}`);
-        return error;
-      }
-    },
   },
   Query: {
     getAllMainCategory: async (_: any, args: any, context: any) => {
@@ -353,21 +318,6 @@ export default {
         return res;
       } catch (error) {
         console.log(`error------->${error}`);
-      }
-    },
-
-    getWishlistItemList: async (_: any, args: any, context: any, info: any) => {
-      if (!context._id || args.userId !== context._id.toString()) {
-        return {
-          message: "Unauthorized",
-          statusCode: 401,
-        };
-      }
-      try {
-        return ProductQueryHandler.getWishlistItemList(args);
-      } catch (error) {
-        console.log(`Error -------> ${error}`);
-        return error;
       }
     },
   },
