@@ -1,0 +1,56 @@
+import { Response } from "./Response";
+import { CartDataRepository } from "../../../usecases/repositories/CartDataRepository";
+import Cart from "../../../domains/models/Cart";
+export class CartDataRepositoryImpl implements CartDataRepository {
+  //Cart
+  async addItemToCart(args: any): Promise<Response> {
+    const { userId, productId, size, quantity } = args;
+    try {
+      let isCartData = await Cart.findOne({
+        userId: userId,
+        productId: productId,
+      });
+
+      console.log("isCartData :: ", isCartData);
+
+      let existingUpdateCart;
+      let newCart;
+      if (isCartData) {
+        const forupdate = {
+          quantity: isCartData.quantity + quantity,
+          size: size,
+        };
+
+        existingUpdateCart = await Cart.findOneAndUpdate(
+          { userId: userId, productId: productId },
+          forupdate
+        );
+      } else {
+        const cartSchema = new Cart({
+          userId: userId,
+          productId: productId,
+          size: size,
+          quantity: quantity,
+        });
+        newCart = await cartSchema.save();
+      }
+
+      if (existingUpdateCart || newCart) {
+        return {
+          message: "Item added to cart",
+          statusCode: 200,
+        };
+      }
+    } catch (error) {
+      console.log(error);
+      return {
+        message: "Something went wrong",
+        statusCode: 500,
+      };
+    }
+    return {
+      message: "Something went wrong",
+      statusCode: 500,
+    };
+  }
+}

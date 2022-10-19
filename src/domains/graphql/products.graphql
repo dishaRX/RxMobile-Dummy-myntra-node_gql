@@ -70,8 +70,6 @@ type Mutation {
   ): brandresponse
 
   updateProductBrandById(brandid: String, updatedname: String): brandresponse
-  addToWishlist(userId: String!, productId: String!): response
-  removeItemFromWishlist(userId: String!, productId: String!): response
 }
 type Query {
   getAllMainCategory: getAllMainCategoryResponse
@@ -88,13 +86,8 @@ type Query {
   getProductBrandById(brandid: String): brandresponse
 
   getCategoryMenuList: getAllMainCategoryResponse
-  getWishlistItemList(userId: String!): wishlistItemResponse
 }
 
-type response {
-  message: String!
-  statusCode: Int!
-}
 type maincategoryresponse {
   message: String!
   statusCode: Int!
@@ -124,15 +117,4 @@ type getAllProductBrandResponse {
   message: String!
   statusCode: Int!
   data: [Brand]
-}
-type wishlistItemResponse {
-  message: String!
-  statusCode: Int!
-  data: [Wishlist]
-}
-
-type Wishlist {
-  _id: String!
-  productId: String
-  userId: String
 }

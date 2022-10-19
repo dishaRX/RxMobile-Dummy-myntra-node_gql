@@ -1,7 +1,6 @@
 import { AddMainCategoryCase } from "../../../usecases/cases/product/AddMainCategory";
 import { AddProductBrandCase } from "../../../usecases/cases/product/AddProductBrandCase";
 import { AddProductCategoryCase } from "../../../usecases/cases/product/AddProductCategoryCase";
-import { AddToWishlistCase } from "../../../usecases/cases/product/AddToWishlist";
 import { AllProductCategoriesCreatedByUserCase } from "../../../usecases/cases/product/AllProductCategoriesCreatedByUserCase";
 import { AllProductCategoryCase } from "../../../usecases/cases/product/AllProductCategoryCase";
 import { DeleteMainCategoryByIdCase } from "../../../usecases/cases/product/DeleteMainCategoryById";
@@ -15,8 +14,6 @@ import { GetMainCategoryByIdCase } from "../../../usecases/cases/product/GetMain
 import { GetMainCategoryByUserIdCase } from "../../../usecases/cases/product/GetMainCategoryByUserIdCase";
 import { GetProductBrandByIdCase } from "../../../usecases/cases/product/GetProductBrandByIdCase";
 import { GetProductCategoryByIdCase } from "../../../usecases/cases/product/GetProductCategoryByIdCase";
-import { GetWishlistItemListCase } from "../../../usecases/cases/product/GetWishlistItemList";
-import { RemoveItemFromWishlistCase } from "../../../usecases/cases/product/RemoveItemFromWishlist";
 import { UpdateMainCategoryByIdCase } from "../../../usecases/cases/product/UpdateMainCategoryById";
 import { UpdateProductBrandByIdCase } from "../../../usecases/cases/product/UpdateProductBrandByIdCase";
 import { UpdateProductCategoryByIdCase } from "../../../usecases/cases/product/UpdateProductCategoryByIdCase";
@@ -103,28 +100,6 @@ export class ProductMutationHandler {
       return res;
     } catch (error) {
       return error;
-    }
-  };
-
-  static addToWishlist = async (args: any) => {
-    try {
-      const res = await new AddToWishlistCase(
-        new ProductDataRepositoryImpl()
-      ).addToWishlist(args);
-      return res;
-    } catch (err) {
-      return err;
-    }
-  };
-
-  static removeItemFromWishlist = async (args: any) => {
-    try {
-      const res = await new RemoveItemFromWishlistCase(
-        new ProductDataRepositoryImpl()
-      ).removeItemFromWishlist(args);
-      return res;
-    } catch (err) {
-      return err;
     }
   };
 }
@@ -265,17 +240,6 @@ export class ProductQueryHandler {
       const res = await new GetCategoryMenuListCase(
         new ProductDataRepositoryImpl()
       ).getCategoryMenuList();
-      return res;
-    } catch (err) {
-      return err;
-    }
-  };
-
-  static getWishlistItemList = async (args: any) => {
-    try {
-      const res = await new GetWishlistItemListCase(
-        new ProductDataRepositoryImpl()
-      ).getWishlistItemList(args);
       return res;
     } catch (err) {
       return err;

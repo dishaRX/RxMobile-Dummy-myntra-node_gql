@@ -1,0 +1,25 @@
+type Mutation {
+  addItemToCart(
+    userId: String!
+    productId: String!
+    size: String!
+    quantity: Int!
+  ): response
+}
+
+type response {
+  message: String!
+  statusCode: Int!
+}
+
+type wishlistItemResponse {
+  message: String!
+  statusCode: Int!
+  data: [Wishlist]
+}
+
+type Wishlist {
+  _id: String!
+  productId: String
+  userId: String
+}
