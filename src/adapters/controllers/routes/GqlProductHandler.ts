@@ -16,6 +16,7 @@ import { GetMainCategoryByUserIdCase } from "../../../usecases/cases/product/Get
 import { GetProductBrandByIdCase } from "../../../usecases/cases/product/GetProductBrandByIdCase";
 import { GetProductCategoryByIdCase } from "../../../usecases/cases/product/GetProductCategoryByIdCase";
 import { GetWishlistItemListCase } from "../../../usecases/cases/product/GetWishlistItemList";
+import { RemoveItemFromWishlistCase } from "../../../usecases/cases/product/RemoveItemFromWishlist";
 import { UpdateMainCategoryByIdCase } from "../../../usecases/cases/product/UpdateMainCategoryById";
 import { UpdateProductBrandByIdCase } from "../../../usecases/cases/product/UpdateProductBrandByIdCase";
 import { UpdateProductCategoryByIdCase } from "../../../usecases/cases/product/UpdateProductCategoryByIdCase";
@@ -110,6 +111,17 @@ export class ProductMutationHandler {
       const res = await new AddToWishlistCase(
         new ProductDataRepositoryImpl()
       ).addToWishlist(args);
+      return res;
+    } catch (err) {
+      return err;
+    }
+  };
+
+  static removeItemFromWishlist = async (args: any) => {
+    try {
+      const res = await new RemoveItemFromWishlistCase(
+        new ProductDataRepositoryImpl()
+      ).removeItemFromWishlist(args);
       return res;
     } catch (err) {
       return err;

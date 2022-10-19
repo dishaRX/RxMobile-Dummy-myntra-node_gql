@@ -526,4 +526,28 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       };
     }
   }
+
+  async removeItemFromWishlist(args: any): Promise<Response> {
+    const { productId, userId } = args;
+
+    const wishlist = await Wishlist.findOne({
+      productId: productId,
+      userId: userId,
+    });
+    console.log("wishlist : ", wishlist);
+
+    if (!wishlist) {
+      return {
+        message: "Item not found",
+        statusCode: 404,
+      };
+    }
+
+    await wishlist.remove();
+
+    return {
+      message: "Item removed",
+      statusCode: 200,
+    };
+  }
 }
