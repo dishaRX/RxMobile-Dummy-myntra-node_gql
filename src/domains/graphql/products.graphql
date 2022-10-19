@@ -71,6 +71,7 @@ type Mutation {
 
   updateProductBrandById(brandid: String, updatedname: String): brandresponse
   addToWishlist(userId: String!, productId: String!): response
+  removeItemFromWishlist(userId: String!, productId: String!): response
 }
 type Query {
   getAllMainCategory: getAllMainCategoryResponse
