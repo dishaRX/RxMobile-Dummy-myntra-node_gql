@@ -9,10 +9,7 @@ export class CartDataRepositoryImpl implements CartDataRepository {
       let isCartData = await Cart.findOne({
         userId: userId,
         productId: productId,
-      });
-
-      console.log("isCartData :: ", isCartData);
-
+      }); //
       let existingUpdateCart;
       let newCart;
       if (isCartData) {
@@ -72,5 +69,49 @@ export class CartDataRepositoryImpl implements CartDataRepository {
         statusCode: 500,
       };
     }
+  }
+
+  async updateCartItem(args: any): Promise<Response> {
+    const { userId, productId, size, quantity } = args;
+    try {
+      let cartItem = await Cart.findOne({
+        userId: userId,
+        productId: productId,
+      });
+
+      if (!cartItem) {
+        return {
+          message: "Item not found",
+          statusCode: 404,
+        };
+      }
+
+      const forupdate = {
+        quantity: quantity,
+        size: size,
+      };
+
+      const existingUpdateCart = await Cart.findOneAndUpdate(
+        { userId: userId, productId: productId },
+        forupdate
+      );
+
+      if (existingUpdateCart) {
+        return {
+          message: "Cart item updated",
+          statusCode: 200,
+        };
+      }
+    } catch (error) {
+      console.log(error);
+      return {
+        message: "Something went wrong",
+        statusCode: 500,
+      };
+    }
+    return {
+      message: "Something went wrong",
+      statusCode: 500,
+    };
   }
 }

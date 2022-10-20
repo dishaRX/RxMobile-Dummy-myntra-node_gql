@@ -5,6 +5,13 @@ type Mutation {
     size: String!
     quantity: Int!
   ): response
+
+  updateCartItem(
+    userId: String!
+    productId: String!
+    size: String!
+    quantity: Int!
+  ): response
 }
 
 type Query {
