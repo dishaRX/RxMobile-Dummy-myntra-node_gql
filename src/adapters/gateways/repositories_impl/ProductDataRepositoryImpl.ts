@@ -34,7 +34,10 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
   }
   async getAllMainCategory(): Promise<any> {
     try {
-      const data = await MainCategory.find();
+      const data = await MainCategory.find().populate([
+        "category",
+        "createdBY",
+      ]);
       return {
         message: "success true",
         statusCode: 201,
@@ -56,7 +59,9 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       };
     }
     try {
-      const data = await MainCategory.findOne({ _id: args });
+      const data = await MainCategory.findOne({ _id: args }).populate(
+        "category"
+      );
       console.log(data);
       return {
         message: "success true",
@@ -79,10 +84,20 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       };
     }
     try {
+      const brand = await Brands.find({ mainCategory: args });
+      if (brand.length > 0) {
+        const a = await Brands.deleteMany({ mainCategory: args });
+        console.log("DELETED brands::", a);
+      }
+      const category = await Category.find({ mainCategory: args });
+      if (category.length > 0) {
+        const d = await Category.deleteMany({ mainCategory: args });
+        console.log("categories deleted::", d);
+      }
       const deletedItem = await MainCategory.findOneAndDelete({
         _id: args,
-        createdBY: createdBy._id,
       });
+      console.log("deletd item---->", deletedItem);
       return {
         message: "success true",
         statusCode: 201,
@@ -188,10 +203,7 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
   }
   async getAllProductCategories(createdBy: any): Promise<any> {
     try {
-      const data = await Category.find().populate([
-        "createdBy",
-        "mainCategory",
-      ]);
+      const data = await Category.find().populate(["mainCategory", "Brand"]);
       return {
         message: "success true",
         statusCode: 201,
@@ -252,12 +264,25 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
         statusCode: 201,
       };
     }
-
     try {
+      const Item = await Category.findOne({
+        _id: args,
+      }).populate("mainCategory");
+      if (Item) {
+        const s: any = await MainCategory.findById(Item.mainCategory?._id);
+        const index = s.category.indexOf(args);
+        s.category.splice(index, 1);
+        const a = await s.save();
+      }
+      const brand = await Brands.find({ mainCategory: args });
+      if (brand.length > 0) {
+        const a = await Brands.deleteMany({ category: args });
+        console.log("DELETED brands::", a);
+      }
       const deletedItem = await Category.findOneAndDelete({
         _id: args,
-        createdBy: createdBy._id,
       });
+
       return {
         message: "success true",
         statusCode: 201,
@@ -327,7 +352,8 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
         category: categorydetails,
         mainCategory: main,
       });
-      console.log(brand);
+      categorydetails?.Brand.push(brand);
+      const d = await categorydetails?.save();
       return {
         message: "success true",
         statusCode: 201,
@@ -389,6 +415,7 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
     }
   }
   async deleteProductBrandById(args: String, createdBy: any): Promise<any> {
+    console.log(args);
     if (!args) {
       return {
         message: "main category id can not be null",
@@ -396,9 +423,17 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       };
     }
     try {
+      const Item = await Brands.findOne({
+        _id: args,
+      }).populate("category");
+      if (Item) {
+        const s: any = await Category.findById(Item.category?._id);
+        const index = s.Brand.indexOf(args);
+        s.Brand.splice(index, 1);
+        const a = await s.save();
+      }
       const deletedItem = await Brands.findOneAndDelete({
         _id: args,
-        createdBy: createdBy._id,
       });
       return {
         message: "success true",
@@ -465,7 +500,6 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       };
     }
   }
-
   async getCategoryMenuList(): Promise<any> {
     try {
       const data = await MainCategory.find().populate(["category"]);

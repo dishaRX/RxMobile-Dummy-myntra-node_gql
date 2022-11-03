@@ -8,7 +8,7 @@ type Category {
   Categoryname: String!
   _id: String!
   createdBy: Admin
-  Brands: [Brand]
+  Brand: [Brand]
   mainCategory: Maincategory
 }
 type Admin {

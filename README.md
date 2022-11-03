@@ -44,7 +44,6 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 - Edit Payment Info (card/upi)
   - We have added the edit Payment Info API, In which user can edit there payment details card/upi.
 - Delete Payment Info (card/upi)
-
   - We have added the delete Payment Info API, In which user can delete there payment details card/upi.
 
 - **Admin API**
