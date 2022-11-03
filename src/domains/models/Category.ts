@@ -12,10 +12,10 @@ const categorySchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Admin",
     },
-    Brands: [
+    Brand: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Brands",
+        ref: "brands",
       },
     ],
   },
