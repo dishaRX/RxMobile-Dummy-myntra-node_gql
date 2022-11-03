@@ -46,6 +46,7 @@ type Mutation {
     newPassword: String!
     role: String!
   ): AdminResponse
+  logoutAdmin(adminId: String!, authToken: String!): AdminResponse
 }
 type AdminResponse {
   message: String!

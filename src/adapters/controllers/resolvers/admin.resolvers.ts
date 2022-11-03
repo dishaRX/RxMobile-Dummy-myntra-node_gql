@@ -55,5 +55,21 @@ export default {
         return error;
       }
     },
+    logoutAdmin : async (_: any, args: any, context: any, info: any) => {
+      console.log(context._id)
+      if (!context._id || args.adminId !== context._id.toString()) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+
+      try {
+        return AdminMutationHandler.logoutAdmin(args);
+      } catch (error) {
+        console.log(`Error -------> ${error}`);
+        return error;
+      }
+    },
   },
 };

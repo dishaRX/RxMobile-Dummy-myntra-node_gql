@@ -4,6 +4,7 @@ import { LoginAdminCase } from "../../../usecases/cases/admin/LoginAdmin";
 import { ChangeAdminPasswordCase } from "../../../usecases/cases/admin/ChangeAdminPassword";
 import { ForgotAdminPasswordCase } from "../../../usecases/cases/admin/ForgotAdminPassword";
 import { ResetAdminPasswordCase } from "../../../usecases/cases/admin/ResetAdminPassword";
+import { LogoutAdminCase } from "../../../usecases/cases/admin/LogoutAdmin";
 
 export class AdminMutationHandler {
   static registerAdmin = async (args: any) => {
@@ -61,4 +62,16 @@ export class AdminMutationHandler {
       return error;
     }
   };
+  static logoutAdmin = async (args: any) => {
+    try {
+      console.log("its handler----->",args)
+      const res = await new LogoutAdminCase(
+        new AdminDataRepositoryImpl()
+      ).logoutAdmin(args);
+      return res;
+    } catch (error: any) {
+      return error;
+    }
+  };
+
 }
