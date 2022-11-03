@@ -28,6 +28,7 @@ export default {
     },
 
     logoutUser: async (_: any, args: any, context: any, info: any) => {
+  
       if (!context._id || args.userId !== context._id.toString()) {
         return {
           message: "Unauthorized",

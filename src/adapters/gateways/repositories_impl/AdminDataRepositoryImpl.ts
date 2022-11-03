@@ -200,4 +200,28 @@ export class AdminDataRepositoryImpl implements AdminDataRepository {
       statusCode: 200,
     };
   }
+
+  async logoutAdmin(args: any): Promise<any> {
+    try {
+      const { adminId, authToken } = args;
+      const admin = await Admin.findOne({ _id: adminId });
+      console.log("admin mil gya----->", admin);
+      if (!admin) {
+        return {
+          message: "Admin not found",
+          statusCode: 404,
+        };
+      }
+      admin.tokens = admin.tokens.filter((token: any) => {
+        return token.token !== authToken;
+      });
+      await admin.save();
+      return {
+        message: "Success",
+        statusCode: 200,
+      };
+    } catch (error) {
+      return error;
+    }
+  }
 }

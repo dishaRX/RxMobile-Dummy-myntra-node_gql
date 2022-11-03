@@ -8,4 +8,5 @@ export interface AdminDataRepository {
   ): Promise<any>;
   forgotadminPassword(args: any): Promise<any>;
   resetadminPassword(args: any): Promise<any>;
+  logoutAdmin(args:any): Promise<any>;
 }
