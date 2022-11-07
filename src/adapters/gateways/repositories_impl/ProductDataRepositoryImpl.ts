@@ -554,7 +554,7 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
       setTimeout(async () => {
         const main: any = await MainCategory.findOne({ _id: maincategory });
         const categories: any = await Category.findOne({ _id: category });
-        const brands: any = await Brands.findOne({ _id:brand });
+        const brands: any = await Brands.findOne({ _id: brand });
         const product = await Product.create({
           Maincategory: main._id,
           Category: categories._id,
@@ -577,6 +577,26 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
   async getAllProducts(createdBY: any): Promise<any> {
     try {
       const data = await Product.find().populate([
+        "Maincategory",
+        "Category",
+        "Brand",
+      ]);
+      return {
+        message: "success true",
+        statusCode: 201,
+        data: data,
+      };
+    } catch (error) {
+      return {
+        message: "not found",
+        statusCode: 404,
+        data: error,
+      };
+    }
+  }
+  async getProductById(args: String): Promise<any> {
+    try {
+      const data = await Product.findOne({ _id: args }).populate([
         "Maincategory",
         "Category",
         "Brand",
