@@ -51,4 +51,6 @@ export interface ProductDataRepository {
   ): Promise<any>;
   getAllProducts(createdBY: any):Promise<any>;
   getProductById(args: String): Promise<any>;
+  deleteProductById(args: String, createdBy: any): Promise<any>;
+
 }

@@ -420,7 +420,6 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
     }
   }
   async deleteProductBrandById(args: String, createdBy: any): Promise<any> {
-    console.log(args);
     if (!args) {
       return {
         message: "main category id can not be null",
@@ -611,6 +610,40 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
         message: "not found",
         statusCode: 404,
         data: error,
+      };
+    }
+  }
+  async deleteProductById(args: String, createdBy: any): Promise<any> {
+    if (!args) {
+      return {
+        message: "main category id can not be null",
+        statusCode: 201,
+      };
+    }
+    try {
+      const Item = await Product.findOne({
+        _id: args,
+      }).populate("Brand");
+
+      if (Item) {
+        const s: any = await Brands.findOne({ _id: Item.Brand?._id });
+        console.log(s);
+        const index = s.products.indexOf(args);
+        s.products.splice(index, 1);
+        const a = await s.save();
+      }
+      const deletedItem = await Product.findOneAndDelete({
+        _id: args,
+      });
+      console.log(deletedItem);
+      return {
+        message: "Product deleted successfully",
+        statusCode: 201,
+      };
+    } catch (error) {
+      return {
+        message: "success false",
+        statusCode: 404,
       };
     }
   }
