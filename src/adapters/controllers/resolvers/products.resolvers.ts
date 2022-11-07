@@ -367,5 +367,22 @@ export default {
         console.log(`err----------->${error}`);
       }
     },
+    deleteProductById: async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        let res = await ProductQueryHandler.deleteProductById(
+          args.productid,
+          context
+        );``
+        return res;
+      } catch (error) {
+        console.log(`err----------->${error}`);
+      }
+    },
   },
 };

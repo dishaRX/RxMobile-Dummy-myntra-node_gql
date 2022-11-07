@@ -97,6 +97,7 @@ type Query {
   getCategoryMenuList: getAllMainCategoryResponse
   getAllProducts:getAllProductResponse
   getProductById(productid:String):ProductByIdResponse
+  deleteProductById(productid:String):ProductResponse
 }
 
 type maincategoryresponse {

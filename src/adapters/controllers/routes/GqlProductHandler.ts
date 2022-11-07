@@ -6,6 +6,7 @@ import { AllProductCategoriesCreatedByUserCase } from "../../../usecases/cases/p
 import { AllProductCategoryCase } from "../../../usecases/cases/product/AllProductCategoryCase";
 import { DeleteMainCategoryByIdCase } from "../../../usecases/cases/product/DeleteMainCategoryById";
 import { DeleteProductBrandByIdCase } from "../../../usecases/cases/product/DeleteProductBrandByIdCase";
+import { DeleteProductByIdCase } from "../../../usecases/cases/product/DeleteProductById";
 import { DeleteProductCategoryByIdCase } from "../../../usecases/cases/product/DeleteProductCategoryByIdCase";
 import { GetAllMainCategoryCase } from "../../../usecases/cases/product/GetAllMainCategory";
 import { GetAllProductBrandsCase } from "../../../usecases/cases/product/GetAllProductBrandsCase";
@@ -291,6 +292,16 @@ export class ProductQueryHandler {
       const res = await new GetProductByIdCase(
         new ProductDataRepositoryImpl()
       ).getProductById(productid);
+      return res;
+    } catch (error) {
+      return error;
+    }
+  };
+  static deleteProductById = async (Product: string, createdBY: any) => {
+    try {
+      const res = await new DeleteProductByIdCase(
+        new ProductDataRepositoryImpl()
+      ).deleteProductById(Product, createdBY);
       return res;
     } catch (error) {
       return error;
