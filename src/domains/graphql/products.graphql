@@ -79,7 +79,7 @@ type Mutation {
     ProductSize: String
     Deliverable: String
     Returnable: Boolean
-  ):ProductResponse
+  ): ProductResponse
 }
 type Query {
   getAllMainCategory: getAllMainCategoryResponse
@@ -94,8 +94,8 @@ type Query {
   getAllProductBrandsCreatedByUser: getAllProductBrandResponse
   deleteProductBrandById(brandid: String): brandresponse
   getProductBrandById(brandid: String): brandresponse
-
   getCategoryMenuList: getAllMainCategoryResponse
+  getAllProducts:getAllProductResponse
 }
 
 type maincategoryresponse {
@@ -131,4 +131,9 @@ type getAllProductBrandResponse {
 type ProductResponse {
   message: String!
   statusCode: Int!
+}
+type getAllProductResponse {
+  message: String!
+  statusCode: Int!
+  data: [Products]
 }

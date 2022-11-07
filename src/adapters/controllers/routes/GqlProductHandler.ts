@@ -10,6 +10,7 @@ import { DeleteProductCategoryByIdCase } from "../../../usecases/cases/product/D
 import { GetAllMainCategoryCase } from "../../../usecases/cases/product/GetAllMainCategory";
 import { GetAllProductBrandsCase } from "../../../usecases/cases/product/GetAllProductBrandsCase";
 import { GetAllProductBrandsCreatedByUserCase } from "../../../usecases/cases/product/GetAllProductBrandsCreatedByUserCase";
+import { GetAllProductsCase } from "../../../usecases/cases/product/GetAllProducts";
 import { GetCategoryMenuListCase } from "../../../usecases/cases/product/GetCategoryMenuList";
 import { GetMainCategoryByIdCase } from "../../../usecases/cases/product/GetMainCategoryById";
 import { GetMainCategoryByUserIdCase } from "../../../usecases/cases/product/GetMainCategoryByUserIdCase";
@@ -19,6 +20,7 @@ import { UpdateMainCategoryByIdCase } from "../../../usecases/cases/product/Upda
 import { UpdateProductBrandByIdCase } from "../../../usecases/cases/product/UpdateProductBrandByIdCase";
 import { UpdateProductCategoryByIdCase } from "../../../usecases/cases/product/UpdateProductCategoryByIdCase";
 import { ProductDataRepositoryImpl } from "../../gateways/repositories_impl/ProductDataRepositoryImpl";
+
 export class ProductMutationHandler {
   //Products
   static addMainCategory = async (MainCategoryName: String, Createdby: any) => {
@@ -274,4 +276,15 @@ export class ProductQueryHandler {
       return err;
     }
   };
+  static getAllProducts = async (createdBY: any) => {
+    try {
+      const res = await new GetAllProductsCase(
+        new ProductDataRepositoryImpl()
+      ).getAllProducts(createdBY);
+      return res;
+    } catch (error) {
+      return error;
+    }
+  };
+
 }
