@@ -100,6 +100,8 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 - We have added the add product  API to add details of a product in the react-myntra-dummy web and app.
 - get all products  API
 - We have added the get all products  API to get details of all products in the react-myntra-dummy web and app.
+- get product by id API
+- We have added the get product by id  API to get details of a specific product in the react-myntra-dummy web and app.
 # Tech components
 
 - **Node**

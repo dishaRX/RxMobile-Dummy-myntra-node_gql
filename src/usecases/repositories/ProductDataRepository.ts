@@ -50,4 +50,5 @@ export interface ProductDataRepository {
     Returnable: Boolean
   ): Promise<any>;
   getAllProducts(createdBY: any):Promise<any>;
+  getProductById(args: String): Promise<any>;
 }

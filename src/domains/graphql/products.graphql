@@ -96,6 +96,7 @@ type Query {
   getProductBrandById(brandid: String): brandresponse
   getCategoryMenuList: getAllMainCategoryResponse
   getAllProducts:getAllProductResponse
+  getProductById(productid:String):ProductByIdResponse
 }
 
 type maincategoryresponse {
@@ -136,4 +137,9 @@ type getAllProductResponse {
   message: String!
   statusCode: Int!
   data: [Products]
+}
+type ProductByIdResponse {
+  message: String!
+  statusCode: Int!
+  data:Products!
 }

@@ -15,12 +15,12 @@ import { GetCategoryMenuListCase } from "../../../usecases/cases/product/GetCate
 import { GetMainCategoryByIdCase } from "../../../usecases/cases/product/GetMainCategoryById";
 import { GetMainCategoryByUserIdCase } from "../../../usecases/cases/product/GetMainCategoryByUserIdCase";
 import { GetProductBrandByIdCase } from "../../../usecases/cases/product/GetProductBrandByIdCase";
+import { GetProductByIdCase } from "../../../usecases/cases/product/GetProductById";
 import { GetProductCategoryByIdCase } from "../../../usecases/cases/product/GetProductCategoryByIdCase";
 import { UpdateMainCategoryByIdCase } from "../../../usecases/cases/product/UpdateMainCategoryById";
 import { UpdateProductBrandByIdCase } from "../../../usecases/cases/product/UpdateProductBrandByIdCase";
 import { UpdateProductCategoryByIdCase } from "../../../usecases/cases/product/UpdateProductCategoryByIdCase";
 import { ProductDataRepositoryImpl } from "../../gateways/repositories_impl/ProductDataRepositoryImpl";
-
 export class ProductMutationHandler {
   //Products
   static addMainCategory = async (MainCategoryName: String, Createdby: any) => {
@@ -281,6 +281,16 @@ export class ProductQueryHandler {
       const res = await new GetAllProductsCase(
         new ProductDataRepositoryImpl()
       ).getAllProducts(createdBY);
+      return res;
+    } catch (error) {
+      return error;
+    }
+  };
+  static getProductById = async (productid: string) => {
+    try {
+      const res = await new GetProductByIdCase(
+        new ProductDataRepositoryImpl()
+      ).getProductById(productid);
       return res;
     } catch (error) {
       return error;

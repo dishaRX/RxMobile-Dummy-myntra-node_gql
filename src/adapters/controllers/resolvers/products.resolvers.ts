@@ -353,5 +353,19 @@ export default {
         return error;
       }
     },
+    getProductById: async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        let res = ProductQueryHandler.getProductById(args.productid);
+        return res;
+      } catch (error) {
+        console.log(`err----------->${error}`);
+      }
+    },
   },
 };
