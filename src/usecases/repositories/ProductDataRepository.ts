@@ -39,4 +39,14 @@ export interface ProductDataRepository {
     createdBy: any
   ): Promise<any>;
   getCategoryMenuList(): Promise<any>;
+  addProduct(
+    Maincategory: String,
+    Category: String,
+    Brand: String,
+    Productname: String,
+    Productdetails: String,
+    ProductImage: any,
+    Deliverable:String,
+    Returnable: Boolean
+  ): Promise<any>;
 }

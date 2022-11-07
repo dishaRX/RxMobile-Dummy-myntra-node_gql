@@ -1,4 +1,5 @@
 import { AddMainCategoryCase } from "../../../usecases/cases/product/AddMainCategory";
+import { AddProductCase } from "../../../usecases/cases/product/AddProduct";
 import { AddProductBrandCase } from "../../../usecases/cases/product/AddProductBrandCase";
 import { AddProductCategoryCase } from "../../../usecases/cases/product/AddProductCategoryCase";
 import { AllProductCategoriesCreatedByUserCase } from "../../../usecases/cases/product/AllProductCategoriesCreatedByUserCase";
@@ -101,6 +102,34 @@ export class ProductMutationHandler {
     } catch (error) {
       return error;
     }
+  };
+  static addProduct = async (
+    Maincategory: String,
+    Category: String,
+    Brand: String,
+    Productname: String,
+    Productdetails: String,
+    ProductImage:any,
+    Deliverable: String,
+    Returnable: Boolean
+  ) => {
+    try {
+      const res = await new AddProductCase(
+        new ProductDataRepositoryImpl()
+      ).addProduct(Maincategory,
+        Category,
+        Brand,
+        Productname,
+        Productdetails,
+        ProductImage,
+        Deliverable,
+        Returnable,);
+      return res;
+    } catch (error) {
+      return error;
+    }
+
+
   };
 }
 

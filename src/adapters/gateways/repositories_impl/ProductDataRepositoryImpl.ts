@@ -3,6 +3,8 @@ import MainCategory from "../../../domains/models/MainCategory";
 import Category from "../../../domains/models/Category";
 import Brands from "../../../domains/models/Brands";
 import Admin from "../../../domains/models/Admin";
+const cloudinary = require("cloudinary");
+import Product from "../../../domains/models/Product";
 export class ProductDataRepositoryImpl implements ProductDataRepository {
   async addMainCategory(
     MainCategoryName: String,
@@ -19,6 +21,7 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
         mainCategory: MainCategoryName,
         createdBY: Createdby,
       });
+      console.log(data);
       return {
         message: "Success",
         statusCode: 201,
@@ -373,6 +376,7 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
         "createdBy",
         "mainCategory",
         "category",
+        "products",
       ]);
       return {
         message: "success true",
@@ -392,6 +396,7 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
         "createdBy",
         "mainCategory",
         "category",
+        "products",
       ]);
       console.log(data);
       if (data.length > 0) {
@@ -453,6 +458,7 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
         "mainCategory",
         "createdBy",
         "category",
+        "products",
       ]);
       return {
         message: "success true",
@@ -514,6 +520,58 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
         statusCode: 404,
         data: error,
       };
+    }
+  }
+  async addProduct(
+    maincategory: String,
+    category: String,
+    brand: String,
+    Productname: String,
+    Productdetails: String,
+    ProductImage: any,
+    Deliverable: String,
+    Returnable: boolean
+  ): Promise<any> {
+    try {
+      let a: any = [];
+      cloudinary.config({
+        cloud_name: "dz6gjmx3j",
+        api_key: "986946116878116",
+        api_secret: "mSyeV8W1CHaHUPYOQ5_99RcFlYg",
+      });
+      if (ProductImage.length >= 1) {
+        ProductImage.forEach(async (element: any) => {
+          console.log("its try");
+          await cloudinary.v2.uploader.upload(
+            element,
+            { public_id: "olympic_flag" },
+            async function (error: any, result: any) {
+              a.push(result.secure_url);
+            }
+          );
+        });
+      }
+      setTimeout(async () => {
+        const main: any = await MainCategory.findOne({ _id: maincategory });
+        const categories: any = await Category.findOne({ _id: category });
+        const brands: any = await Brands.findOne({ _id: brand });
+        const product = await Product.create({
+          Maincategory: main._id,
+          Category: categories._id,
+          Brand: brands._id,
+          Productname: Productname,
+          Productdetails: Productdetails,
+          ProductImage: a,
+          Deliverable: Deliverable,
+          Returnable: Returnable,
+        });
+        console.log(product);
+        brands.products.push(product);
+        await brands.save();
+      }, 3000);
+      return { message: "product created", statusCode: 201 };
+    } catch (error) {
+      return { message: "success false", statusCode: 501 };
     }
   }
 }
