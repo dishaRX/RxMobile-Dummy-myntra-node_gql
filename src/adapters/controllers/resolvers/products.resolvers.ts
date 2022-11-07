@@ -118,6 +118,27 @@ export default {
         return error;
       }
     },
+    addProduct: async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+    
+
+      let res = ProductMutationHandler.addProduct(
+        args.Maincategory,
+        args.Category,
+        args.Brand,
+        args.Productname,
+        args.Productdetails,
+        args.ProductImage,
+        args.Deliverable,
+        args.Returnable
+      );
+      return res;
+    },
   },
   Query: {
     getAllMainCategory: async (_: any, args: any, context: any) => {

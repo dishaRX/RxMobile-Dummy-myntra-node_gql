@@ -68,8 +68,18 @@ type Mutation {
     category: String
     brandname: String
   ): brandresponse
-
   updateProductBrandById(brandid: String, updatedname: String): brandresponse
+  addProduct(
+    Maincategory: String
+    Category: String
+    Brand: String
+    Productname: String!
+    Productdetails: String
+    ProductImage: [String]
+    ProductSize: String
+    Deliverable: String
+    Returnable: Boolean
+  ):ProductResponse
 }
 type Query {
   getAllMainCategory: getAllMainCategoryResponse
@@ -117,4 +127,8 @@ type getAllProductBrandResponse {
   message: String!
   statusCode: Int!
   data: [Brand]
+}
+type ProductResponse {
+  message: String!
+  statusCode: Int!
 }
