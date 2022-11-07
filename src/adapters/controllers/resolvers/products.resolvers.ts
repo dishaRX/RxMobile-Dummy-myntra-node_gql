@@ -125,7 +125,6 @@ export default {
           statusCode: 401,
         };
       }
-    
 
       let res = ProductMutationHandler.addProduct(
         args.Maincategory,
@@ -332,13 +331,26 @@ export default {
         console.log(`err----------->${error}`);
       }
     },
-
     getCategoryMenuList: async (_: any, args: any, context: any) => {
       try {
         let res = ProductQueryHandler.getCategoryMenuList();
         return res;
       } catch (error) {
         console.log(`error------->${error}`);
+      }
+    },
+    getAllProducts: async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      try {
+        let res = await ProductQueryHandler.getAllProducts(context);
+        return res;
+      } catch (error) {
+        return error;
       }
     },
   },
