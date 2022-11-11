@@ -134,10 +134,33 @@ export default {
         args.Productdetails,
         args.ProductImage,
         args.Deliverable,
-        args.Returnable
+        args.Returnable,
+        args.ProductSize,
+        args.ProductPrice
       );
       return res;
     },
+    updateProduct:async (_: any, args: any, context: any) => {
+      if (!context._id) {
+        return {
+          message: "Unauthorized",
+          statusCode: 401,
+        };
+      }
+      let res = ProductMutationHandler.updateProduct(
+        args.Productname,
+        args.Productdetails,
+        args.ProductImage,
+        args.Deliverable,
+        args.Returnable,
+        args.Productid,
+        args.ProductSize,
+        args.ProductPrice
+     
+      );
+      return res;
+    },
+
   },
   Query: {
     getAllMainCategory: async (_: any, args: any, context: any) => {

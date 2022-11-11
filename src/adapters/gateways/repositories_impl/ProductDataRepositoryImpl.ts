@@ -529,7 +529,9 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
     Productdetails: String,
     ProductImage: any,
     Deliverable: String,
-    Returnable: boolean
+    Returnable: boolean,
+    ProductSize: String,
+    ProductPrice: String
   ): Promise<any> {
     try {
       let a: any = [];
@@ -563,6 +565,8 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
           ProductImage: a,
           Deliverable: Deliverable,
           Returnable: Returnable,
+          ProductSize: ProductSize,
+          ProductPrice: ProductPrice,
         });
         console.log(product);
         brands.products.push(product);
@@ -645,6 +649,79 @@ export class ProductDataRepositoryImpl implements ProductDataRepository {
         message: "success false",
         statusCode: 404,
       };
+    }
+  }
+  async updateProduct(
+    Productname: String,
+    Productdetails: String,
+    ProductImage: any,
+    Deliverable: String,
+    Returnable: Boolean,
+    Productid: String,
+    ProductSize: String,
+    ProductPrice: String
+  ): Promise<any> {
+    let a: any = [];
+    if (ProductImage.length > 0) {
+      console.log("hey");
+      try {
+        cloudinary.config({
+          cloud_name: "dz6gjmx3j",
+          api_key: "986946116878116",
+          api_secret: "mSyeV8W1CHaHUPYOQ5_99RcFlYg",
+        });
+        ProductImage.forEach(async (element: any) => {
+          await cloudinary.v2.uploader.upload(
+            element,
+            { public_id: "olympic_flag" },
+            async function (error: any, result: any) {
+              a.push(result.secure_url);
+            }
+          );
+        });
+        setTimeout(async () => {
+          console.log(a);
+          cloudinary.config({
+            cloud_name: "dz6gjmx3j",
+            api_key: "986946116878116",
+            api_secret: "mSyeV8W1CHaHUPYOQ5_99RcFlYg",
+          });
+          const forupdate = {
+            Productname: Productname,
+            Productdetails: Productdetails,
+            ProductImage: a,
+            Deliverable: Deliverable,
+            Returnable: Returnable,
+            ProductSize: ProductSize,
+            ProductPrice: ProductPrice,
+          };
+          const product = await Product.findByIdAndUpdate(
+            { _id: Productid },
+            forupdate
+          );
+          return { message: "success true", statusCode: 201 };
+        }, 3000);
+      } catch (error) {
+        return { message: "success false", statusCode: 501 };
+      }
+    } else {
+      try {
+        const forupdate = {
+          Productname: Productname,
+          Productdetails: Productdetails,
+          Deliverable: Deliverable,
+          Returnable: Returnable,
+          ProductSize: ProductSize,
+          ProductPrice: ProductPrice,
+        };
+        const data: any = await Product.findByIdAndUpdate(
+          { _id: Productid },
+          forupdate
+        );
+        return { message: "success true", statusCode: 201 };
+      } catch (error) {
+        return { message: "success false", statusCode: 501 };
+      }
     }
   }
 }

@@ -1,31 +1,28 @@
 import { ProductDataRepository } from "../../repositories/ProductDataRepository";
 
-export class AddProductCase {
- addProductDataRepository: ProductDataRepository;
+export class UpdateProductCase {
+ updateProductDataRepository: ProductDataRepository;
   constructor(productDataRepository: ProductDataRepository) {
-    this.addProductDataRepository = productDataRepository;
+    this.updateProductDataRepository = productDataRepository;
   }
 
-  public addProduct = async (   Maincategory:any,
-    Category:String,
-    Brand:String,
+  public updateProduct = async (   
     Productname:String,
     Productdetails:String,
     ProductImage:any,
     Deliverable:String,
     Returnable:Boolean,
+    Productid:String,
     ProductSize:String,
     ProductPrice:String
     ) => {
-    return await this.addProductDataRepository.addProduct(
-        Maincategory,
-        Category,
-        Brand,
+    return await this.updateProductDataRepository.updateProduct(
         Productname,
         Productdetails,
         ProductImage,
         Deliverable,
         Returnable,
+        Productid,
         ProductSize,
         ProductPrice
     );

@@ -47,10 +47,22 @@ export interface ProductDataRepository {
     Productdetails: String,
     ProductImage: any,
     Deliverable:String,
-    Returnable: Boolean
+    Returnable: Boolean,
+    ProductSize:String,
+    ProductPrice:String
   ): Promise<any>;
   getAllProducts(createdBY: any):Promise<any>;
   getProductById(args: String): Promise<any>;
   deleteProductById(args: String, createdBy: any): Promise<any>;
+  updateProduct(
+    Productname: String,
+    Productdetails: String,
+    ProductImage: any,
+    Deliverable:String,
+    Returnable: Boolean,
+    Productid:String,
+    ProductSize:String,
+    ProductPrice:String
+  ): Promise<any>;
 
 }

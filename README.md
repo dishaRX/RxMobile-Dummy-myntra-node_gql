@@ -104,6 +104,8 @@ The illustration below shows the four concentric circles that compose a Clean Ar
 - We have added the get product by id  API to get details of a specific product in the react-myntra-dummy web and app.
 - delete product by id API
 - We have added the delete product by id  API for delete  a specific product in the react-myntra-dummy web and app.
+- update product by id API
+- We have added the update product by id  API for update  a specific product in the react-myntra-dummy web and app.
 # Tech components
 
 - **Node**
