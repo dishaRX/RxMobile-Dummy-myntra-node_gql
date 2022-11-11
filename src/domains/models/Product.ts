@@ -19,5 +19,7 @@ const productSchema = new Schema({
   ProductImage: [String],
   Deliverable: String,
   Returnable: Boolean,
+  ProductSize:String,
+  ProductPrice:String
 });
 export = mongoose.model("products", productSchema);

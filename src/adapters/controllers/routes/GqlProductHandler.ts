@@ -19,6 +19,7 @@ import { GetProductBrandByIdCase } from "../../../usecases/cases/product/GetProd
 import { GetProductByIdCase } from "../../../usecases/cases/product/GetProductById";
 import { GetProductCategoryByIdCase } from "../../../usecases/cases/product/GetProductCategoryByIdCase";
 import { UpdateMainCategoryByIdCase } from "../../../usecases/cases/product/UpdateMainCategoryById";
+import { UpdateProductCase } from "../../../usecases/cases/product/UpdateProduct";
 import { UpdateProductBrandByIdCase } from "../../../usecases/cases/product/UpdateProductBrandByIdCase";
 import { UpdateProductCategoryByIdCase } from "../../../usecases/cases/product/UpdateProductCategoryByIdCase";
 import { ProductDataRepositoryImpl } from "../../gateways/repositories_impl/ProductDataRepositoryImpl";
@@ -114,7 +115,9 @@ export class ProductMutationHandler {
     Productdetails: String,
     ProductImage:any,
     Deliverable: String,
-    Returnable: Boolean
+    Returnable: Boolean,
+    ProductSize:String,
+    ProductPrice:String
   ) => {
     try {
       const res = await new AddProductCase(
@@ -126,7 +129,40 @@ export class ProductMutationHandler {
         Productdetails,
         ProductImage,
         Deliverable,
-        Returnable,);
+        Returnable,
+        ProductSize,
+        ProductPrice
+        );
+      return res;
+    } catch (error) {
+      return error;
+    }
+
+
+  };
+  static updateProduct = async (
+    Productname: String,
+    Productdetails: String,
+    ProductImage:any,
+    Deliverable: String,
+    Returnable: Boolean,
+    Productid:String,
+    ProductSize:String,
+    ProductPrice:String
+  ) => {
+    try {
+      const res = await new UpdateProductCase(
+        new ProductDataRepositoryImpl()
+      ).updateProduct(
+        Productname,
+        Productdetails,
+        ProductImage,
+        Deliverable,
+        Returnable,
+        Productid,
+        ProductSize,
+        ProductPrice
+        );
       return res;
     } catch (error) {
       return error;

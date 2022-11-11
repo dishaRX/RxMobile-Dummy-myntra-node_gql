@@ -43,10 +43,11 @@ type Products {
   CreatedBy: Admin!
   Productname: String!
   Productdetails: String
-  ProductImage: String
+  ProductImage: [String]
   ProductSize: String
   Deliverable: String
   Returnable: Boolean
+  ProductPrice: String
   _id: String
 }
 type Mutation {
@@ -77,8 +78,19 @@ type Mutation {
     Productdetails: String
     ProductImage: [String]
     ProductSize: String
+    ProductPrice: String
     Deliverable: String
     Returnable: Boolean
+  ): ProductResponse
+  updateProduct(
+    Productname: String!
+    Productdetails: String
+    ProductImage: [String]
+    ProductSize: String
+    Deliverable: String
+    Returnable: Boolean
+    Productid: String
+    ProductPrice: String
   ): ProductResponse
 }
 type Query {
@@ -95,9 +107,9 @@ type Query {
   deleteProductBrandById(brandid: String): brandresponse
   getProductBrandById(brandid: String): brandresponse
   getCategoryMenuList: getAllMainCategoryResponse
-  getAllProducts:getAllProductResponse
-  getProductById(productid:String):ProductByIdResponse
-  deleteProductById(productid:String):ProductResponse
+  getAllProducts: getAllProductResponse
+  getProductById(productid: String): ProductByIdResponse
+  deleteProductById(productid: String): ProductResponse
 }
 
 type maincategoryresponse {
@@ -142,5 +154,5 @@ type getAllProductResponse {
 type ProductByIdResponse {
   message: String!
   statusCode: Int!
-  data:Products!
+  data: Products!
 }
